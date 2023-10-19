@@ -1,0 +1,222 @@
+
+<div id="content">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-10 col-lg-10 col-xl-10 mx-auto">
+                <div class="bg-white shadow-md rounded p-3 pt-sm-4 pb-sm-5 px-sm-5">
+                    <h3 class="fw-400 text-center mb-4">Sign Up</h3>
+                    <hr class="mx-n3 mx-sm-n5">
+                    <p class="lead text-center">Your information is safe with us.</p>
+                    <form novalidate #pageform="ngForm">
+                        <notifier-container></notifier-container>
+                        <div class="">
+
+                            <div class="row" *ngIf="!show_Success">
+
+
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label for="name"> {{ 'Name' | translate }} <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" required #name="ngModel" [(ngModel)]="dataModel.name"
+                                                placeholder=" {{ 'Name' | translate }}" class="form-control" required
+                                                [ngClass]="{ 'is-invalid': submitted && name.errors }" id="name"
+                                                name="name">
+                                            <div *ngIf="name?.hasError('required') && submitted "
+                                                class="invalid-feedback">
+                                                {{ 'Name' | translate }} {{ 'Required' | translate }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label for="email"> {{ 'Email' | translate }} <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="email" placeholder="{{ 'Email' | translate }}" #email="ngModel"
+                                                [ngClass]="{ 'is-invalid': validationError.email!='' }"
+                                                [(ngModel)]="dataModel.email" class="form-control" required
+                                                [ngClass]="{ 'is-invalid': submitted && email.errors }" id="email"
+                                                name="email">
+                                            <div *ngIf="email?.hasError('required') && submitted "
+                                                class="invalid-feedback">
+                                                {{ 'Email' | translate }} {{ 'Required' | translate }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label for="mobile"> {{ 'Mobile' | translate }} <span
+                                                    class="text-danger">*</span></label>
+                                            <div class="wrapper" dir="ltr">
+                                                <ngx-intl-tel-input [onlyCountries]="SharedModule.preferredCountries"
+                                                    [enableAutoCountrySelect]="true" [enablePlaceholder]="false"
+                                                    [searchCountryFlag]="true" [searchCountryField]="[
+                                      SharedModule.SearchCountryField.Iso2,
+                                      SharedModule.SearchCountryField.Name
+                                    ]" [selectFirstCountry]="false"
+                                                    [selectedCountryISO]="SharedModule.CountryISO.Kuwait"
+                                                    [maxLength]="15" [minlength]="8" [phoneValidation]="true"
+                                                    [separateDialCode]="true"
+                                                    [numberFormat]="SharedModule.PhoneNumberFormat.National"
+                                                    name="mobile" [(ngModel)]="dataModel.mobile" id="mobile"
+                                                    name="mobile" required="">
+                                                </ngx-intl-tel-input>
+                                                <div *ngIf="submitted">
+                                                    <div class="invalid-feedback" style="display: block;"
+                                                        *ngIf="!pageform.form.value.mobile">
+                                                        Vendor Mobile is required</div>
+                                                    <div class="invalid-feedback" style="display: block;"
+                                                        *ngIf="pageform.form.value.mobile && pageform.form.controls['mobile'].errors">
+                                                        Invalid Phone Number</div>
+                                                </div>
+                                                <span></span>
+                                            </div>
+                                            <!-- <input type="mobile" placeholder="{{ 'Mobile' | translate }}" #mobile="ngModel"
+                                        [ngClass]="{ 'is-invalid': validationError.mobile!='' }"
+                                        [(ngModel)]="dataModel.mobile" class="form-control" required
+                                        [ngClass]="{ 'is-invalid': submitted && mobile.errors }" id="mobile"
+                                        name="mobile"> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label for="companyName"> {{ 'CompanyName' | translate }} <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" placeholder="{{ 'CompanyName' | translate }}"
+                                                #companyName="ngModel"
+                                                [ngClass]="{ 'is-invalid': validationError.companyName!='' }"
+                                                [(ngModel)]="dataModel.companyName" class="form-control" required
+                                                [ngClass]="{ 'is-invalid': submitted && companyName.errors }"
+                                                id="companyName" name="companyName">
+                                            <div *ngIf="companyName?.hasError('required') && submitted "
+                                                class="invalid-feedback">
+                                                {{ 'CompanyName' | translate }} {{ 'Required' | translate }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label for="workPhone"> {{ 'WorkPhone' | translate }} <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" placeholder="{{ 'WorkPhone' | translate }}"
+                                                #workPhone="ngModel"
+                                                [ngClass]="{ 'is-invalid': validationError.workPhone!='' }"
+                                                [(ngModel)]="dataModel.workPhone" class="form-control" required
+                                                [ngClass]="{ 'is-invalid': submitted && workPhone.errors }"
+                                                id="workPhone" name="workPhone">
+                                            <div *ngIf="workPhone?.hasError('required') && submitted "
+                                                class="invalid-feedback">
+                                                {{ 'WorkPhone' | translate }} {{ 'Required' | translate }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label for="accountType"> {{ 'Account_Type' | translate }} <span
+                                                    class="text-danger">*</span></label>
+                                            <ng-select #accountType="ngModel"
+                                                [ngClass]="{ 'is-invalid': validationError.accountType!='' }"
+                                                [(ngModel)]="dataModel.accountType" required
+                                                [ngClass]="{ 'is-invalid': submitted && accountType.errors }"
+                                                id="accountType" name="accountType">
+                                                <ng-option value="HomeBusiness" selected="selected">
+                                                    {{ 'HomeBusiness' | translate }}
+                                                </ng-option>
+                                                <ng-option value="Business">
+                                                    {{ 'Business' | translate }}
+                                                </ng-option>
+                                            </ng-select>
+                                            <div *ngIf="accountType?.hasError('required') && submitted "
+                                                class="invalid-feedback">
+                                                {{ 'Account_Type' | translate }} {{ 'Required' | translate }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label for="password"> {{ 'password' | translate }} <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="password" placeholder="{{ 'Password' | translate }}"
+                                                #password="ngModel"
+                                                [ngClass]="{ 'is-invalid': validationError.password!='' }"
+                                                [(ngModel)]="dataModel.password" class="form-control" required
+                                                [ngClass]="{ 'is-invalid': submitted && password.errors }" id="password"
+                                                name="password">
+                                            <div *ngIf="password?.hasError('required') && submitted "
+                                                class="invalid-feedback">
+                                                {{ 'password' | translate }} {{ 'Required' | translate }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <label for="confirmPassword"> {{ 'confirmPassword' | translate }} <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="password" placeholder="{{ 'Password' | translate }}"
+                                                #confirmPassword="ngModel"
+                                                [ngClass]="{ 'is-invalid': validationError.confirmPassword!='' }"
+                                                [(ngModel)]="dataModel.confirmPassword" class="form-control" required
+                                                [ngClass]="{ 'is-invalid': submitted && confirmPassword.errors }"
+                                                id="confirmPassword" name="confirmPassword">
+                                            <div *ngIf="confirmPassword?.hasError('required') && submitted "
+                                                class="invalid-feedback">
+                                                {{ 'confirmPassword' | translate }} {{ 'Required' | translate }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-3"></div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="container-login100-form-btn">
+                                            <button (click)="register(pageform.form)" class="btn btn-primary me-1">
+                                                {{ 'Submit' | translate }}
+                                            </button>
+
+
+                                        </div>
+                                        <div class="text-center pt-3">
+                                            <p class="text-dark mb-0">Already have account?<a routerLink="/auth/login"
+                                                    class="text-primary mx-1">{{ 'Signin' | translate }}</a></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3"></div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-lg-2 col-md-2"></div>
+
+                        </div>
+                        <div class="row" *ngIf="show_Success">
+                            <div class="col-lg-2 col-md-2"></div>
+                            <div class="col-lg-8 col-md-8 col-xl-8">
+                                <div class="">
+                                    <div class="alert alert-success" role="alert">
+                                        <h5 class="alert-heading text-black text-right"> <img
+                                                src="assets/images/success.svg" style="margin-left: 2%;">{{ 'Registerd
+                                            Successfully.' | translate }}
+                                        </h5>
+                                        <div style="text-align: center;">
+                                            Registeration completed successfully, you will receive activation email to
+                                            complete process.
+                                            <br><br>
+
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2"></div>
+                        </div>
+                        <!-- CONTAINER CLOSED -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

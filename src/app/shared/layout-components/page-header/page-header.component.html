@@ -1,0 +1,18 @@
+<!-- PAGE-HEADER -->
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="javascript:void(0)"> {{title}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{active_item}}</li>
+    </ol>
+    <div class="ms-auto" *ngIf="showlist=='0'">
+        <a routerLink="{{link}}" class="btn btn-orange btn-icon text-white">
+            <i class="fe fe-plus me-1"></i> {{ 'AddNew' | translate }} 
+        </a>
+    </div>
+    <div class="ms-auto" *ngIf="showlist=='1'">
+        <a routerLink="{{link}}" class="btn btn-orange btn-icon text-white">
+            <i class="fe fe-list me-1"></i> {{ 'List' | translate }}  
+        </a>
+    </div>
+</div>
+<!-- PAGE-HEADER END -->

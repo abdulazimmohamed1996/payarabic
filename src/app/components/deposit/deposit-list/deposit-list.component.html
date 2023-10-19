@@ -1,0 +1,132 @@
+<app-page-header title="Deposit" active_item="Deposit List" link="/deposit/new"></app-page-header>
+
+<!-- ROW OPEN -->
+<div class="row row-cards">
+  <div class="col-lg-12 col-xl-2">
+    <div class="row ">
+      <div class="col-md-12 col-lg-6 col-xl-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">{{ 'AdvancedSearch' | translate }} </div>
+          </div>
+          <div class="card-body" style=" overflow: auto;  width: 100%;
+                    height: 60vh;">
+            <div class="form-group">
+              <input type="text" name="vendor" class="form-control" [(ngModel)]="depositFilter.vendor"
+                placeholder="{{ 'Vendor' | translate }}">
+            </div>
+            <div class="form-group">
+              <input type="text" name="code" class="form-control" [(ngModel)]="depositFilter.code"
+                placeholder="{{ 'DepositCode' | translate }}">
+
+            </div>
+            <div class="form-group">
+              <input type="text" name="number" class="form-control" [(ngModel)]="depositFilter.number"
+                placeholder="{{ 'ReferenceId' | translate }}">
+
+            </div>
+            <div class="form-group">
+              <ng-select name="status" [(ngModel)]="depositFilter.status">
+                <ng-option value="" selected>{{"Select"| translate}}</ng-option>
+                <ng-option value="Started">{{ 'Started' | translate }}</ng-option>
+                <ng-option value="Completed">{{ 'Completed' | translate }}</ng-option>
+                <ng-option value="Canceled">{{ 'Cancelled' | translate }}</ng-option>
+              </ng-select>
+            </div>
+            <button (click)="SearchDeposits()" class="btn btn-primary me-1">
+              {{ 'Search' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-lg-12 col-xl-10">
+    <p-table #dt [value]="deposits" dataKey="id" [rowHover]="true" [rows]="10" [showCurrentPageReport]="true"
+      [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+      sortField="tutorials.id" sortMode="single" [scrollable]="true"
+      [globalFilterFields]="['title', 'category', 'rating']">
+      <ng-template pTemplate="caption">
+        <div class="table-header">
+          <span class="p-input-icon-right">
+            <i class="pi pi-search"></i>
+            <input class="form-control" pInputText type="text" #searchBox
+              (input)="dt.filterGlobal(searchBox.value, 'contains')" placeholder="Global Search" />
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="code">
+            <p-sortIcon field="code"></p-sortIcon> {{ 'Code' | translate }}
+            <p-columnFilter type="text" field="code" display="menu"></p-columnFilter>
+          </th>
+          <th pSortableColumn="refNumber">
+            <p-sortIcon field="refNumber"></p-sortIcon> {{ 'ReferenceId' | translate }}
+            <p-columnFilter type="text" field="refNumber" display="menu"></p-columnFilter>
+          </th>
+          <th pSortableColumn="amount">
+            <p-sortIcon field="amount"></p-sortIcon> {{ 'Amount' | translate }}
+            <p-columnFilter type="text" field="amount" display="menu"></p-columnFilter>
+          </th>
+          <th pSortableColumn="status">
+            <p-sortIcon field="status"></p-sortIcon> {{ 'Status' | translate }}
+            <p-columnFilter type="text" field="status" display="menu"></p-columnFilter>
+          </th>
+
+          <th pSortableColumn="Date">
+            <p-sortIcon field="Date"></p-sortIcon> {{ 'DepositDate' | translate }}
+            <p-columnFilter type="date" field="Date" display="menu"></p-columnFilter>
+          </th>
+        </tr>
+
+      </ng-template>
+      <ng-template pTemplate="body" let-deposit>
+        <tr id="invrow{{deposit.id}}" [ngClass]="{
+                  'table-success': deposit.status =='Paid',
+                  'table-warning': ( deposit.status =='Canceled' || deposit.deleted ), 
+                  'table-primary': deposit.status =='Deposited',
+                  'table-danger': deposit.status =='Refunded'
+                }">
+          <td>
+            <a [routerLink]="['/deposit/manage/',deposit.id]">
+              <span> {{deposit.code}}</span>
+            </a> <i *ngIf="deposit.addedBy == 'API'" class="mdi mdi-api font-22"></i>
+          </td>
+
+          <td>
+            <a [routerLink]="['/deposit/manage/',deposit.id]">
+              <span> {{deposit.refNumber}}</span>
+            </a>
+          </td>
+          <td>
+            {{deposit.amount.toFixed(3)}} {{deposit['currency_Code'] | translate}}
+          </td>
+          <td>
+            {{ 'InvStatus'+deposit.status | translate }}
+            <span *ngIf="deposit.status != 'Refunded' && deposit.refunded_Amount > 0">- {{"Partial" | translate}}</span>
+            <span *ngIf="depositFilter.depositType  == 'Order' && deposit.orderStatus != '' "> ({{deposit.orderStatus |
+              translate}})</span>
+            <small *ngIf="deposit.status == 'Paid'"><br>{{deposit.payment_Date}}</small>
+            <small *ngIf="deposit.status == 'Deposited'"><br>{{deposit.deposit_Date}}</small>
+
+          </td>
+
+
+          <td>
+            {{deposit.date }}
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="9"> No deposits found</td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+  </div>
+</div>
+<!-- ROW CLOSE -->

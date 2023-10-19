@@ -1,0 +1,112 @@
+<app-page-header title="{{ 'HomePage' | translate }}" active_item="{{ 'ProductLinks' | translate }}" showlist="0"
+  link="/productlink/create"></app-page-header>
+<notifier-container></notifier-container>
+<div class="row row-cards">
+  <div class="col-lg-12 col-xl-2">
+    <div class="row ">
+      <div class="col-md-12 col-lg-6 col-xl-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">{{ 'AdvancedSearch' | translate }} </div>
+          </div>
+          <div class="card-body" style=" overflow: auto;  width: 100%;
+                  height: 60vh;">
+            <div class="form-group">
+
+              <input type="text" name="name" #name="ngModel" required [(ngModel)]="ProductLinkFilter.name"
+                class="form-control" id="name" placeholder="{{ 'Name' | translate }}">
+            </div>
+            <button (click)="SearchProductLinks()" class="btn btn-primary me-1">
+              {{ 'Search' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-lg-12 col-xl-10">
+    <p-table #dt2 [value]="productlinks" dataKey="id" [rows]="15" [showCurrentPageReport]="true"
+      responsiveLayout="scroll" *ngIf="productlinks && productlinks.length>0" [responsive]="true" [autoLayout]="true"
+      [resizableColumns]="true" [style]="{'width':'100%','overflow':'auto!important'}" class="ui-rtl"
+      columnResizeMode="expand" [rowsPerPageOptions]="[15,30,50]" styleClass="p-datatable-gridlines" [paginator]="true"
+      currentPageReportTemplate="{{ 'Show' | translate }} {first} {{ 'To' | translate }}  {last}  {{ 'FromTotal' | translate }} {totalRecords} ">
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="nameAr">
+            <p-sortIcon field="nameAr"></p-sortIcon> {{ 'EnglishName' | translate }}
+            <p-columnFilter type="text" field="nameAr" display="menu"></p-columnFilter>
+          </th>
+          <th pSortableColumn="nameEn">
+            <p-sortIcon field="nameEn"></p-sortIcon> {{ 'ArabicName' | translate }}
+            <p-columnFilter type="text" field="nameEn" display="menu"></p-columnFilter>
+          </th>
+          <th>
+            {{ 'URL' | translate }}
+          </th>
+          <th pSortableColumn="inActive">
+            <p-sortIcon field="inActive"></p-sortIcon> {{ 'Active' | translate }}
+          </th>
+          <th>
+
+            {{ 'Action' | translate }}
+
+          </th>
+
+        </tr>
+
+      </ng-template>
+      <ng-template pTemplate="body" let-productlink let-i="rowIndex">
+        <tr [attr.id]="productlink.id" [ngClass]="{
+    
+    'table-danger': productlink.inActive
+  }">
+          <td>
+            {{productlink.nameAr}}
+          </td>
+          <td>
+             {{productlink.nameEn}}
+          </td>
+          <td>
+            <table>
+              <tr>
+                <td>{{ 'Arabic' | translate }} </td>
+                <td>
+                  <a href="{{baseURL}}/productLnk/ar/{{productlink.key}}"
+                    target="_blank">{{baseURL}}/productLnk/ar/{{productlink.key}}</a>
+                </td>
+              </tr>
+              <tr>
+                <td>{{ 'English' | translate }} </td>
+                <td><a href="{{baseURL}}/productLnk/en/{{productlink.key}}"
+                    target="_blank">{{baseURL}}/productLnk/en/{{productlink.key}}</a></td>
+              </tr>
+            </table>
+          </td>
+          <td>
+            <div class="form-group form-check form-switch">
+              <input type="checkbox" class="form-check-input switchery" id="Active" inActive="ngModel"
+                [(ngModel)]="!productlink.inActive" name="Active" disabled>
+            </div>
+          </td>
+          <!-- <td *ngIf="app.UserType() != 'Vendor'"> -->
+          <td class="text-center align-middle">
+            <div class="btn-group align-top">
+              <a class="btn btn-sm btn-primary-light" [routerLink]="['/productlink/details/',productlink.id]">{{
+                'Edit' | translate }}</a>
+              <button class="btn btn-sm btn-primary-light" type="button" (click)="ConfirmDelete(productlink.id)"><i
+                  class="fa fa-trash"></i></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="9" style="text-align: center;">{{ 'NoRecords' | translate }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+  </div>
+</div>

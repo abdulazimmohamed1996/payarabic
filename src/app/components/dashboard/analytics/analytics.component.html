@@ -1,0 +1,597 @@
+<app-page-header title="Dashboards"  active_item="Analytics"></app-page-header>
+	<!-- ROW OPEN -->
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <div class="chart-wrapper">
+            <div class="d-flex">
+              <a href="javascript:void(0)">
+                <span class="avatar avatar-lg rounded-3 border bg-white text-success me-3">
+                  <i class="fe fe-activity"></i>
+                </span>
+              </a>
+              <div class="w-100">
+                <p class="mb-0 fs-20 font-weight-semibold me-3">Active Users</p>
+                <p class="fs-12 text-muted me-3">8,543</p>
+              </div>
+            </div>
+            <div echarts class="mb-0 p-0 overflow-hidden w-100 h-300" [options]="echartLineOption1"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="row">
+        <div class="col-sm-6 col-lg-6">
+          <div class="card">
+            <div class="card-body text-center">
+              <span class="bg-primary-transparent avatar avatar-md rounded-3 text-primary"><i class="fe fe-user"></i> </span>
+              <h6 class="mb-1 mt-3 font-weight-500">Total Visits</h6>
+              <h2 class="mb-1"><span class="number-font counter">5,897</span></h2>
+              <p class="text-muted fs-12 mb-1">Daily changes may occur in visits report</p>
+              <a href="javascript:void(0)">View Details</a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body text-center">
+              <span class="bg-warning-transparent avatar avatar-md rounded-3 text-warning"><i class="fe fe-download"></i> </span>
+              <h6 class="mb-1 mt-3 font-weight-500">Total Downloads</h6>
+              <h2 class="mb-1"><span class="number-font counter">43k</span></h2>
+              <p class="text-muted fs-12 mb-1">Daily changes may occur in downloads report</p>
+              <a href="javascript:void(0)">View Details</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-6">
+          <div class="card">
+            <div class="card-body text-center">
+              <span class="bg-danger-transparent avatar avatar-md rounded-3 text-danger"><i class="fe fe-bell"></i> </span>
+              <h6 class="mb-1 mt-3 font-weight-500">Total Subscribers</h6>
+              <h2 class="mb-1"><span class="number-font counter">10,218</span></h2>
+              <p class="text-muted fs-12 mb-1">Daily changes may occur in subscribers report</p>
+              <a href="javascript:void(0)">View Details</a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body text-center">
+              <span class="bg-success-transparent avatar avatar-md rounded-3 text-success"><i class="fe fe-loader"></i> </span>
+              <h6 class="mb-1 mt-3 font-weight-500">Users Avg Time on Page</h6>
+              <h2 class="mb-1"><span class="number-font counter">60min</span></h2>
+              <p class="text-muted fs-12 mb-1">Daily changes may occur in page report</p>
+              <a href="javascript:void(0)">View Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--END ROW OPEN -->
+
+  <!-- ROW OPEN -->
+  <div class="row">
+    <div class="col-lg-6 col-xl-8">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Browser Traffic Sources</h3>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered align-items-center">
+              <thead class="thead-light">
+                <tr>
+                  <th>Source</th>
+                  <th>Views</th>
+                  <th>New Users</th>
+                  <th>Time Spent</th>
+                  <th>Bounce Rate</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><i class="fa fa-circle text-warning fs-10 me-1"></i> Organic</td>
+                  <td>23,986</td>
+                  <td>
+                    <div class="progress progress-xs mt-2">
+                                                      <div class="progress-bar bg-primary" style="width: 40%;"></div>
+                                                  </div>
+                  </td>
+                  <td><i class="fe fe-clock"></i> 1hr 45min</td>
+                  <td>
+                    <span class="badge bg-warning-transparent text-warning p-2 px-3">30.53%</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="fa fa-circle text-secondary fs-10 me-1"></i> Direct</td>
+                  <td>40,321</td>
+                  <td>
+                    <div class="progress progress-xs mt-2">
+                                                      <div class="progress-bar bg-primary" style="width: 70%;"></div>
+                                                  </div>
+                  </td>
+                  <td><i class="fe fe-clock"></i> 50min</td>
+                  <td>
+                    <span class="badge bg-secondary-transparent text-secondary p-2 px-3">12.55%</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="fa fa-circle text-success fs-10 me-1"></i> Campaign</td>
+                  <td>30,489</td>
+                  <td>
+                    <div class="progress progress-xs mt-2">
+                                                      <div class="progress-bar bg-primary" style="width: 55%;"></div>
+                                                  </div>
+                  </td>
+                  <td><i class="fe fe-clock"></i> 2hr 03min</td>
+                  <td>
+                    <span class="badge bg-success-transparent text-success p-2 px-3">43.09%</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="fa fa-circle text-primary fs-10 me-1"></i> Referral</td>
+                  <td>7,093</td>
+                  <td>
+                    <div class="progress progress-xs mt-2">
+                                                      <div class="progress-bar bg-primary" style="width: 80%;"></div>
+                                                  </div>
+                  </td>
+                  <td><i class="fe fe-clock"></i> 3hr</td>
+                  <td>
+                    <span class="badge bg-primary-transparent text-primary p-2 px-3">67.93%</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="fa fa-circle text-danger fs-10 me-1"></i> Email</td>
+                  <td>5,987</td>
+                  <td>
+                    <div class="progress progress-xs mt-2">
+                                                      <div class="progress-bar bg-primary" style="width: 40%;"></div>
+                                                  </div>
+                  </td>
+                  <td><i class="fe fe-clock"></i> 1hr 38min</td>
+                  <td>
+                    <span class="badge bg-danger-transparent text-danger p-2 px-3">59.74%</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xl-4">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Viewing from Devices</h3>
+        </div>
+        <div class="card-body">
+          <div style="display: block">
+            <div class="chart " class="h-345">
+              <apx-chart
+                [series]="chartOptions.series"
+                [chart]="chartOptions.chart"
+
+
+                [dataLabels]="chartOptions.dataLabels"
+                [responsive]="chartOptions.responsive"
+              ></apx-chart>
+            </div>
+       
+          <div class="row text-center">
+            <div class="col">
+              <i class="bx bx-desktop fs-20 text-primary me-2"></i>
+              <p class="text-muted font-weight-semibold mb-1">Desktop</p>
+              <h3 class="mb-0">48%</h3>
+            </div>
+            <div class="col">
+              <i class="bx bx-tab fs-20 text-warning me-2"></i>
+              <p class="text-muted font-weight-semibold mb-1">Tablet</p>
+              <h3 class="mb-0">34%</h3>
+            </div>
+            <div class="col">
+              <i class="bx bx-mobile-alt fs-20 text-success me-2"></i>
+              <p class="text-muted font-weight-semibold mb-1">Mobile</p>
+              <h3 class="mb-0">18%</h3>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!--END ROW OPEN -->
+
+  <!-- ROW OPEN -->
+  <div class="row">
+    <div class="col-md-12 col-xl-5">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Browser Usage</h3>
+        </div>
+        <div class="card-body">
+          <div class="d-flex mb-6">
+            <img src="./assets/images/browsers/chrome.svg" class="avatar bg-white me-3" alt="img">
+            <div class="w-40 me-5">
+              <p class="mb-0 fs-13 me-3">Google Chrome</p>
+              <div class="progress progress-xs mt-2">
+                <div class="progress-bar bg-danger" style="width: 50%;"></div>
+              </div>
+            </div>
+            <div class="my-auto">
+              <h6 class="mb-0 text-muted">
+                1,32,000 users
+              </h6>
+            </div>
+            <div class="ms-auto my-auto text-success">
+              <i class="fa fa-caret-up"></i> 45% Inc
+            </div>
+          </div>
+          <div class="d-flex mb-6">
+            <img src="./assets/images/browsers/edge.svg" class="avatar bg-white me-3" alt="img">
+            <div class="w-40 me-5">
+              <p class="mb-0 fs-13 me-3">Microsoft Edge</p>
+              <div class="progress progress-xs mt-2">
+                <div class="progress-bar bg-blue" style="width: 65%;"></div>
+              </div>
+            </div>
+            <div class="my-auto">
+              <h6 class="mb-0 text-muted">
+                56,897 users
+              </h6>
+            </div>
+            <div class="ms-auto my-auto text-danger">
+              <i class="fa fa-caret-down"></i> 15% Dec
+            </div>
+          </div>
+          <div class="d-flex mb-6">
+            <img src="./assets/images/browsers/safari.svg" class="avatar bg-white me-3" alt="img">
+            <div class="w-40 me-5">
+              <p class="mb-0 fs-13 me-3">Safari</p>
+              <div class="progress progress-xs mt-2">
+                <div class="progress-bar bg-cyan" style="width: 40%;"></div>
+              </div>
+            </div>
+            <div class="my-auto">
+              <h6 class="mb-0 text-muted">
+                29,732 users
+              </h6>
+            </div>
+            <div class="ms-auto my-auto text-success">
+              <i class="fa fa-caret-up"></i> 73% Inc
+            </div>
+          </div>
+          <div class="d-flex mb-6">
+            <img src="./assets/images/browsers/firefox.svg" class="avatar bg-white me-3" alt="img">
+            <div class="w-40 me-5">
+              <p class="mb-0 fs-13 me-3">Firefox</p>
+              <div class="progress progress-xs mt-2">
+                <div class="progress-bar bg-warning" style="width: 75%;"></div>
+              </div>
+            </div>
+            <div class="my-auto">
+              <h6 class="mb-0 text-muted">
+                86,467 users
+              </h6>
+            </div>
+            <div class="ms-auto my-auto text-danger">
+              <i class="fa fa-caret-down"></i> 25% Dec
+            </div>
+          </div>
+          <div class="d-flex mb-6">
+            <img src="./assets/images/browsers/opera.svg" class="avatar bg-white me-3" alt="img">
+            <div class="w-40 me-5">
+              <p class="mb-0 fs-13 me-3">Opera</p>
+              <div class="progress progress-xs mt-2">
+                <div class="progress-bar bg-danger" style="width: 25%;"></div>
+              </div>
+            </div>
+            <div class="my-auto">
+              <h6 class="mb-0 text-muted">
+                86,467 users
+              </h6>
+            </div>
+            <div class="ms-auto my-auto text-danger">
+              <i class="fa fa-caret-down"></i> 14% Dec
+            </div>
+          </div>
+          <div class="d-flex">
+            <img src="./assets/images/browsers/uc-browser.svg" class="avatar bg-white me-3" alt="img">
+            <div class="w-40 me-5">
+              <p class="mb-0 fs-13 me-3">UC Browser</p>
+              <div class="progress progress-xs mt-2">
+                <div class="progress-bar bg-success" style="width: 85%;"></div>
+              </div>
+            </div>
+            <div class="my-auto">
+              <h6 class="mb-0 text-muted">
+                86,467 users
+              </h6>
+            </div>
+            <div class="ms-auto my-auto text-success">
+              <i class="fa fa-caret-up"></i> 20% Inc
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-xl-4">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Todo List</h3>
+          <div class="ms-auto">
+            <a href="javascript:void(0)" role="button" class="btn btn-sm btn-primary">
+              <i class="fe fe-plus me-1"></i><span> Add New Task</span>
+            </a>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="todolist">
+            <div class="custom-controls-stacked">
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name="todo1" value="option1" checked>
+                <span class="custom-control-label text-decoration-line-through text-muted">Make sure to add new page in user interface. </span>
+              </label>
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name="todo2" value="option2" checked>
+                <span class="custom-control-label text-decoration-line-through text-muted">Update authentication pages. </span>
+              </label>
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name="todo3" value="option3">
+                <span class="custom-control-label">Application design meeting. </span>
+              </label>
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name="todo4" value="option4">
+                <span class="custom-control-label">Get a feedback from customers on web page design. </span>
+              </label>
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name="todo5" value="option5" checked>
+                <span class="custom-control-label text-decoration-line-through text-muted">Update contact page. </span>
+              </label>
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name="todo6" value="option6">
+                <span class="custom-control-label">Add more content for project summary and get ready with proper assests. </span>
+              </label>
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name="todo7" value="option7" checked>
+                <span class="custom-control-label text-decoration-line-through text-muted">New Template design. </span>
+              </label>
+            </div>
+          </div>
+          <div class="">
+            <span class="badge bg-success-transparent text-success p-3 fs-13"> 3 / 7 Done <i class="fe fe-check-circle ms-1"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  	<div class="col-md-6 col-xl-3">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Visits by Country</h3>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-borderless mb-0 height-300">
+              <thead >
+                <tr>
+                  <th>Country</th>
+                  <th>Users</th>
+                  <th>% Change</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <img src="./assets/images/flags/flag-imgs/us_flag.jpg" class="w-5 me-2 br-3" alt="img">USA
+                  </td>
+                  <td>30K</td>
+                  <td>
+                    <i class="fe fe-trending-up text-success me-1"></i> 28%
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <img src ="./assets/images/flags/flag-imgs/india_flag.jpg" class="w-5 me-2 br-3" alt="img">India
+                  </td>
+                  <td>42k</td>
+                  <td>
+                    <i class="fe fe-trending-down text-danger me-1"></i> 13%
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <img src="./assets/images/flags/flag-imgs/argentina.jpg" class="w-5 me-2 br-3" alt="img">Argentina
+                  </td>
+                  <td>12k</td>
+                  <td>
+                    <i class="fe fe-trending-up text-success me-1"></i> 45%
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <img src="./assets/images/flags/flag-imgs/canada.jpg" class="w-5 me-2 br-3" alt="img">Canada
+                  </td>
+                  <td>37k</td>
+                  <td>
+                    <i class="fe fe-trending-up text-success me-1"></i> 32%
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <img src="./assets/images/flags/flag-imgs/spain_flag.jpg" class="w-5 me-2 br-3" alt="img">Spain
+                  </td>
+                  <td>24k</td>
+                  <td>
+                    <i class="fe fe-trending-down text-danger me-1"></i> 22%
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <img src="./assets/images/flags/flag-imgs/malaysia.jpg" class="w-5 me-2 br-3" alt="img">Malaysia
+                  </td>
+                  <td>24k</td>
+                  <td>
+                    <i class="fe fe-trending-down text-danger me-1"></i> 22%
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <img src="./assets/images/flags/flag-imgs/italy_flag.jpg" class="w-5 me-2 br-3" alt="img">Italy
+                  </td>
+                  <td>24k</td>
+                  <td>
+                    <i class="fe fe-trending-up text-success me-1"></i> 35%
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--END ROW OPEN -->
+
+  <!-- ROW OPEN -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Social Report Rate</h3>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered text-nowrap mb-0">
+              <thead>
+                <tr>
+                  <th>Network</th>
+                  <th>Session</th>
+                  <th>Avg Time</th>
+                  <th>Bounce Rate</th>
+                  <th>Goal Conversion</th>
+                  <th>%Change</th>
+                  <th>Location</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <span class="bg-danger-transparent icon-service text-danger me-2"><i class="bx bxl-google"></i> </span>
+                    <span class="fs-14">Google</span>
+                  </td>
+                  <td>1346</td>
+                  <td>4:30</td>
+                  <td>
+                    <span class="badge bg-primary-transparent text-primary px-2 py-1">65.4%</span>
+                  </td>
+                  <td>
+                    <span class="badge bg-warning-transparent text-warning px-2 py-1">43.2%</span>
+                  </td>
+                  <td><i class="fe fe-trending-up text-success me-1"></i> 32%</td>
+                  <td>United States</td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="bg-primary-transparent icon-service text-primary me-2"><i class="bx bxl-facebook"></i> </span>
+                    <span class="fs-14">Facebook</span>
+                  </td>
+                  <td>4875</td>
+                  <td>9:22</td>
+                  <td>
+                    <span class="badge bg-primary-transparent text-primary px-2 py-1">32.9%</span>
+                  </td>
+                  <td>
+                    <span class="badge bg-warning-transparent text-warning px-2 py-1">56.6%</span>
+                  </td>
+                  <td><i class="fe fe-trending-down text-danger me-1"></i> 67.3%</td>
+                  <td>Australia</td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="bg-info-transparent icon-service text-info me-2"><i class="bx bxl-linkedin"></i> </span>
+                    <span class="fs-14">Linkedin</span>
+                  </td>
+                  <td>3781</td>
+                  <td>5:43</td>
+                  <td>
+                    <span class="badge bg-primary-transparent text-primary px-2 py-1">23.8%</span>
+                  </td>
+                  <td>
+                    <span class="badge bg-warning-transparent text-warning px-2 py-1">92.4%</span>
+                  </td>
+                  <td><i class="fe fe-trending-up text-success me-1"></i> 62.7%</td>
+                  <td>Spain</td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="bg-purple-transparent icon-service text-purple me-2"><i class="bx bxl-yahoo"></i> </span>
+                    <span class="fs-14">Yahoo</span>
+                  </td>
+                  <td>6793</td>
+                  <td>8:35</td>
+                  <td>
+                    <span class="badge bg-primary-transparent text-primary px-2 py-1">40.5%</span>
+                  </td>
+                  <td>
+                    <span class="badge bg-warning-transparent text-warning px-2 py-1">23.9%</span>
+                  </td>
+                  <td><i class="fe fe-trending-up text-success me-1"></i> 54%</td>
+                  <td>UAE</td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="bg-danger-transparent icon-service text-danger me-2"><i class="bx bxl-pinterest"></i> </span>
+                    <span class="fs-14">Pinterest</span>
+                  </td>
+                  <td>3678</td>
+                  <td>2:09</td>
+                  <td>
+                    <span class="badge bg-primary-transparent text-primary px-2 py-1">22.7%</span>
+                  </td>
+                  <td>
+                    <span class="badge bg-warning-transparent text-warning px-2 py-1">56.0%</span>
+                  </td>
+                  <td><i class="fe fe-trending-down text-danger me-1"></i> 43.8%</td>
+                  <td>Malaysia</td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="bg-secondary-transparent icon-service text-secondary me-2"><i class="bx bxl-twitter"></i> </span>
+                    <span class="fs-14">Twitter</span>
+                  </td>
+                  <td>5431</td>
+                  <td>1:54</td>
+                  <td>
+                    <span class="badge bg-primary-transparent text-primary px-2 py-1">27.9%</span>
+                  </td>
+                  <td>
+                    <span class="badge bg-warning-transparent text-warning px-2 py-1">30.6%</span>
+                  </td>
+                  <td><i class="fe fe-trending-down text-danger me-1"></i> 76%</td>
+                  <td>India</td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="bg-pink-transparent icon-service text-pink me-2"><i class="bx bxl-instagram"></i> </span>
+                    <span class="fs-14">Instagram</span>
+                  </td>
+                  <td>1346</td>
+                  <td>4:30</td>
+                  <td>
+                    <span class="badge bg-primary-transparent text-primary px-2 py-1">65.4%</span>
+                  </td>
+                  <td>
+                    <span class="badge bg-warning-transparent text-warning px-2 py-1">43.2%</span>
+                  </td>
+                  <td><i class="fe fe-trending-up text-success me-1"></i> 32%</td>
+                  <td>Russia</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!--END ROW OPEN -->
+

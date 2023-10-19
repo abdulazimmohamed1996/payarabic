@@ -1,0 +1,143 @@
+<app-page-header title="{{ 'HomePage' | translate }}" link="/product/list" showlist="1"  active_item="{{ 'AddEdit' | translate }} {{ 'Products' | translate }}"></app-page-header>
+<notifier-container></notifier-container>
+<!-- ROW-1 OPEN -->
+<form novalidate #pageform="ngForm" (ngSubmit)="pageform.form.valid && onSubmit()">
+  <div class="row">
+    <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">{{ 'Details' | translate }}</h3>
+        </div>
+        <div class="card-body" style="min-height: 480px;">
+          <div class="panel panel-primary">
+            <div class=" tab-menu-heading border-bottom-0">
+              <div class="tabs-menu1 ">
+                <!-- Tabs -->
+
+                <div class="row">
+                  <div class="col-lg-4">
+                    <label for="Name_En"> {{ 'Category' | translate }} <span class="text-danger">*</span></label>
+                    <select class="custom-select mb-1" name="Category_Id" #vendor_Id="ngModel" required
+                      [(ngModel)]="model.categoryId">
+                      <option [value]="cat.id" *ngFor="let cat of categoryLst">
+                        {{lang=='en'? cat.nameEn :cat.nameAr}}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col-lg-4">
+                    <label for="nameAr"> {{ 'ArabicName' | translate }} <span class="text-danger">*</span></label>
+                    <input type="text" name="nameAr" class="form-control " #nameAr="ngModel"
+                      [(ngModel)]="model.nameAr" required placeholder="{{ 'ArabicName' | translate }}"
+                      [ngClass]="{ 'is-invalid': submitted && nameAr.errors }"
+                      onkeydown="return /[a-z \u0621-\u064A]/i.test(event.key)" />
+                    <div *ngIf="nameAr?.hasError('required') && submitted " class="invalid-feedback">
+                      {{ 'ArabicName' | translate }} {{ 'Required' | translate }}
+                    </div>
+                    <div *ngIf="nameAr?.hasError('incorrect') && submitted " class="invalid-feedback">
+                      {{(nameAr.errors?.['message']| json)}}
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <label for="nameEn"> {{ 'EnglishName' | translate }} <span class="text-danger">*</span></label>
+                    <input type="text" name="nameEn" class="form-control " #nameEn="ngModel"
+                      [(ngModel)]="model.nameEn" required placeholder="{{ 'EnglishName' | translate }}"
+                      [ngClass]="{ 'is-invalid': submitted && nameEn.errors }"
+                      onkeydown="return /[a-z \u0621-\u064A]/i.test(event.key)" />
+                    <div *ngIf="nameEn?.hasError('required') && submitted " class="invalid-feedback">
+                      {{ 'EnglishName' | translate }} {{ 'Required' | translate }}
+                    </div>
+                    <div *ngIf="nameEn?.hasError('incorrect') && submitted " class="invalid-feedback">
+                      {{(nameEn.errors?.['message']| json)}}
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <label for="descAr"> {{ 'DescriptionArabic' | translate }} </label>
+                    <textarea name="descAr" parsley-trigger="change" #descAr="ngModel" [(ngModel)]="model.descAr"
+                      placeholder="{{ 'DescriptionArabic' | translate }}" class="form-control" id="descAr"></textarea>
+
+                  </div>
+                  <div class="col-lg-6">
+                    <label for="descEn"> {{ 'DescriptionEnglish' | translate }}</label>
+                    <textarea name="descEn" parsley-trigger="change" #descEn="ngModel" [(ngModel)]="model.descEn"
+                      placeholder="{{ 'DescriptionEnglish' | translate }}" class="form-control" id="descEn"></textarea>
+                  </div>
+                  <div class="col-lg-3">
+                    <label for="Name_En"> {{ 'UnitPrice' | translate }} ({{"KWD"| translate}})<span
+                        class="text-danger">*</span></label>
+
+                    <input type="number" name="price" parsley-trigger="change" min="1"
+                      (keypress)="app.onlyDecimalNumberKey($event)" required [(ngModel)]="model.price"
+                      #price="ngModel"
+                      placeholder=" {{ 'UnitPrice' | translate }}" class="form-control" id="price"
+                       [ngClass]="{ 'is-invalid': submitted && price.errors }">
+                       <div *ngIf="price?.hasError('required') && submitted " class="invalid-feedback">
+                        {{ 'UnitPrice' | translate }} {{ 'Required' | translate }}
+                      </div>
+                      <div *ngIf="price?.hasError('incorrect') && submitted " class="invalid-feedback">
+                        {{(price.errors?.['message']| json)}}
+                      </div>
+                  </div>
+                  <div class="col-lg-2">&nbsp;&nbsp;&nbsp;
+                    <label for="Active"> {{ 'Active' | translate }} </label>
+                    <div class="form-group form-check form-switch">
+                      &nbsp;&nbsp;&nbsp; <input type="checkbox" class="form-check-input switchery" id="Active"
+                        inActive="ngModel" [(ngModel)]="active" name="Active">
+                    </div>
+                  </div>
+                  <div class="col-lg-2">
+                    <label for="Stockable" style="width: 90px;"> {{ 'IsStockable' | translate }} </label>
+                    <div class="form-group form-check form-switch">
+                      <input type="checkbox" class="form-check-input switchery" id="stockable" inActive="ngModel"
+                        [(ngModel)]="model.stockable" name="stockable">
+                    </div>
+                  </div>
+                  <div class="col-lg-2" [hidden]="!model.stockable">
+                    <label for="quantity"> {{ 'Quantity' | translate }} <span class="text-danger">*</span></label>
+                    <input type="number" name="quantity" required [(ngModel)]="model.quantity" required
+                      (keypress)="app.onlyDecimalNumberKey($event)" [min]="0" [required]="model.stockable"
+                      [disabled]="!model.stockable" placeholder=" {{ 'Required' | translate }}" class="form-control">
+                  </div>
+                  <div class="col-lg-12">
+                    <div class="col-lg-4">
+                      <label for="image" class="btn btn-light  mt-4"><i class="fas fa-cloud-upload-alt"></i> {{ 'Image'
+                        | translate }}</label>
+                      <input type="file" accept="image/jpg,image/jpeg,image/png" name="image"
+                        (change)="fileChangeEvent($event)" class="form-control"
+                        placeholder=" {{ 'Optional' | translate }}" id="image">
+                      <Br>
+                      <img src="{{model.image}}" style="max-width:200px">
+                      <br>
+                      <div class="text-inform text-left ml-4 " *ngIf="!model.image || model.image "> <i class=""></i>{{
+                        'Image_inform' | translate }} </div>
+                      <a *ngIf="model.image" class="btn" (click)="app.downloadFile(model.image , 'image')">
+                        <span class="iconify" data-icon="mdi:image" data-inline="false"></span>
+                        {{ 'Download' | translate }}
+                      </a>
+
+                    </div>
+                    <div class="col-lg-8">
+                    </div>
+                  </div>
+
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <button (click)="SaveForm(pageform.form)" class="btn btn-success me-1">
+            {{ 'Submit' | translate }}
+          </button>
+          <button type="reset" class="btn btn-secondary waves-effect">
+            {{ 'Cancel' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<!-- ROW-1 CLOSED -->
+<!-- ROW-2 CLOSED -->

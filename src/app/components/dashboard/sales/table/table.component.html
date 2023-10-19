@@ -1,0 +1,57 @@
+<form>
+    <div class="mb-3 row">
+      <label for="table-complete-search" class="col-xs-3 col-sm-auto col-form-label">Full text search:</label>
+      <div class="col-xs-3 col-sm-auto">
+        <input id="table-complete-search" type="text" class="form-control" name="searchTerm" [(ngModel)]="service.searchTerm">
+       </div>
+      <span class="col col-form-label" *ngIf="service.loading$ | async">Loading...</span>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-bordered text-nowrap mb-0">
+        <thead class="border-top">
+        <tr>
+          <th scope="col" sortable="id" (sort)="onSort($event)">#No</th>
+          <th scope="col" sortable="name" (sort)="onSort($event)">Product Name</th>
+          <th scope="col" sortable="clientname" (sort)="onSort($event)">Client Name</th>
+          <th scope="col" sortable="cost"(sort)="onSort($event)">Product ID</th>
+          <th scope="col" sortable="status" (sort)="onSort($event)">Status</th>
+          <th scope="col" sortable="cost" (sort)="onSort($event)">Product Cost</th>
+          <th scope="col" sortable="paymentmode" (sort)="onSort($event)">Payment Mode</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="border-bottom" *ngFor="let product of products$ | async">
+     
+          <td><ngb-highlight [result]="product.id" [term]="service.searchTerm"></ngb-highlight></td>
+          <td>   <img src={{product.image}} class="w-6 bg-light rounded-3 me-1" alt="image"><ngb-highlight [result]="product.name" [term]="service.searchTerm"></ngb-highlight></td>
+
+
+          <td><ngb-highlight [result]="product.clientname" [term]="service.searchTerm"></ngb-highlight></td>
+          <td><ngb-highlight [result]="product.productId" [term]="service.searchTerm"></ngb-highlight></td>
+
+            <td><span class="badge bg-{{product.progresscolor}}  text-{{product.text}}">{{product.status}}</span></td>
+
+
+          <td><ngb-highlight [result]="product.cost | currency" [term]="service.searchTerm"></ngb-highlight></td>
+          <td><ngb-highlight [result]="product.paymentmode" [term]="service.searchTerm"></ngb-highlight></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="d-flex justify-content-between p-2">
+      <ngb-pagination
+        [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
+      </ngb-pagination>
+
+      <ng-select class="" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+        <ng-option ng-option-selected value="0">--Select--</ng-option>
+        <ng-option value="2">2 items per page</ng-option>
+        <ng-option value="4">4 items per page</ng-option>
+        <ng-option value="6">6 items per page</ng-option>
+      </ng-select>
+    </div>
+  
+  </form>

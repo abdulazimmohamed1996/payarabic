@@ -1,0 +1,502 @@
+<app-page-header title="Invoice" active_item="Invoice manage" showlist="1" link="/invoice/list"></app-page-header>
+<notifier-container></notifier-container>
+
+
+<form novalidate #pageform="ngForm">
+    <div class="row">
+        <div class=" col-lg-4 col-xl-3 col-md-12 col-sm-12">
+            <div class="card">
+                <div class="card-header border-bottom">
+                    <h5 class="card-title">Invoice Summary</h5>
+                </div>
+                <div class="card-body">
+                    <div class="clearfix row mb-4">
+                        <div class="col">
+                            <div class="float-start">
+                                <h5 class="mb-0">{{ 'SubTotal' | translate }}</h5>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="float-end">
+                                <h5 class="font-weight-bold mb-0 text-secondary ">{{invoice.subtotal}} {{
+                                    invoice.currencyCode |
+                                    translate }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix row mb-4">
+                        <div class="col">
+                            <div class="float-start">
+                                <h5 class="mb-0">{{ 'Discount' | translate }}</h5>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="float-end">
+                                <h5 class="font-weight-bold mb-0 text-success ">{{invoice.discountAmount}} {{
+                                    invoice.currencyCode |
+                                    translate }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix row mb-4">
+                        <div class="col">
+                            <div class="float-start">
+                                <h5 class="mb-0">{{ 'Total' | translate }}</h5>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="float-end">
+                                <h5 class="font-weight-bold mb-0 text-primary ">{{invoice.amount}} {{
+                                    invoice.currencyCode |
+                                    translate }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header border-bottom">
+                    <h5 class="card-title">Invoice Option</h5>
+                </div>
+                <div class="card-body pt0">
+
+                    <div>
+                        <div class="form-label">{{ 'DisplayCurrency' | translate }}</div>
+                        <ng-select id="currencyCode" name="currencyCode" #currencyCode="ngModel" [clearable]="false"
+                            [(ngModel)]="invoice.currencyCode" [disabled]="cntrlDisabled">
+                            <ng-option value="KWD" selected>{{ 'KWD' | translate }}</ng-option>
+                        </ng-select>
+                    </div>
+                    <div>
+                        <div class="form-label">{{ 'SendInvoiceOption' | translate }}</div>
+                        <ng-select id="sendType" name="sendType" #sendType="ngModel" [clearable]="false"
+                            [(ngModel)]="invoice.sendType" [disabled]="cntrlDisabled">
+                            <ng-option value="SMS">{{ 'SMS' | translate }}</ng-option>
+                            <ng-option value="Email">{{ 'Email' | translate }}</ng-option>
+                        </ng-select>
+                    </div>
+                    <div>
+                        <div class="form-label">{{ 'Language' | translate }}</div>
+                        <ng-select id="lang" name="lang" #sendType="ngModel" [(ngModel)]="invoice.lang"
+                            [clearable]="false" [disabled]="cntrlDisabled">
+                            <ng-option value="ar">{{ 'Arabic' | translate }}</ng-option>
+                            <ng-option value="en">{{ 'English' | translate }}</ng-option>
+                        </ng-select>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-xl-9 col-md-12 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">{{ 'InvoiceInfo' | translate }} </h3>
+                </div>
+                <div class="card-body pt0">
+                    <div class="panel panel-primary">
+                        <div class="row">
+                            <div class=" col-lg-4">
+                                <div class="form-label">{{ 'CustomerName' | translate }}
+                                    <span class="text-danger">*</span>
+                                </div>
+                                <input type="text" required #customerName="ngModel" [(ngModel)]="invoice.customerName"
+                                    placeholder=" {{ 'CustomerName' | translate }}" class="form-control" required
+                                    [ngClass]="{ 'is-invalid': submitted && customerName.errors }" id="customerName"
+                                    name="customerName" [disabled]="cntrlDisabled">
+                                <div *ngIf="customerName?.hasError('required') && submitted " class="invalid-feedback">
+                                    Customer Name is required
+                                </div>
+                                <!-- <div *ngIf="customerName?.hasError('incorrect') && submitted " class="invalid-feedback">
+                                        {{(customerName.errors?.['message']| json)}}
+                                      </div> -->
+                            </div>
+                            <div class=" col-lg-4">
+                                <div class="form-label">{{ 'Mobile' | translate }}</div>
+                                <ngx-intl-tel-input 
+                                [onlyCountries]="SharedModule.preferredCountries"
+                                [enableAutoCountrySelect]="true" [enablePlaceholder]="false"
+                                [searchCountryFlag]="true" [searchCountryField]="[
+                                      SharedModule.SearchCountryField.Iso2,
+                                      SharedModule.SearchCountryField.Name
+                                    ]" [selectFirstCountry]="false"
+                                [selectedCountryISO]="SharedModule.CountryISO.Kuwait" [maxLength]="15" [minlength]="8"
+                                [phoneValidation]="true" [separateDialCode]="true"
+                                [numberFormat]="SharedModule.PhoneNumberFormat.National" name="mobile"
+                                [(ngModel)]="invoice.customerMobile" *ngIf="invoice.status=='Unpaid'"
+                                id="customerMobile" name="customerMobile"
+                                [required]="invoice.sendType=='SMS'"
+                               >
+                            </ngx-intl-tel-input>
+                            <div *ngIf="submitted">
+                                <div class="invalid-feedback" style="display: block;" *ngIf="!pageform.form.value.customerMobile && invoice.sendType=='SMS'">Customer Mobile is required</div>
+                                <div class="invalid-feedback" style="display: block;" *ngIf="pageform.form.value.customerMobile && pageform.form.controls['customerMobile'].errors">Invalid Phone Number</div>
+                              </div>
+                            <span *ngIf="invoice.status!='Unpaid' ">{{invoice.customer_Mobile}}</span>
+                                <!-- <input type="text" [required]="invoice.sendType=='SMS'" #customerMobile="ngModel"
+                                    [(ngModel)]="invoice.customerMobile"
+                                    placeholder=" {{ 'customerMobile' | translate }}" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && customerMobile.errors }" id="customerMobile"
+                                    name="customerMobile" [disabled]="cntrlDisabled"> -->
+                                <!-- <div *ngIf="customerMobilehasError && submitted " style="display: block;"
+                                    class="invalid-feedback">
+                                    Customer Mobile is required
+                                </div> -->
+
+
+                            </div>
+
+                            <div class=" col-lg-4">
+                                <div class="form-label">{{ 'Email' | translate }}</div>
+                                <input type="email" parsley-trigger="change" #customerEmail="ngModel"
+                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                                    [min]="invoice.sendType=='Email' ?1:0" [required]="invoice.sendType=='Email'"
+                                    placeholder=" {{ 'Email' | translate }}" class="form-control"
+                                    [(ngModel)]="invoice.customerEmail" name="Email"
+                                    [ngClass]="{ 'is-invalid': submitted && customerEmail.errors }"
+                                    [disabled]="cntrlDisabled">
+                                <div *ngIf="customerEmail?.hasError('required') && submitted " class="invalid-feedback">
+                                    Customer Email is required
+                                </div>
+                            </div>
+
+
+                            <div class=" col-lg-4" *ngIf="this.quickInvoice">
+                                <div class="form-label">{{ 'InvoiceValue' | translate }}
+                                    <span
+                                        class="text-danger">*</span>
+                                </div>
+                                <input name="amount" parsley-trigger="change" required min="1"
+                                    (keypress)="app.onlyDecimalNumberKey($event)" [(ngModel)]="invoice.amount"
+                                    placeholder=" {{ 'Required' | translate }}" class="form-control" id="amount"
+                                    [disabled]="cntrlDisabled">
+                            </div>
+                            <div class=" col-lg-4">
+                                <div class="form-label">{{ 'ExpireDate' | translate }}</div>
+                                <div class="input-group">
+                                    <input class="form-control" name="expiryDateUI" ngbDatepicker
+                                        #expiryDateUI="ngModel" [(ngModel)]="invoice.expiryDateUI" #d="ngbDatepicker"
+                                        placeholder=" {{ 'ExpireDate' | translate }}"
+                                        [ngClass]="{ 'is-invalid': submitted && expiryDateUI.errors }" required />
+                                    <i class="fa fa-calendar btn btn-md btn-default lh-lg" (click)="d.toggle()"></i>
+                                    <div *ngIf="expiryDateUI?.hasError('required') && submitted "
+                                        class="invalid-feedback">
+                                        End Date is required
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" col-lg-4">
+                                <div class="form-label">{{ 'ReferenceId' | translate }}</div>
+                                <input type="text" [disabled]="cntrlDisabled" ngModel
+                                    placeholder=" {{ 'InvoiceReferencePlaceholder' | translate }}" class="form-control"
+                                    [(ngModel)]="invoice.ref_Number" name="Ref_Number">
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-file">
+                                    <div class="form-label">{{ 'Attachment' | translate }}</div>
+
+                                    <input type="file" class="form-control form-file-input" name="form-file-input"
+                                        accept="image/jpg,image/jpeg,image/png,application/pdf" name="attachment"
+                                        (change)="fileChangeEvent($event)" id="attachment">
+                                    <a *ngIf="invoice.attachments.length>0" class="btn" target="_blank"
+                                        [routerLink]="attachlink">
+                                        <span class="iconify" data-icon="mdi:attachment" data-inline="false"></span>
+                                        {{ 'Download' | translate }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="!this.quickInvoice" >
+                            <div class=" tab-menu-heading border-0">
+                                <div class="tabs-menu1 ">
+                                    <!-- Tabs -->
+                                    <ul ngbNav #nav1="ngbNav" [activeId]="1" class="panel-tabs">
+                                        <li class="me-2" [ngbNavItem]="1">
+                                            <a ngbNavLink>{{ 'InvoiceItems' | translate }}</a>
+                                            <ng-template ngbNavContent>
+                                                <p-table #dt2 [value]="invoice.items" dataKey="id" [rows]="20"
+                                                    [showCurrentPageReport]="true" [responsive]="true" rowhe
+                                                    [autoLayout]="true" [resizableColumns]="true"
+                                                    [style]="{'width':'100%','overflow':'auto!important'}"
+                                                    class="ui-rtl" columnResizeMode="expand" [rows]="items.length"
+                                                    styleClass="p-datatable-gridlines">
+                                                    <ng-template pTemplate="header">
+                                                        <tr>
+
+                                                            <th>
+                                                                {{ 'Name' | translate }}
+
+                                                            </th>
+                                                            <th>
+                                                                {{ 'Quantity' | translate }}
+
+                                                            </th>
+                                                            <th>
+                                                                {{ 'Amount' | translate }}
+
+                                                            </th>
+
+                                                            <th>
+
+                                                            </th>
+
+                                                        </tr>
+
+                                                    </ng-template>
+                                                    <ng-template pTemplate="body" let-item>
+                                                        <tr>
+
+                                                            <td>
+                                                                <input type="text" name="name_{{item.id}}" min="1"
+                                                                    min="0" [(ngModel)]="item.name" required
+                                                                    placeholder=" {{ 'Required' | translate }}"
+                                                                    class="form-control"
+                                                                    [disabled]="cntrlDisabled">
+
+
+                                                            </td>
+                                                            <td>
+                                                                <input name="quantity_{{item.id}}" min="1"
+                                                                    (keyup)="SetInvoiceTotal()"
+                                                                    (keypress)="app.onlyNumberKey($event)" min="0"
+                                                                    [(ngModel)]="item.quantity" required
+                                                                    placeholder=" {{ 'Required' | translate }}"
+                                                                    class="form-control"
+                                                                    [disabled]="cntrlDisabled">
+
+
+                                                            </td>
+                                                            <td>
+                                                                <input name="amount_{{item.id}}" min="1" min="0"
+                                                                    [(ngModel)]="item.amount" required
+                                                                    (keypress)="app.onlyDecimalNumberKey($event)"
+                                                                    (keyup)="SetInvoiceTotal()"
+                                                                    placeholder=" {{ 'Required' | translate }}"
+                                                                    class="form-control"
+                                                                    [disabled]="cntrlDisabled">
+
+
+                                                            </td>
+                                                            <td>
+                                                                <div (click)="ConfirmDelete(item.id)"
+                                                                    *ngIf="invoice.status=='Unpaid'"
+                                                                    class="text-danger cursor-pointer font-weight-bold">
+                                                                    X</div>
+                                                            </td>
+                                                        </tr>
+                                                    </ng-template>
+
+                                                </p-table>
+                                                <div class="row" *ngIf="invoice.status=='Unpaid' && !this.quickInvoice">
+                                                    <div class=" text-left mb-0">
+                                                        <button type="button"
+                                                            class="btn btn-outline-primary waves-effect waves-lightt"
+                                                            (click)="AddNewRow()"> {{ 'Add' |
+                                                            translate }}</button>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </li>
+                                        <li class="me-2" [ngbNavItem]="2">
+                                            <a ngbNavLink>{{'MoreOption' | translate }}</a>
+                                            <ng-template ngbNavContent class="pt0">
+                                                <div class="row ">
+                                                    <div class=" col-lg-4">
+                                                        <div class="form-label">{{ 'DiscountType' | translate }}
+                                                        </div>
+                                                        <ng-select id="discount_Type" (change)="SetInvoiceTotal()"
+                                                            name="discount_Type" #sendType="ngModel"
+                                                            [(ngModel)]="invoice.discountType"
+                                                            [disabled]="cntrlDisabled">
+                                                            <ng-option value="" selected>{{ 'select' | translate
+                                                                }}</ng-option>
+                                                            <ng-option value="Amount">{{ 'FixedRate' | translate
+                                                                }}</ng-option>
+                                                            <ng-option value="Percent">{{ 'Rate%' | translate
+                                                                }}</ng-option>
+                                                        </ng-select>
+                                                    </div>
+                                                    <div class=" col-lg-4">
+                                                        <div class="form-label">{{ 'DiscountAmount' | translate }}
+                                                        </div>
+                                                        <input type="number" name="discountAmount"
+                                                            [min]="invoice.discountType!=0 ?1:0"
+                                                            [required]="invoice.discountType!=0"
+                                                            (keyup)="SetInvoiceTotal()" #discountAmount="ngModel"
+                                                            [(ngModel)]="invoice.discountAmount"
+                                                            placeholder=" {{ 'DiscountAmount' | translate }}"
+                                                            class="form-control" id="discount_Amount"
+                                                            [disabled]="cntrlDisabled">
+                                                    </div>
+
+                                                    <div class=" col-lg-4">
+                                                        <div class="form-label">{{ 'ReminderAfter' | translate }}
+                                                        </div>
+                                                        <input type="number" name="remind_After"
+                                                            parsley-trigger="change" #remind_After="ngModel"
+                                                            [(ngModel)]="invoice.remind_After"
+                                                            placeholder="{{ 'Required' | translate }}"
+                                                            class="form-control" id="remind_After"
+                                                            [disabled]="cntrlDisabled">
+                                                    </div>
+
+
+
+
+
+                                                    <div class="col-lg-6">
+                                                        <div class="">
+                                                            <div class="form-label">{{ 'Notes' | translate }}
+                                                                (<span>{{comment_remainingText}}
+                                                                    {{"CharsRemaining"|translate}}</span>)
+                                                            </div>
+
+                                                            <textarea maxlength="25" name="comment"
+                                                                parsley-trigger="change" #comment="ngModel"
+                                                                [(ngModel)]="invoice.comment"
+                                                                placeholder="{{ 'Notes' | translate }}"
+                                                                class="form-control" id="comment"
+                                                                (ngModelChange)="text_valueChange('comment',invoice.comment.length)"
+                                                                maxlength="500"
+                                                                [disabled]="cntrlDisabled"></textarea>
+
+
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-lg-6">
+
+                                                        <div class="form-label">{{ 'TermsConditions' | translate }}
+                                                            (<span>{{terms_remainingText}}
+                                                                {{"CharsRemaining"|translate}}</span>)
+                                                        </div>
+                                                        <div class="input-group">
+                                                            <div class="checkbox checkbox-info checkbox-circle">
+                                                                <input id="checkbox8" type="checkbox"
+                                                                    name="terms_Condition_Enabled"
+                                                                    [(ngModel)]="invoice.terms_Condition_Enabled">
+                                                                <label for="checkbox8">
+
+                                                                </label>
+                                                            </div>
+                                                            <span class="input-group-btn" style="margin: 5px;"></span>
+                                                            <textarea name="terms_Condition"
+                                                                [disabled]="!invoice.terms_Condition_Enabled"
+                                                                #terms_Condition="ngModel"
+                                                                [(ngModel)]="invoice.terms_Condition"
+                                                                placeholder="{{ 'TermsConditions' | translate }}"
+                                                                class="form-control" id="terms_Condition"
+                                                                (ngModelChange)="text_valueChange('terms',invoice.terms_Condition.length)"
+                                                                maxlength="500"
+                                                                [disabled]="cntrlDisabled"></textarea>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </li>
+
+                                        <li class="me-2" [ngbNavItem]="3" *ngIf="this.quickInvoice">
+                                            <a ngbNavLink>{{
+                                                'Transactions' | translate }}</a>
+                                            <ng-template ngbNavContent>
+                                                <p-table #dt2 [value]="invoice.transactions" dataKey="id" [rows]="20"
+                                                    [showCurrentPageReport]="true" [responsive]="true" rowhe
+                                                    [autoLayout]="true" [resizableColumns]="true"
+                                                    [style]="{'width':'100%','overflow':'auto!important'}"
+                                                    class="ui-rtl" columnResizeMode="expand"
+                                                    [rows]="invoice.transactions.length"
+                                                    styleClass="p-datatable-gridlines">
+                                                    <ng-template pTemplate="header">
+                                                        <tr>
+
+                                                            <th>
+                                                                {{ 'PaymentType' | translate }}
+
+                                                            </th>
+                                                            <th>
+                                                                {{ 'PaymentGateway' | translate }}
+                                                            </th>
+                                                            <th>
+                                                                {{ 'Amount' | translate }}
+                                                            </th>
+                                                            <th>
+                                                                {{ 'Status' | translate }}
+                                                            </th>
+                                                            <th>
+                                                                {{ 'TrackId' | translate }}
+                                                            </th>
+                                                            <th>
+                                                                {{ 'TransactionId' | translate }}
+                                                            </th>
+                                                            <th>
+                                                                {{ 'ReferenceId' | translate }}
+                                                            </th>
+                                                            <th>
+                                                                {{ 'PaymentId' | translate }}
+                                                            </th>
+                                                            <th>
+                                                                {{ 'IpAddress' | translate }}
+                                                            </th>
+                                                            <th>
+                                                                {{ 'CreatedDate' | translate }}
+                                                            </th>
+                                                        </tr>
+
+                                                    </ng-template>
+                                                    <ng-template pTemplate="body" let-item>
+                                                        <tr
+                                                            class="{{(item.status == 'True' || item.status == 'Success'?'':'table-warning')}}">
+
+                                                            <td>{{item.request_Type}}</td>
+                                                            <td>{{item.paymentGateway}} - {{item.paymentGatewayCode}}
+                                                            </td>
+                                                            <td>{{item.amount.toFixed(3)}}
+                                                                {{item.currencyCode|translate}}</td>
+                                                            <td>{{item.status | translate}}</td>
+                                                            <td>{{item.trackId}}</td>
+                                                            <td>{{item.transactionId}}</td>
+                                                            <td>{{item.referenceId}}</td>
+                                                            <td>{{item.paymentId}}</td>
+                                                            <td>{{item.ipAddress}}</td>
+                                                            <td class="text-phone">{{item.createDate|date:'dd/MM/yyyy
+                                                                H:m:s'}}
+                                                            </td>
+                                                        </tr>
+                                                    </ng-template>
+
+                                                </p-table>
+                                            </ng-template>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="panel-body ">
+                                <div [ngbNavOutlet]="nav1"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <div class="row" *ngIf="invoice.status=='Unpaid' && !invoice.deleted">
+
+                        <div class="btn-list text-center">
+                            <button (click)="SaveForm(pageform.form)" class="btn btn-primary me-1">
+                                {{ 'Submit' | translate }}
+                            </button>
+                            <button type="reset" class="btn btn-secondary waves-effect">
+                                {{ 'Cancel' | translate }}
+                            </button>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

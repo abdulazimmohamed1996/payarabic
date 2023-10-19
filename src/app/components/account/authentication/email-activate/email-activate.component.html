@@ -1,0 +1,54 @@
+<div class="account-pages pt-3 my-3">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6 col-xl-8">
+        <div class="account-card-box">
+          <div class="card mb-0">
+            <div class="card-body p-4">
+              <div class="text-center">
+                <div class="my-3">
+                  <a href="index.html">
+                    <span><img src="assets/images/logo.svg" alt="" height="75"></span>
+                  </a>
+                </div>
+                <h5 class="text-muted text-uppercase py-3 font-16">{{ 'ActivationCodeTitle' | translate }}</h5>
+                <label>{{ 'ActivationCodeHint' | translate }}</label>
+                
+              </div>
+              <form  (ngSubmit)="onSubmit()">
+
+                <div class="form-group mb-3">
+                  <label for="activationCode"> {{ 'ActivationCode' | translate }} <span class="text-danger">*</span></label>
+                  <input type="text" formControlName="activationCode" class="form-control"
+                         [ngClass]="{ 'is-invalid': submitted && f.activationCode.errors }" placeholder="{{ 'ActivationCode' | translate }}">
+                  <div *ngIf="submitted && f.activationCode.errors" class="invalid-feedback">
+                    <div *ngIf="f.activationCode.errors.required">{{ 'ActivationCodeRequired' | translate }}</div>
+                    <div *ngIf="f.activationCode.errors.minlength">{{ 'ActivationCodeMinimumLength' | translate }}</div>
+                    <!--<div *ngIf="f.userEmail.errors.email"> Email must be a valid email address</div>-->
+                  </div>
+                </div>
+                <div class="form-group text-center">
+                  <button type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center" style=""
+                          [disabled]="isLoading">
+                    <i [className]="isLoading ? 'fa fa-spin fa-spinner':''"></i>
+                    {{ 'Activate' | translate }}
+                  </button>
+                </div>
+              </form>
+            </div> <!-- end card-body -->
+          </div>
+          <!-- end card -->
+        </div>
+        <div class="card p-4">
+          <div class="col-12 text-center">
+            <p class="">Don't have an account? <a href="pages-register.html" class="ml-1"><b>Sign Up</b></a></p>
+          </div> <!-- end col -->
+        </div>
+        <!-- end row -->
+
+      </div> <!-- end col -->
+    </div>
+    <!-- end row -->
+  </div>
+  <!-- end container -->
+</div>

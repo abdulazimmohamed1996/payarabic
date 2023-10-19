@@ -1,0 +1,75 @@
+<div id="main-wrapper">
+  <div class="container-fluid px-0">
+    <div class="row g-0 min-vh-100"> 
+      <!-- Welcome Text
+      ============================================= -->
+      <div class="col-md-6">
+        <div class="hero-wrap d-flex align-items-center h-100">
+          <div class="hero-mask opacity-8 bg-primary"></div>
+          <div class="hero-bg hero-bg-scroll" style="background-image:url('assets/landingpage/images/bg/image-3.jpg');"></div>
+          <div class="hero-content mx-auto w-100 h-100 d-flex flex-column">
+            <div class="row g-0">
+              <div class="col-10 col-lg-9 mx-auto">
+                <div class="logo mt-5 mb-5 mb-md-0"> <a class="d-flex" href="index.html" title="Payyed - HTML Template"><img src="assets/landingpage/images/logo-light.png" alt="Payyed"></a> </div>
+              </div>
+            </div>
+            <div class="row g-0 my-auto">
+              <div class="col-10 col-lg-9 mx-auto">
+                <h1 class="text-11 text-white mb-4">Welcome back!</h1>
+                <p class="text-4 text-white lh-base mb-5">We are glad to see you again! Instant deposits, withdrawals & payouts trusted by millions worldwide.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Welcome Text End --> 
+      
+      <!-- Login Form
+      ============================================= -->
+      <div class="col-md-6 d-flex align-items-center">
+        <div class="container my-4">
+          <div class="row g-0">
+            <form [formGroup]="loginForm" (ngSubmit)="Submit()" novalidate #pageform="ngForm">
+              <notifier-container></notifier-container>
+            <div class="col-11 col-lg-9 col-xl-8 mx-auto">
+              <h3 class="fw-400 mb-4">Log In</h3>
+              
+
+                <div class="mb-3">
+                  <label for="emailAddress" class="form-label">Email Address</label>
+                  <input type="email" class="border-start-0 form-control ms-0" placeholder="email"
+                  autocomplete formControlName="email" required [(ngModel)]="dataModel.email">
+                  <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                    <div *ngIf="f['email'].errors">Password is required</div>
+                    <!--<div *ngIf="f.userEmail.errors.email"> Email must be a valid email address</div>-->
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="loginPassword" class="form-label">Password</label>
+                  <input type="password" class="border-start-0 form-control ms-0" placeholder="Password"
+                              autocomplete formControlName="password" required [(ngModel)]="dataModel.password">
+                              <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                                <div *ngIf="f['password'].errors">UserName is required</div>
+                                <!--<div *ngIf="f.userEmail.errors.email"> Email must be a valid email address</div>-->
+                              </div>
+                           </div>
+                <div class="row mb-3">
+                  <div class="col-sm">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" id="remember-me" name="remember" type="checkbox">
+                      <label class="form-check-label" for="remember-me">Remember Me</label>
+                    </div>
+                  </div>
+                  <div class="col-sm text-end"><a class="btn-link" href="#">Forgot Password ?</a></div>
+                </div>
+                <div class="d-grid mb-3"><button class="btn btn-primary  {{disabled}}" type="submit">Login</button></div>
+              <p class="text-3 text-center text-muted">Don't have an account? <a class="btn-link" routerLink="/auth/register">Sign Up</a></p>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- Login Form End --> 
+    </div>
+  </div>
+</div>

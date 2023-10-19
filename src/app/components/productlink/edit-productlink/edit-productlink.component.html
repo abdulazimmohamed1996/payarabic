@@ -1,0 +1,129 @@
+<app-page-header title="{{ 'HomePage' | translate }}" link="/productlink/list" showlist="1"  active_item="{{ 'AddEdit' | translate }} {{ 'ProductLink' | translate }}"></app-page-header>
+<notifier-container></notifier-container>
+<!-- ROW-1 OPEN -->
+<form novalidate #pageform="ngForm" (ngSubmit)="pageform.form.valid && onSubmit()">
+  <div class="row">
+    <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">{{ 'Details' | translate }}</h3>
+        </div>
+        <div class="card-body" style="min-height: 480px;">
+          <div class="panel panel-primary">
+            <div class=" tab-menu-heading border-bottom-0">
+              <div class="tabs-menu1 ">
+                <!-- Tabs -->
+
+              </div>
+              <div class="row">
+
+                <div class="row">
+                  <div class="col-lg-4">
+                    <label for="nameEn"> {{ 'ArabicName' | translate }} <span class="text-danger">*</span></label>
+                    <input type="text" parsley-trigger="change" required [(ngModel)]="model.nameAr" #nameAr="ngModel"
+                    [ngClass]="{ 'is-invalid': submitted && nameAr.errors }"
+                      placeholder=" {{ 'ArabicName' | translate }}" class="form-control" id="nameAr" name="nameAr">
+                      <div *ngIf="nameAr?.hasError('required') && submitted " class="invalid-feedback">
+                        {{ 'ArabicName' | translate }} {{ 'Required' | translate }}
+                      </div>
+                      <div *ngIf="nameAr?.hasError('incorrect') && submitted " class="invalid-feedback">
+                        {{(nameAr.errors?.['message']| json)}}
+                      </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <label for="nameEn"> {{ 'EnglishName' | translate }} <span class="text-danger">*</span></label>
+                    <input type="text" parsley-trigger="change" required [(ngModel)]="model.nameEn" #nameEn="ngModel"
+                    [ngClass]="{ 'is-invalid': submitted && nameAr.errors }"
+                      placeholder=" {{ 'EnglishName' | translate }}" class="form-control" id="nameEn" name="nameEn">
+                      <div *ngIf="nameEn?.hasError('required') && submitted " class="invalid-feedback">
+                        {{ 'EnglishName' | translate }} {{ 'Required' | translate }}
+                      </div>
+                      <div *ngIf="nameEn?.hasError('incorrect') && submitted " class="invalid-feedback">
+                        {{(nameEn.errors?.['message']| json)}}
+                      </div>
+                  </div>
+                  <div class="col-lg-8">
+
+                    <label for="termsCondition"> {{ 'TermsConditions' | translate }} </label>
+                    <div class="input-group">
+                      <div class="checkbox checkbox-info checkbox-circle">
+                        <input id="checkbox8" type="checkbox" name="termsConditionEnabled"
+                          [(ngModel)]="model.termsConditionEnabled">
+                        <label for="checkbox8">
+
+                        </label>
+                      </div>
+                      <span class="input-group-btn" style="margin: 5px;"></span>
+                      <textarea name="termsCondition" [disabled]="!model.termsConditionEnabled"
+                        [ngStyle]="{'border': model.termsCondition == '' && model.termsConditionEnabled ? '1px red solid' : ''}"
+                        #termsCondition="ngModel" [(ngModel)]="model.termsCondition"
+                        placeholder="{{ 'TermsConditions' | translate }}" class="form-control"
+                        id="termsCondition"></textarea>
+                    </div>
+                    <div class="text-danger text-left ml-4 "
+                      *ngIf="model.termsCondition == '' && model.termsConditionEnabled "> <i
+                        class="fa fa-times-circle"></i> {{ 'Empty_terms' | translate }}</div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="row">&nbsp;</div>
+              <div class="row">
+                <div class="form-group row">
+                  <div class="col-md-5">
+                    <h5>{{"Products" | translate}}</h5>
+                    <span><i>{{'ClickToAdd' | translate}}</i></span>
+
+                    <select class="form-control" [(ngModel)]="selectedToAdd" multiple name="myselecttsms2"
+                      (click)="assign($any($event.target).value,1)">
+                      <optgroup *ngFor='let grp of unSelectedItems' label="{{grp['name'+lang]}}">
+                        <option *ngFor='let item of grp.products'
+                          style="text-align: {{align}} ;border-radius: 2px;background: #fff;margin-bottom: 2px;padding: 2px;"
+                          [value]="item.id">{{item['name'+lang]}}</option>
+                      </optgroup>
+                    </select>
+
+                  </div>
+                  <div class="col-md-1 arrow-multi">
+                    &nbsp;
+                  </div>
+                  <div class="col-md-5">
+                    <h5>{{"ChosenProducts" | translate}}</h5>
+                    <span><i>{{'ClickToRemove' | translate}}</i></span>
+                    <select class="form-control" [(ngModel)]="selectedToRemove" multiple name="myselecttsms"
+                      (click)="assign($any($event.target).value,0)">
+                      <optgroup *ngFor='let grp of selectedItems' label="{{grp['name'+lang]}}">
+                        <option *ngFor='let item of filterArray(grp.products,0)'
+                          style="text-align: {{align}} ;border-radius: 2px;background: #fff;margin-bottom: 2px;padding: 2px;"
+                          [value]="item.id">{{item['name'+lang]}}</option>
+                      </optgroup>
+                    </select>
+                  </div>
+                  <div class="col-lg-3">
+                    <label for="Active"> {{ 'Active' | translate }} </label>
+                    <div class="form-group form-check form-switch">
+                      <input type="checkbox" class="form-check-input" id="Active" inActive="ngModel"
+                        [(ngModel)]="model.active" name="Active">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="card-footer">
+        <button (click)="SaveForm(pageform.form)" class="btn btn-success me-1">
+          {{ 'Submit' | translate }}
+        </button>
+        <button type="reset" class="btn btn-secondary waves-effect">
+          {{ 'Cancel' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+<!-- ROW-1 CLOSED -->
+<!-- ROW-2 CLOSED -->

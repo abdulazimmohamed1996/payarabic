@@ -1,0 +1,547 @@
+<app-page-header title="Dashboards"  active_item="CRM"></app-page-header>
+
+						<!-- ROW OPEN -->
+						<div class="row">
+							<div class="col-xl-3 col-sm-6">
+								<div class="card">
+									<div class="card-body text-center">
+										<span class="bg-primary-transparent icon-service text-primary mb-3"><i class="fe fe-users"></i> </span>
+										<h6>Total Contacts</h6>
+										<h3 class="counter mt-0 mb-3 number-font">7,896</h3>
+										<div class="progress h-1 mt-0 mb-2">
+											<div class="progress-bar progress-bar-striped progress-bar-animated bg-primary w-70" role="progressbar"></div>
+										</div>
+										<div class="row mt-4">
+											<div class="col text-center border-end">
+												<span class="text-muted">Weekly</span>
+												<h4 class="font-weight-normal mt-2 mb-0 ">8</h4>
+											</div>
+											<div class="col text-center border-end">
+												<span class="text-muted">Monthly</span>
+												<h4 class="font-weight-normal mt-2 mb-0 number-font2">23</h4>
+											</div>
+											<div class="col text-center">
+												<span class="text-muted">Total</span>
+												<h4 class="font-weight-normal mt-2 mb-0 number-font3">31</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-3 col-sm-6">
+								<div class="card overflow-hidden">
+									<div class="card-body text-center">
+										<span class="bg-secondary-transparent icon-service text-secondary mb-3"><i class="fe fe-file-text"></i> </span>
+										<h6>Total Leads</h6>
+										<h3 class="counter mt-0 mb-3 number-font">2,897</h3>
+										<div class="progress h-1 mt-0 mb-2">
+											<div class="progress-bar progress-bar-striped progress-bar-animated bg-secondary w-50" role="progressbar"></div>
+										</div>
+										<div class="row mt-4">
+											<div class="col text-center border-end">
+												<span class="text-muted">Weekly</span>
+												<h4 class="font-weight-normal mt-2 mb-0 ">378</h4>
+											</div>
+											<div class="col text-center border-end">
+												<span class="text-muted">Monthly</span>
+												<h4 class="font-weight-normal mt-2 mb-0 ">689</h4>
+											</div>
+											<div class="col text-center">
+												<span class="text-muted">Total</span>
+												<h4 class="font-weight-normal mt-2 mb-0 ">1,069</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-3 col-sm-6">
+								<div class="card overflow-hidden">
+									<div class="card-body text-center">
+										<span class="bg-success-transparent icon-service text-success mb-3"><i class="fe fe-award"></i> </span>
+										<h6>Total Deals</h6>
+										<h3 class="counter mt-0 mb-3 number-font">1,567</h3>
+										<div class="progress h-1 mt-0 mb-2">
+											<div class="progress-bar progress-bar-striped progress-bar-animated bg-success w-60" role="progressbar"></div>
+										</div>
+										<div class="row mt-4">
+											<div class="col text-center border-end">
+												<span class="text-muted">Weekly</span>
+												<h4 class="font-weight-normal mt-2 mb-0 ">5</h4>
+											</div>
+											<div class="col text-center border-end">
+												<span class="text-muted">Monthly</span>
+												<h4 class="font-weight-normal mt-2 mb-0 ">20</h4>
+											</div>
+											<div class="col text-center">
+												<span class="text-muted">Total</span>
+												<h4 class="font-weight-normal mt-2 mb-0 ">25</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-3 col-sm-6">
+								<div class="card overflow-hidden">
+									<div class="card-body text-center">
+										<span class="bg-danger-transparent icon-service text-danger mb-3"><i class="fe fe-tag"></i> </span>
+										<h6>Total Forecasts</h6>
+										<h3 class="counter mt-0 mb-3 number-font">4,293</h3>
+										<div class="progress h-1 mt-0 mb-2">
+											<div class="progress-bar progress-bar-striped progress-bar-animated bg-danger w-40" role="progressbar"></div>
+										</div>
+										<div class="row mt-4">
+											<div class="col text-center border-end">
+												<span class="text-muted">Weekly</span>
+												<h4 class="font-weight-normal mt-2 mb-0 ">35</h4>
+											</div>
+											<div class="col text-center border-end">
+												<span class="text-muted">Monthly</span>
+												<h4 class="font-weight-normal mt-2 mb-0 ">56</h4>
+											</div>
+											<div class="col text-center">
+												<span class="text-muted">Total</span>
+												<h4 class="font-weight-normal mt-2 mb-0 ">91</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- ROW END -->
+
+						<!-- ROW OPEN -->
+						<div class="row">
+							<div class="col-xl-8 col-md-6">
+								<div class="card">
+									<div class="card-header">
+										<div class="card-title mb-0">Profits by Month</div>
+									</div>
+									<div class="card-body overflow-hidden">
+                    <canvas baseChart  [data]="lineChartData" [options]="lineChartOptions" [legend]="lineChartLegend" [type]="lineChartType"[height]="400">
+                    </canvas>
+										<div id="profits" class="w-100"></div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-4 col-md-6">
+								<div class="card overflow-hidden">
+									<div class="card-header">
+										<div class="card-title mb-0">Activity Log</div>
+									</div>
+									<div class="card-body">
+										<ul class="task-list">
+											<li>
+												<i class="task-icon bg-primary"></i>
+												<div class="d-flex">
+													<div class="">
+														<p class="mb-0"><span class="font-weight-500">New Task</span> added to the project.</p>
+														<small class="text-muted">Just now</small>
+													</div>
+													<div class="ms-auto float-end">
+														<a href="javascript:void(0)" class="btn btn-primary-light btn-sm">View</a>
+													</div>
+												</div>
+											</li>
+											<li>
+												<i class="task-icon bg-secondary"></i>
+												<div class="d-flex">
+													<div class="">
+														<p class="mb-0"><span class="font-weight-500">New File</span> Uploaded to the project.</p>
+														<small class="text-muted">09:20 AM</small>
+													</div><div class="ms-auto float-end">
+														<a href="javascript:void(0)" class="btn btn-primary-light btn-sm">View</a>
+													</div>
+												</div>
+											</li>
+											<li>
+												<i class="task-icon bg-danger"></i>
+												<div class="d-flex">
+													<div class="">
+														<p class="mb-0"><span class="font-weight-500">Mary Perk</span> Found A New Bug.</p>
+														<small class="text-muted">05 Mar 2022</small>
+													</div>
+													<div class="ms-auto float-end">
+														<a href="javascript:void(0)" class="btn btn-primary-light btn-sm">View</a>
+													</div>
+												</div>
+											</li>
+											<li>
+												<i class="task-icon bg-success"></i>
+												<div class="d-flex">
+													<div class="">
+														<p class="mb-0"><span class="font-weight-500">New Member</span> Added To The Project.</p>
+														<small class="text-muted">10 Mar 2022</small>
+													</div>
+													<div class="ms-auto float-end">
+														<a href="javascript:void(0)" class="btn btn-primary-light btn-sm">View</a>
+													</div>
+												</div>
+											</li>
+											<li>
+												<i class="task-icon bg-orange"></i>
+												<div class="d-flex">
+													<div class="">
+														<p class="mb-0"><span class="font-weight-500">Task Completed</span> Successfully by Team</p>
+														<small class="text-muted">20 Apr 2022</small>
+													</div>
+													<div class="ms-auto float-end">
+														<a href="javascript:void(0)" class="btn btn-primary-light btn-sm">View</a>
+													</div>
+												</div>
+											</li>
+											<li>
+												<i class="task-icon bg-cyan"></i>
+												<div class="d-flex">
+													<div class="">
+														<p class="mb-0"><span class="font-weight-500">Task Assigned</span> to Project Team Leader.</p>
+														<small class="text-muted">27 Apr 2022</small>
+													</div>
+													<div class="ms-auto float-end">
+														<a href="javascript:void(0)" class="btn btn-primary-light btn-sm">View</a>
+													</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- ROW END -->
+
+						<!-- ROW OPEN -->
+						<div class="row">
+							<div class="col-xl-6 col-md-12">
+								<div class="card">
+									<div class="card-header">
+										<div class="card-title mb-0">Deals</div>
+									</div>
+									<div class="card-body p-0">
+										<div class="table-responsive">
+											<table class="table text-nowrap mb-0 deals">
+												<thead class="thead-light">
+													<tr>
+														<th>Deal Name</th>
+														<th>Revenue</th>
+														<th>Stage</th>
+														<th class="text-center">Close Date</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>Power Labs Co</td>
+														<td>$450,870</td>
+														<td>
+															<span class="badge bg-primary-transparent text-primary">Analysing</span>
+														</td>
+														<td class="text-center">24 Aug 2022</td>
+													</tr>
+													<tr>
+														<td>Monitoring Press</td>
+														<td>$230,540</td>
+														<td>
+															<span class="badge bg-success-transparent text-success">Won</span>
+														</td>
+														<td class="text-center">17 Sep 2022</td>
+													</tr>
+													<tr>
+														<td>New Times Inc</td>
+														<td>$55,300</td>
+														<td>
+															<span class="badge bg-danger-transparent text-danger">Closed</span>
+														</td>
+														<td class="text-center">30 Jul 2022</td>
+													</tr>
+													<tr>
+														<td>Manual Deccan Ltd</td>
+														<td>$234,100</td>
+														<td>
+															<span class="badge bg-secondary-transparent text-secondary">Follow-up</span>
+														</td>
+														<td class="text-center">21 Aug 2022</td>
+													</tr>
+													<tr>
+														<td>ACT Printers</td>
+														<td>$43,198</td>
+														<td>
+															<span class="badge bg-warning-transparent text-warning">Qualified</span>
+														</td>
+														<td class="text-center">20 Oct 2022</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-3 col-md-6 col-sm-6">
+								<div class="card">
+									<div class="card-header">
+										<div class="card-title mb-0">Our Team Details</div>
+									</div>
+									<div class="card-body">
+										<div class="ibox teams bg-boxshadow">
+											<div class="ibox-content teams">
+												<div class="avatar-list avatar-list-stacked">
+													<img class="avatar brround cover-image" src="./assets/images/users/female/2.jpg">
+													<img class="avatar brround cover-image" src="./assets/images/users/male/1.jpg" >
+													<img class="avatar brround cover-image" src="./assets/images/users/female/9.jpg" >
+													<img class="avatar brround cover-image" src="./assets/images/users/female/2.jpg" >
+													<img class="avatar brround cover-image" src="./assets/images/users/male/4.jpg">
+													<span class="avatar brround cover-image">+8</span>
+												</div>
+												<div class="teams-board-details mt-3">
+													<h5>About Team</h5>
+													<p class="text-muted">Contrary to popular belief, Lorem Ipsum is not simply random text classical Latin literature.</p>
+												</div>
+												<span class="font-weight-semibold  h5">Status of Current Deal:</span>
+												<div class="progress-details-teams mt-2 mb-4">
+													<div class="stat-percent "><i class="fa fa-check-circle text-success me-1 mb-2"></i> 75% Done</div>
+													<div class="progress h-1 ">
+														<div class="progress-bar bg-success w-70" role="progressbar"></div>
+													</div>
+												</div>
+												<div class="row ">
+													<div class="col-6">
+														<div class="teams-rank h6 mt-2">RANKING</div>
+														<span class="">3rd</span>
+													</div>
+													<div class="col-6 text-end">
+														<div class="teams-rank h6 mt-2">BUDGET</div>
+														<span class="">$36,25,854</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-3 col-md-6 col-sm-6">
+								<div class="card">
+									<div class="card-header">
+										<div class="card-title mb-0">Leads by Source</div>
+									</div>
+									<div class="card-body">
+
+                      <div id="leads"class="h-240">
+                        <div echarts class="ht-245" [options]="echartLineOption2"></div>
+                      </div>
+
+									
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- ROW END -->
+
+						<!-- ROW OPEN -->
+						<div class="row">
+							<div class="col-md-6 col-xl-4">
+								<div class="card">
+									<div class="card-header">
+										<div class="card-title mb-0">Latest Deal</div>
+									</div>
+									<div class="card-body">
+										<div class="d-flex mb-5">
+											<a href="javascript:void(0)">
+												<span class="avatar rounded-circle border bg-light text-primary me-3">
+													<i class="bx bxl-bing"></i>
+												</span>
+											</a>
+											<p class="mb-0 mt-1 fs-15 font-weight-semibold me-3">Square BPS</p>
+											<span class="ms-auto my-auto">
+                     <a   routerLink="/dashboard/sales"	><i class="bx bx-cog fs-20 text-muted"></i></a>
+											</span>
+										</div>
+										<div class="">
+											<ul>
+												<li class="d-flex fs-14 mb-4">
+													<p class="text-muted my-auto">Expected Closed Date :</p>
+													<p class="ms-auto my-auto">
+														<i class="fe fe-calendar me-1"></i> 15 Oct 2022
+													</p>
+												</li>
+												<li class="d-flex fs-14 mb-4">
+													<p class="text-muted my-auto">Dealed Owner :</p>
+													<p class="ms-auto my-auto">
+														<img src="./assets/images/users/female/1.jpg" class="avatar avatar-sm rounded-circle me-1" alt="img"> Bella Gorge
+													</p>
+												</li>
+												<li class="d-flex fs-14 mb-4">
+													<p class="text-muted my-auto">Deal Value :</p>
+													<p class="ms-auto my-auto">
+														$10,789
+													</p>
+												</li>
+												<li class="d-flex fs-14 mb-4">
+													<p class="text-muted my-auto">Deal Priority :</p>
+													<p class="ms-auto my-auto badge bg-success-transparent text-success">
+														<i class="fa fa-circle text-success me-1 fs-10"></i> High
+													</p>
+												</li>
+												<li class="d-flex fs-14 mb-4">
+													<p class="text-muted my-auto">Email Contact :</p>
+													<p class="ms-auto my-auto">
+														<i class="fe fe-mail me-1"></i> <span class="text-break">bellagorge12@bps.com</span>
+													</p>
+												</li>
+												<li class="d-flex fs-14">
+													<p class="text-muted my-auto">Phone Contact :</p>
+													<p class="ms-auto my-auto">
+														<i class="fe fe-phone me-1"></i> (555) 555-1234
+													</p>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="card-footer">
+										<div class="mb-2 d-flex">
+											<i class="fe fe-activity me-1 fs-16"></i> Deal Status :
+											<p class="ms-auto mb-0">Contacted</p>
+										</div>
+										<div class="progress h-1 mb-2">
+											<div class="progress-bar bg-primary w-30" role="progressbar"></div>
+											<div class="progress-bar bg-warning w-30" role="progressbar"></div>
+											<div class="progress-bar bg-success w-30" role="progressbar"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6 col-xl-8">
+								<div class="card">
+									<div class="card-header">
+										<div class="card-title mb-0">Leaderboard</div>
+										<div class="ms-auto">
+											<div class="form-group overflow-hidden mb-0">
+												<select class="form-control select2">
+													<option selected="selected"> This Week </option>
+													<option> This Month </option>
+													<option> This Year </option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="card-body p-0">
+										<div class="table-responsive">
+											<table class="table text-nowrap mb-0 leaderboard">
+												<thead class="thead-light">
+													<tr>
+														<th>Name</th>
+														<th>Deal Owner</th>
+														<th>Deals</th>
+														<th>Value</th>
+														<th>Leads</th>
+														<th>Action</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td class="pt-5">Merion Data Inc.</td>
+														<td class="d-flex">
+															<img src="./assets/images/users/female/10.jpg" class="avatar avatar-sm rounded-circle me-2" alt="img">
+															<div class="">
+																<p class="mb-0">Joan Powell</p>
+															</div>
+														</td>
+														<td>5,870</td>
+														<td>
+															<span class="badge bg-success-transparent text-success p-2">$56,980</span>
+														</td>
+														<td>2,395</td>
+														<td>
+															<a href="javascript:void(0)" class="btn btn-sm btn-light"><i class="fe fe-eye me-1"></i>View</a>
+														</td>
+													</tr>
+													<tr>
+														<td class="pt-5">Dot Label Co.</td>
+														<td class="d-flex">
+															<img src="./assets/images/users/male/1.jpg" class="avatar avatar-sm rounded-circle me-2" alt="img">
+															<div class="">
+																<p class="mb-0">Gavin Gibson</p>
+															</div>
+														</td>
+														<td>6,781</td>
+														<td>
+															<span class="badge bg-primary-transparent text-primary p-2">$47,900</span>
+														</td>
+														<td>3,832</td>
+														<td>
+															<a href="javascript:void(0)" class="btn btn-sm btn-light"><i class="fe fe-eye me-1"></i>View</a>
+														</td>
+													</tr>
+													<tr>
+														<td class="pt-5">Hopes Param Inc.</td>
+														<td class="d-flex">
+															<img src="./assets/images/users/male/5.jpg" class="avatar avatar-sm rounded-circle me-2" alt="img">
+															<div class="">
+																<p class="mb-0">Julian Kerr</p>
+															</div>
+														</td>
+														<td>5,870</td>
+														<td>
+															<span class="badge bg-warning-transparent text-warning p-2">$42,542</span>
+														</td>
+														<td>1,890</td>
+														<td>
+															<a href="javascript:void(0)" class="btn btn-sm btn-light"><i class="fe fe-eye me-1"></i>View</a>
+														</td>
+													</tr>
+													<tr>
+														<td class="pt-5">Strex Tech.</td>
+														<td class="d-flex">
+															<img src="./assets/images/users/female/4.jpg" class="avatar avatar-sm rounded-circle me-2" alt="img">
+															<div class="">
+																<p class="mb-0">Cedric Kelly</p>
+															</div>
+														</td>
+														<td>6,843</td>
+														<td>
+															<span class="badge bg-info-transparent text-info p-2">$35,924</span>
+														</td>
+														<td>5,654</td>
+														<td>
+															<a href="javascript:void(0)" class="btn btn-sm btn-light"><i class="fe fe-eye me-1"></i>View</a>
+														</td>
+													</tr>
+													<tr>
+														<td class="pt-5">Trendy Promps Inc.</td>
+														<td class="d-flex">
+															<img src="./assets/images/users/female/7.jpg" class="avatar avatar-sm rounded-circle me-2" alt="img">
+															<div class="">
+																<p class="mb-0">Samantha May</p>
+															</div>
+														</td>
+														<td>3,892</td>
+														<td>
+															<span class="badge bg-danger-transparent text-danger p-2">$32,126</span>
+														</td>
+														<td>2,891</td>
+														<td>
+															<a href="javascript:void(0)" class="btn btn-sm btn-light"><i class="fe fe-eye me-1"></i>View</a>
+														</td>
+													</tr>
+													<tr>
+														<td class="pt-5">Galaxy Stops Co.</td>
+														<td class="d-flex">
+															<img src="./assets/images/users/male/3.jpg" class="avatar avatar-sm rounded-circle me-2" alt="img">
+															<div class="">
+																<p class="mb-0">Petrix Roller</p>
+															</div>
+														</td>
+														<td>7,478</td>
+														<td>
+															<span class="badge bg-pink-transparent text-pink p-2">$25,672</span>
+														</td>
+														<td>4,389</td>
+														<td>
+															<a href="javascript:void(0)" class="btn btn-sm btn-light"><i class="fe fe-eye me-1"></i>View</a>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- ROW END -->
+

@@ -1,0 +1,210 @@
+<app-page-header title="{{ 'HomePage' | translate }}" active_item="{{UserFilter.userType}}" showlist="0"
+  link="/{{UserFilter.userType}}/create"></app-page-header>
+
+<notifier-container></notifier-container>
+<div class="row row-cards">
+  <div class="col-lg-12 col-xl-2">
+    <div class="row ">
+      <div class="col-md-12 col-lg-6 col-xl-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">{{ 'AdvancedSearch' | translate }} </div>
+          </div>
+          <div class="card-body" style=" overflow: auto;  width: 100%;
+                  height: 60vh;">
+            <div class="form-group">
+
+              <input type="text" name="name" #name="ngModel" required [(ngModel)]="UserFilter.name" class="form-control"
+                id="name" placeholder="{{ 'Name' | translate }}">
+            </div>
+            <div class="form-group">
+              <input type="tel" name="customer_Mobile" [(ngModel)]="UserFilter.mobile"
+                placeholder="{{ 'Mobile' | translate }}" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="email" name="customer_Email" [(ngModel)]="UserFilter.email"
+                placeholder="{{ 'Email' | translate }}" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <ng-select name="inactive" id="inactive" [(ngModel)]="UserFilter.inactive">
+                <ng-option value="" selected>...</ng-option>
+                <ng-option value="false">{{ 'Active' | translate }}</ng-option>
+                <ng-option value="true">{{ 'InActive' | translate }}</ng-option>
+              </ng-select>
+            </div>
+
+            <div class="form-group">
+              <ng-select name="reviewed" id="reviewed" [(ngModel)]="UserFilter.reviewed">
+                <ng-option value="" selected>...</ng-option>
+                <ng-option value="false">{{ 'Reviewed' | translate }}</ng-option>
+                <ng-option value="true">{{ 'UnReviewed' | translate }}</ng-option>
+              </ng-select>
+            </div>
+            
+            <button (click)="SearchUsers()" class="btn btn-primary me-1">
+              {{ 'Search' | translate }}
+            </button>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-lg-12 col-xl-10 table table-bordered mb-0">
+    <p-table #dt2 [value]="users" dataKey="id" [rows]="15" [showCurrentPageReport]="true" responsiveLayout="scroll"
+      *ngIf="users && users.length>0" [responsive]="true" [autoLayout]="true" [resizableColumns]="true"
+      [style]="{'width':'100%','overflow':'auto!important'}" class="ui-rtl" columnResizeMode="expand"
+      [rowsPerPageOptions]="[15,30,50]" styleClass="p-datatable-gridlines" [paginator]="true"
+      currentPageReportTemplate="{{ 'Show' | translate }} {first} {{ 'To' | translate }}  {last}  {{ 'FromTotal' | translate }} {totalRecords} ">
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="text-center" pSortableColumn="id" *ngIf="this.requestedUserType == 'Vendor' ">
+            <p-sortIcon field="id"></p-sortIcon> {{ 'ID' | translate }}
+            <p-columnFilter type="text" field="id" display="menu"></p-columnFilter>
+          </th>
+          <th class="text-center" pSortableColumn="name">
+            <p-sortIcon field="name"></p-sortIcon> {{ 'Name' | translate }}
+            <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+          </th>
+          <th class="text-center" pSortableColumn="mobile">
+            <p-sortIcon field="mobile"></p-sortIcon> {{ 'Mobile' | translate }}
+            <p-columnFilter type="text" field="mobile" display="menu"></p-columnFilter>
+          </th>
+          <th class="text-center" pSortableColumn="email">
+            <p-sortIcon field="email"></p-sortIcon> {{ 'Email' | translate }}
+            <p-columnFilter type="text" field="email" display="menu"></p-columnFilter>
+          </th>
+          <th class="text-center" pSortableColumn="userType">
+            <p-sortIcon field="userType"></p-sortIcon> {{ 'userType' | translate }}
+            <p-columnFilter type="text" field="userType" display="menu"></p-columnFilter>
+          </th>
+          <th class="text-center" pSortableColumn="">
+            <p-sortIcon field=""></p-sortIcon> {{ 'Permissions' | translate }}
+            <p-columnFilter type="text" field="" display="menu"></p-columnFilter>
+          </th>
+          <th class="text-center" pSortableColumn="inActive">
+            <p-sortIcon field="inActive"></p-sortIcon> {{ 'Active' | translate }}
+            <p-columnFilter type="text" field="inActive" display="menu"></p-columnFilter>
+          </th>
+          <th>
+            {{ 'Action' | translate }}
+          </th>
+
+        </tr>
+
+      </ng-template>
+      <ng-template pTemplate="body" let-user let-i="rowIndex">
+        <tr [attr.id]="user.id" [ngClass]="{
+          'table-warning': !user.reviewed, 
+          'table-danger': user.inActive
+        }">
+          <td class="text-center align-middle">
+            {{user.name}}
+          </td>
+          <td class="text-phone">
+            {{user.mobile}}
+          </td>
+          <td class="text-center align-middle">
+            <span class="image-text">
+              {{user.email}}
+            </span>
+          </td>
+          <td class="text-center align-middle">
+            <div class="form-group form-check form-switch">
+              {{user.userType}}
+            </div>
+          </td>
+          <td class="text-center align-middle">
+            <a href="javascript:void(0)" class="" (click)="ScrollableContentOpen(largemodal,user.id)">
+              <span> {{ 'Permissions' | translate }}</span>
+            </a>
+          </td>
+          <td class="text-center align-middle">
+            <div class="material-switch pull-center">
+              <input id="inActiveChkBox{{user.id}}" inActive="ngModel" [(ngModel)]="!user.inActive"
+                name="inActiveChkBox{{user.id}}" (click)="ChangeStatus(user.id,user.inActive)" type="checkbox" />
+              <label for="inActiveChkBox{{user.id}}" class="label-success"></label>
+            </div>
+          </td>
+          <td class="text-center align-middle">
+            <div class="btn-group align-top">
+              <a class="btn btn-sm btn-primary-light" [routerLink]="['/'+UserFilter.userType+'/details/',user.id]">{{
+                'Edit' | translate }}</a>
+              <button class="btn btn-sm btn-primary-light" type="button" (click)="ConfirmDelete(user.id)"><i
+                  class="fa fa-trash"></i></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="9" style="text-align: center;">{{ 'NoRecords' | translate }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+  </div>
+</div>
+
+<ng-template #largemodal let-modal>
+  <!-- LARGE MODAL -->
+  <div class="modal-header">
+    <h6 class="modal-title">User Permissions</h6>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+
+    </button>
+  </div>
+  <div class="modal-body">
+    <p class="font-weight-bold">This list will set user permissions to all functions</p>
+    <table class="table card-table table-vcenter table-outline text-nowrap">
+      <thead>
+        <tr>
+          <th class="text-center" scope="col">{{ 'Module' | translate }}</th>
+          <th class="text-center" scope="col">{{ 'Permission' | translate }}</th>
+          <th class="text-center" scope="col">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let permission of UserPermissions">
+          <td colspan="3">
+            <table width="100%" class="border">
+              <tr class="border border-info">
+                <td class="text-center align-middle">{{permission.module}}</td>
+                <td class="text-center align-middle">{{permission.permission}}</td>
+                <td class="text-center align-middle">
+                  <div class="material-switch pull-center">&nbsp;
+                  </div>
+                </td>
+              </tr>
+              <tr *ngFor="let function of permission.functions" class="border border-success">
+                <td class="text-center align-middle">&nbsp;</td>
+                <td class="text-center align-middle">{{function.function}}
+                  <input type="hidden" name="functionIDs[]"
+                    value="{{permission.moduleId}}#{{permission.module}}#{{permission.permission}}#{{permission.auditable}}#{{function.functionId}}#{{function.function}}#{{function.permission}}#{{function.auditable}}#{{function.inActive}}">
+
+                </td>
+                <td class="text-center align-middle">
+                  <div class="material-switch pull-center">
+                    <input id="functionID_{{function.functionId}}" [checked]="function.userId > 0"
+                      name="functionID_{{function.functionId}}" type="checkbox" />
+                    <label for="functionID_{{function.functionId}}" class="label-success"></label>
+                  </div>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" id="modalCloseBtn" class="btn btn-secondary"
+      (click)="modal.close('Close click')">Close</button>
+    <button class="btn btn-primary" type="button" (click)="SavePermission()">Save changes</button>
+  </div>
+</ng-template>

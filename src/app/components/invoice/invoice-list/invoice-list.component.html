@@ -1,0 +1,196 @@
+<app-page-header title="Invoice" active_item="Invoice List" link="../manage"></app-page-header>
+<notifier-container></notifier-container>
+
+<!-- ROW OPEN -->
+<div class="row row-cards">
+  <div class="col-lg-12 col-xl-2">
+    <div class="row ">
+      <div class="col-md-12 col-lg-6 col-xl-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">{{ 'AdvancedSearch' | translate }} </div>
+          </div>
+          <div class="card-body" style=" overflow: auto;  width: 100%;
+                    height: 60vh;">
+                     <div class="form-group" *ngIf="isAdmin">
+                      <input type="text" name="vendorId" [(ngModel)]="invoiceFilter.vendorId"
+                        placeholder="{{ 'VendorCode' | translate }}" class="form-control" id="vendorId">
+                    </div>
+                    <div class="form-group" *ngIf="isAdmin">
+                      <input type="text" name="vendorName" [(ngModel)]="invoiceFilter.vendorName"
+                        placeholder="{{ 'vendor' | translate }}" class="form-control" id="vendorName">
+                    </div>
+            <div class="form-group">
+              <input type="text" name="customerName" [(ngModel)]="invoiceFilter.customerName"
+                placeholder="{{ 'CustomerName' | translate }}" class="form-control" id="customerName">
+            </div>
+            <div class="form-group">
+              <input type="tel" name="customer_Mobile" [(ngModel)]="invoiceFilter.customerMobile"
+                placeholder="{{ 'Mobile' | translate }}" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="email" name="customer_Email" [(ngModel)]="invoiceFilter.customerEmail"
+                placeholder="{{ 'Email' | translate }}" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="text" name="code" class="form-control" [(ngModel)]="invoiceFilter.code"
+                placeholder="{{ 'InvoiceCode' | translate }}">
+
+            </div>
+            <div class="form-group">
+              <input type="text" name="ref_Number" class="form-control" [(ngModel)]="invoiceFilter.refNumber"
+                placeholder="{{ 'ReferenceId' | translate }}">
+
+            </div>
+            <div class="form-group">
+              <ng-select name="status" [(ngModel)]="invoiceFilter.status">
+                <ng-option value="" selected>{{"InvoiceStatus"| translate}}</ng-option>
+                <ng-option value="Paid">{{ 'InvStatusPaid' | translate }}</ng-option>
+                <ng-option value="Unpaid">{{ 'InvStatusUnpaid' | translate }}</ng-option>
+                <ng-option value="Canceled">{{ 'InvStatusCanceled' | translate }}</ng-option>
+                <ng-option value="Deposited">{{ 'InvStatusDeposited' | translate }}</ng-option>
+                <ng-option value="Refunded">{{ 'InvStatusRefunded' | translate }}</ng-option>
+              </ng-select>
+            </div>
+            <div class="form-group">
+              <ng-select name="orderStatus" [(ngModel)]="invoiceFilter.orderStatus"
+                *ngIf="invoiceFilter.invoiceType  == 'Order'">
+                <ng-option value="" selected>{{"orderStatus"| translate}}</ng-option>
+                <ng-option value="Pending">{{ 'Pending' | translate }}</ng-option>
+                <ng-option value="InProcess">{{ 'InProcess' | translate }}</ng-option>
+                <ng-option value="Completed">{{ 'Completed' | translate }}</ng-option>
+                <ng-option value="Cancelled">{{ 'Cancelled' | translate }}</ng-option>
+              </ng-select>
+            </div>
+
+
+            <!-- <div class="form-group">
+                            <label class="form-label">Date Range</label>
+                            <input type="text" ngxDaterangepickerMd  class="form-control" i class="fa fa-calendar3 btn btn-md btn-default lh-lg" />
+
+                        </div>
+                        <div class="input-group">
+                            <input
+                              class="form-control"
+                              placeholder="mm-dd-yyyy"
+                              name="dp"
+                              ngbDatepicker
+                              #d="ngbDatepicker"
+                            />
+                              <i class="fa fa-calendar btn btn-md btn-default lh-lg"  (click)="d.toggle()"></i>
+                          </div> -->
+            <button (click)="SearchInvoices()" class="btn btn-primary me-1">
+              {{ 'Search' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-lg-12 col-xl-10">
+    <p-table #dt [value]="invoices" [lazy]="true" (onLazyLoad)="LoadList($event)" [totalRecords]="totalRecords"
+      [loading]="loading" [showCurrentPageReport]=true dataKey="id" [rowHover]="true" [rows]="3" [paginator]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+      sortField="invoices.id" sortMode="single" [scrollable]="true"
+      [globalFilterFields]="['title', 'category', 'rating']">
+      <ng-template pTemplate="caption">
+        <div class="table-header">
+          <span class="p-input-icon-right">
+            <i class="pi pi-search"></i>
+            <input class="form-control" pInputText type="text" #searchBox
+              (input)="dt.filterGlobal(searchBox.value, 'contains')" placeholder="Global Search" />
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="code">
+            <p-sortIcon field="code"></p-sortIcon> {{ 'Code' | translate }}
+            <p-columnFilter type="text" field="code" display="menu"></p-columnFilter>
+          </th>
+
+
+          <th pSortableColumn="refNumber">
+            <p-sortIcon field="refNumber"></p-sortIcon> {{ 'ReferenceId' | translate }}
+            <p-columnFilter type="text" field="refNumber" display="menu"></p-columnFilter>
+          </th>
+          <th pSortableColumn="vendorName" *ngIf="isAdmin">
+            <p-sortIcon field="vendorName"></p-sortIcon> {{ 'VendorName' | translate }}
+            <p-columnFilter type="text" field="vendorName" display="menu"></p-columnFilter>
+          </th>
+          <th pSortableColumn="customerName">
+            <p-sortIcon field="customerName"></p-sortIcon> {{ 'CustomerName' | translate }}
+            <p-columnFilter type="text" field="customerName" display="menu"></p-columnFilter>
+          </th>
+
+          <th pSortableColumn="amount">
+            <p-sortIcon field="amount"></p-sortIcon> {{ 'Amount' | translate }}
+            <p-columnFilter type="text" field="amount" display="menu"></p-columnFilter>
+          </th>
+          <th pSortableColumn="status">
+            <p-sortIcon field="status"></p-sortIcon> {{ 'Status' | translate }}
+            <p-columnFilter type="text" field="status" display="menu"></p-columnFilter>
+          </th>
+
+          <th pSortableColumn="createDate">
+            <p-sortIcon field="createDate"></p-sortIcon> {{ 'CreatedDate' | translate }}
+            <p-columnFilter type="date" field="createDate" display="menu"></p-columnFilter>
+          </th>
+        </tr>
+
+      </ng-template>
+      <ng-template pTemplate="body" let-invoice>
+        <tr id="invrow{{invoice.id}}" [ngClass]="{
+                  'table-success': invoice.status =='Paid',
+                  'table-warning': ( invoice.status =='Canceled' || invoice.deleted ), 
+                  'table-primary': invoice.status =='Deposited',
+                  'table-danger': invoice.status =='Refunded'
+                }">
+          <td>
+            <a [routerLink]="['/invoice/manage/',invoice.id]">
+              <span> {{invoice.code}}</span>
+            </a> <i *ngIf="invoice.addedBy == 'API'" class="mdi mdi-api font-22"></i>
+          </td>
+
+          <td>
+            <a [routerLink]="['/invoice/manage/',invoice.id]">
+              <span> {{invoice.refNumber}}</span>
+            </a>
+          </td>
+          <td *ngIf="isAdmin">
+            {{invoice.vendorName}}
+          </td>
+          <td>
+            {{invoice.customerName}}
+          </td>
+
+          <td>
+            {{invoice.amount.toFixed(3)}} {{invoice['currency_Code'] | translate}}
+          </td>
+          <td>
+            {{ 'InvStatus'+invoice.status | translate }}
+            <span *ngIf="invoice.status != 'Refunded' && invoice.refunded_Amount > 0">- {{"Partial" | translate}}</span>
+            <span *ngIf="invoiceFilter.invoiceType  == 'Order' && invoice.orderStatus != '' "> ({{invoice.orderStatus |
+              translate}})</span>
+            <small *ngIf="invoice.status == 'Paid'"><br>{{invoice.payment_Date}}</small>
+            <small *ngIf="invoice.status == 'Deposited'"><br>{{invoice.deposit_Date}}</small>
+
+          </td>
+
+
+          <td>
+            {{invoice.createDate }}
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="9"> No invoices found</td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+  </div>
+</div>
+<!-- ROW CLOSE -->

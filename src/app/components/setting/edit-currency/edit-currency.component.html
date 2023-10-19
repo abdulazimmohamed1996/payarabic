@@ -1,0 +1,129 @@
+<app-page-header title="Pages" active_item="Edit Currency"></app-page-header>
+<!-- ROW-1 OPEN -->
+<form novalidate #pageform="ngForm" (ngSubmit)="pageform.form.valid && onSubmit()">
+  <div class="row">
+    <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">{{ 'CurrencyDetails' | translate }}</h3>
+        </div>
+        <div class="card-body" style="min-height: 480px;">
+          <div class="panel panel-primary">
+            <div class=" tab-menu-heading border-bottom-0">
+              <div class="tabs-menu1 ">
+                <!-- Tabs -->
+
+                <div class="row">
+                  <div class="col-lg-4">
+                    <label for="nameAr"> {{ 'ArabicName' | translate }} <span class="text-danger">*</span></label>
+                    <input type="text" name="nameAr" class="form-control " #nameAr="ngModel"
+                      [(ngModel)]="model.nameAr" required placeholder="{{ 'ArabicName' | translate }}"
+                      [ngClass]="{ 'is-invalid': submitted && nameAr.errors }"
+                      onkeydown="return /[a-z \u0621-\u064A]/i.test(event.key)" />
+                    <div *ngIf="nameAr?.hasError('required') && submitted " class="invalid-feedback">
+                      Arabic Name is required
+                    </div>
+                    <div *ngIf="nameAr?.hasError('incorrect') && submitted " class="invalid-feedback">
+                      {{(nameAr.errors?.['message']| json)}}
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <label for="nameEn"> {{ 'EnglishName' | translate }} <span class="text-danger">*</span></label>
+                    <input type="text" name="nameEn" class="form-control " #nameEn="ngModel"
+                      [(ngModel)]="model.nameEn" required placeholder="{{ 'EnglishName' | translate }}"
+                      [ngClass]="{ 'is-invalid': submitted && nameEn.errors }"
+                      onkeydown="return /[a-z \u0621-\u064A]/i.test(event.key)" />
+                    <div *ngIf="nameEn?.hasError('required') && submitted " class="invalid-feedback">
+                      English Name is required
+                    </div>
+                    <div *ngIf="nameEn?.hasError('incorrect') && submitted " class="invalid-feedback">
+                      {{(nameEn.errors?.['message']| json)}}
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <label for="decimalPlacement"> {{ 'DecimalPlacement' | translate }} <span class="text-danger">*</span></label>
+                    <input type="number" name="decimalPlacement" class="form-control " #decimalPlacement="ngModel"
+                      [(ngModel)]="model.decimalPlacement" (keypress)="app.onlyDecimalNumberKey($event)" [min]="0"  required placeholder="{{ 'DecimalPlacement' | translate }}"
+                      [ngClass]="{ 'is-invalid': submitted && decimalPlacement.errors }"
+                      onkeydown="return /[a-z \u0621-\u064A]/i.test(event.key)" />
+                    <div *ngIf="decimalPlacement?.hasError('required') && submitted " class="invalid-feedback">
+                      Decimal Placement is required
+                    </div>
+                    <div *ngIf="decimalPlacement?.hasError('incorrect') && submitted " class="invalid-feedback">
+                      {{(decimalPlacement.errors?.['message']| json)}}
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <label for="symboleAr"> {{ 'ArabicSymbole' | translate }} <span class="text-danger">*</span></label>
+                    <input type="text" name="symboleAr" class="form-control " #symboleAr="ngModel"
+                      [(ngModel)]="model.symboleAr" required placeholder="{{ 'ArabicSymbole' | translate }}"
+                      [ngClass]="{ 'is-invalid': submitted && symboleAr.errors }"
+                      onkeydown="return /[a-z \u0621-\u064A]/i.test(event.key)" />
+                    <div *ngIf="symboleAr?.hasError('required') && submitted " class="invalid-feedback">
+                      Arabic Name is required
+                    </div>
+                    <div *ngIf="symboleAr?.hasError('incorrect') && submitted " class="invalid-feedback">
+                      {{(symboleAr.errors?.['message']| json)}}
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <label for="symboleEn"> {{ 'SymboleEn' | translate }} <span class="text-danger">*</span></label>
+                    <input type="text" name="symboleEn" class="form-control " #symboleEn="ngModel"
+                      [(ngModel)]="model.symboleEn" required placeholder="{{ 'EnglishName' | translate }}"
+                      [ngClass]="{ 'is-invalid': submitted && symboleEn.errors }"
+                      onkeydown="return /[a-z \u0621-\u064A]/i.test(event.key)" />
+                    <div *ngIf="symboleEn?.hasError('required') && submitted " class="invalid-feedback">
+                      English Symbole is required
+                    </div>
+                    <div *ngIf="symboleEn?.hasError('incorrect') && submitted " class="invalid-feedback">
+                      {{(symboleEn.errors?.['message']| json)}}
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <label for="conversionRate"> {{ 'ConversionRate' | translate }} <span class="text-danger">*</span></label>
+                    <input type="number" name="conversionRate" class="form-control " #conversionRate="ngModel"
+                      [(ngModel)]="model.conversionRate" (keypress)="app.onlyDecimalNumberKey($event)" [min]="0"  required placeholder="{{ 'ConversionRate' | translate }}"
+                      [ngClass]="{ 'is-invalid': submitted && conversionRate.errors }"
+                      onkeydown="return /[a-z \u0621-\u064A]/i.test(event.key)" />
+                    <div *ngIf="conversionRate?.hasError('required') && submitted " class="invalid-feedback">
+                      conversion Rate is required
+                    </div>
+                    <div *ngIf="conversionRate?.hasError('incorrect') && submitted " class="invalid-feedback">
+                      {{(conversionRate.errors?.['message']| json)}}
+                    </div>
+                  </div>
+                  <!-- <div class="col-lg-4">&nbsp;&nbsp;&nbsp;
+                    <label for="Active"> {{ 'Active' | translate }} </label>
+                    <div class="form-group form-check form-switch">
+                      &nbsp;&nbsp;&nbsp; <input type="checkbox" class="form-check-input switchery" id="Active"
+                        inActive="ngModel" [(ngModel)]="active" name="Active">
+                    </div>
+                  </div> -->
+                </div>
+                <br>
+                <div class="row">
+
+                  <div class="col-lg-4">
+                    <button (click)="SaveForm(pageform.form)" class="btn btn-success me-1">
+                      {{ 'Submit' | translate }}
+                    </button>
+                    <button type="reset" class="btn btn-secondary waves-effect">
+                      {{ 'Cancel' | translate }}
+                    </button>
+                  </div>
+                  <div class="col-lg-4"></div>
+                  <div class="col-lg-4"> </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<!-- ROW-1 CLOSED -->
+<!-- ROW-2 CLOSED -->

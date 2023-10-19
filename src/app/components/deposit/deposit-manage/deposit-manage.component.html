@@ -1,0 +1,449 @@
+<app-page-header title="Deposit" active_item="Deposit List" link="/deposit/new"></app-page-header>
+<notifier-container></notifier-container>
+
+<!-- ROW OPEN -->
+<div class="row row-cards">
+  <div class="col-lg-12 col-xl-2" id="divdepositsearch">
+    <div class="row ">
+      <div class="col-md-12 col-lg-6 col-xl-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">{{ 'AdvancedSearch' | translate }} </div>
+          </div>
+          <div class="card-body" style=" overflow: auto;  width: 100%;
+                    height: 60vh;">
+            <div class="form-group">
+              <ng-select name="status" [(ngModel)]="depositFilter.list">
+                <ng-option value="24Hours" selected>{{"Last24Hours"| translate}}</ng-option>
+                <ng-option value="Eligible">{{ 'VendorsEligibleDeposit' | translate }}</ng-option>
+                <ng-option value="All">{{ 'AllPaidInvoices' | translate }}</ng-option>
+              </ng-select>
+            </div>
+            <div class="form-group">
+              <input type="text" name="vendorName" [(ngModel)]="depositFilter.vendorName"
+                placeholder="{{ 'vendor' | translate }}" class="form-control" id="vendorName">
+            </div>
+            <div class="form-group">
+              <input type="text" name="customerName" [(ngModel)]="depositFilter.customerName"
+                placeholder="{{ 'CustomerName' | translate }}" class="form-control" id="customerName">
+            </div>
+            <div class="form-group">
+              <input type="tel" name="customer_Mobile" [(ngModel)]="depositFilter.customerMobile"
+                placeholder="{{ 'Mobile' | translate }}" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="email" name="customer_Email" [(ngModel)]="depositFilter.customerEmail"
+                placeholder="{{ 'Email' | translate }}" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="text" name="code" class="form-control" [(ngModel)]="depositFilter.invoiceCode"
+                placeholder="{{ 'Invoice' | translate }}">
+            </div>
+            <div class="form-group">
+              <input type="text" name="number" class="form-control" [(ngModel)]="depositFilter.invoiceRefNumber"
+                placeholder="{{ 'ReferenceId' | translate }}">
+            </div>
+
+            <button (click)="SearchDeposits()" class="btn btn-primary me-1">
+              {{ 'Search' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-lg-12 col-xl-10 " id="divdeposit">
+
+    <div style="text-align: center;font-weight: bold;" *ngIf="vendorsLst.length == 0">{{"NoRecords"| translate}}</div>
+
+    <p-table responsiveLayout="scroll" id="depositsTable" #dt1 [value]="vendorsLst" dataKey="id"
+      [showCurrentPageReport]="true" *ngIf="vendorsLst && vendorsLst.length>0" [responsive]="true" [autoLayout]="true"
+      [resizableColumns]="true" [style]="{'width':'100%','overflow':'auto!important'}" class="ui-rtl"
+      columnResizeMode="expand" styleClass="p-datatable-gridlines">
+      <ng-template pTemplate="body" let-vendor let-i="rowIndex">
+        <tr *ngIf="i==0">
+          <td [attr.colspan]="dataModel.status!='Completed'?7:6">{{"Deposit" | translate}}: {{dataModel.code}}</td>
+        </tr>
+        <tr class="table-info" *ngIf="vendor.invoices.length > 0">
+          <td *ngIf="dataModel.status!='Completed'">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="{{vendor.vendorId}}"
+                name="deposit_invoice[{{vendor.vendorId}}]" [(ngModel)]="vendor.checked"
+                (change)="ParentVendorchecked(vendor.vendorId)">
+            </div>
+          </td>
+          <td [attr.colspan]="dataModel.status!='Completed'?7:6">
+            <div class="row">
+              <div class="col-3">
+                <b>{{"Vendor"|translate}}: &nbsp; {{vendor.vendorName}}</b> &nbsp;
+              </div>
+              <div class="col-3">
+                {{"Code"|translate}}: &nbsp; {{vendor.vendorId}} &nbsp;
+              </div>
+              <div class="col-3">
+                {{"company_Name"|translate}}: &nbsp; {{vendor.companyName}} &nbsp;
+              </div>
+              <div class="col-3">
+                {{"bank_Name"|translate}}: &nbsp; {{app. GetLang() == 'Ar'?vendor.bankNameAr:vendor.bankNameEn}} &nbsp;
+              </div>
+            </div>
+          </td>
+
+        </tr>
+        <tr class="table-active header_table" *ngIf="vendor.invoices.length > 0">
+          <td [hidden]="dataModel.status=='Completed'">
+
+          </td>
+          <td>
+            {{ 'Code' | translate }}
+          </td>
+          <td>
+            {{ 'CreatedDate' | translate }}
+          </td>
+          <td>
+            {{ 'CustomerName' | translate }}
+          </td>
+          <td>
+            {{ 'TotalAmount' | translate }}
+          </td>
+          <td>
+            {{ 'FeesAmount' | translate }}
+          </td>
+          <td>
+            {{ 'net_Amount' | translate }}
+          </td>
+        </tr>
+        <tr *ngFor="let invoice of vendor.invoices" class="{{(invoice.type == 'RefundAdjust'?'table-warning':'')}}">
+          <td [hidden]="dataModel.status=='Completed'" style="text-align: center;">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" (change)="CalculateTotal()"
+                id="paid_invoice_{{invoice.id}}" name="deposit_invoice[{{vendor.vendorId}}]"
+                [(ngModel)]="invoice.checked" data-value="{{invoice.subtotal}}">
+
+            </div>
+          </td>
+          <td>
+            <a *ngIf="invoice.type != 'RefundAdjust'" href="javascript: void(0);"
+              (click)="SelectInvoiceDetails(invoiceDetailsModal,invoice.id)">
+
+              <span *ngIf="invoice.posTransCode != null">{{invoice.posTransCode}}</span>
+              <span *ngIf="invoice.posTransCode == null">{{invoice.code}}</span>
+            </a>
+            <span *ngIf="invoice.type == 'RefundAdjust'">
+              {{"Refund"| translate}} - {{invoice.code}}
+            </span>
+            <button type="button" #modal_btn id="modal_btn" name="modal_btn" data-toggle="modal"
+              data-target="#invoiceDetailsModal" style="display: none;"></button>
+          </td>
+          <td>
+            {{invoice.createDate |date:'dd-MM-yyyy' }}
+          </td>
+          <td>
+
+            {{invoice.customerName}}
+
+          </td>
+          <td>
+
+            {{invoice.total.toFixed(3)}} {{invoice['currency_Code'] | translate}}
+          </td>
+          <td>
+
+            {{invoice.fees.toFixed(3)}} {{invoice['currency_Code'] | translate}}
+          </td>
+          <td>
+            {{(invoice.subtotal).toFixed(3)}} {{invoice['currency_Code'] | translate}}
+          </td>
+        </tr>
+        <tr>
+          <td [attr.colspan]="dataModel.status!='Completed'?5:4">&nbsp; </td>
+          <td>{{ 'Total' | translate }} </td>
+          <td style="text-align:center;">{{vendor.invoiceTotal.toFixed(3)}} {{dataModel['currency_Code'] | translate}}
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td [attr.colspan]="dataModel.status!='Completed'?7:6" style="text-align: center;">{{ 'NoRecords' | translate
+            }}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="footer"
+        *ngIf="(app.UserType().toLowerCase()  == 'systemadmin' || app.UserType().toLowerCase()  == 'admin' || app.UserType().toLowerCase()  == 'superadmin')">
+        <tr>
+          <td [attr.colspan]="dataModel.status!='Completed'?5:4">&nbsp; </td>
+          <td>{{ 'DepositTotal' | translate }} </td>
+          <td style="text-align:center;">{{dataModel.amount.toFixed(3)}} {{dataModel['currency_Code'] | translate}}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <div class="row mt-3" *ngIf="dataModel.id>0">
+      <div class=" col-lg-3">
+          <div class="form-label">
+            <div class="form-label">{{ 'Status' | translate }}</div>
+          <ng-select id="status" name="status" #status="ngModel"  [disabled]="cntrlDisabled" [clearable]="false"
+            [(ngModel)]="dataModel.status">
+            <ng-option value="Started">{{ 'Started' | translate }}</ng-option>
+            <ng-option value="Completed">{{ 'Completed' | translate }}</ng-option>
+          </ng-select>
+        </div>
+      </div>
+      <div class=" col-lg-3">
+          <div class="form-label">
+            <div class="form-label">{{ 'DepositRef' | translate }}</div>
+          <input name="DepositRef" [(ngModel)]="dataModel.number"  [disabled]="cntrlDisabled"
+            placeholder=" {{ 'DepositRef' | translate }}" class="form-control" id="DepositRef">
+
+        </div>
+      </div>
+      <div class=" col-lg-3">
+        <div class="form-label">
+          <div class="form-label">{{ 'DepositDate' | translate }}</div>
+          <div class="input-group">
+          <!-- <input name="DepositDate"  [disabled]="cntrlDisabled" value="{{dataModel.date | date: 'dd/MM/yyyy'}}"
+            placeholder=" {{ 'DepositDate' | translate }}" class="form-control" id="DepositDate"> -->
+
+            <input class="form-control" name="DepositDate" ngbDatepicker [disabled]="cntrlDisabled"
+            #date="ngModel" [(ngModel)]="dataModel.date" #d="ngbDatepicker"
+            placeholder=" {{ 'DepositDate' | translate }}"
+              />
+        <i class="fa fa-calendar btn btn-md btn-default lh-lg"  (click)="d.toggle()"></i>
+        </div>
+      </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="form-file">
+            <div class="form-label">{{ 'Attachment' | translate }}</div>
+
+            <input type="file" class="form-control form-file-input" name="form-file-input"  [disabled]="cntrlDisabled"
+                accept="image/jpg,image/jpeg,image/png,application/pdf" name="attachment"
+                (change)="fileChangeEvent($event)" id="attachment">
+            <a *ngIf="attachlink != ''" class="btn" target="_blank"
+                href="{{attachlink}}">
+                <span class="iconify" data-icon="mdi:attachment" data-inline="false"></span>
+                {{ 'Download' | translate }}
+            </a>
+        </div>
+    </div>
+
+    </div>
+    <div class="row " *ngIf="vendorsLst.length>0">
+
+      <div class="input-group">
+        <div class="form-label">{{ 'Notes' | translate }}
+
+        </div>
+        <span class="input-group-btn" style="margin: 5px;"></span>
+        <textarea name="terms_Condition" #terms_Condition="ngModel" [(ngModel)]="dataModel.note" [disabled]="cntrlDisabled"
+          placeholder="{{ 'Notes' | translate }}" class="form-control" id="terms_Condition" maxlength="500"></textarea>
+      </div>
+
+    </div>
+    <div class="row" *ngIf="!cntrlDisabled">
+      <div class="col-lg-5">
+        &nbsp;
+      </div>
+      <div class="col-lg-7">
+
+        <div class="form-group" *ngIf="vendorsLst.length>0">
+          <br>
+          <button class="btn btn-primary waves-effect waves-light mr-2" type="button" (click)="ConfirmSubmit()">
+            {{ 'Save' | translate }}
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+<ng-template #invoiceDetailsModal let-modal>
+  <!-- LARGE MODAL -->
+  <div class="modal-header">
+    <h6 class="modal-title"> {{ 'InvoiceInfo' | translate }}</h6>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label for="name"> {{ 'CustomerName' | translate }} </label>
+              <h6>{{invoiceDetails.customerName}}</h6>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label for="customer_Mobile"> {{ 'Mobile' | translate }} </label>
+              <h6 class="text-phone">{{invoiceDetails.customerMobile}}</h6>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label for="customer_Email"> {{ 'Email' | translate }} </label>
+              <h6>{{invoiceDetails.customerEmail}} </h6>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label for="amount"> {{ 'InvoiceValue' | translate }}</label>
+              <h6>{{invoiceDetails.amount}}</h6>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label for="expiry_Date"> {{ 'ExpireDate' | translate }} </label>
+              <h6>{{invoiceDetails.expiryDate|date:'dd-MM-yyyy'}}</h6>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label for="disabledSelect"> {{ 'DisplayCurrency' | translate }} </label>
+              <h6> {{ invoiceDetails.currencyCode | translate }}</h6>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label for="sendType"> {{ 'SendInvoiceOption' | translate }} </label>
+              <h6>{{ invoiceDetails.sendType | translate }}</h6>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label for="Lang"> {{ 'Discount' | translate }} </label>
+              <h6>
+                {{invoiceDetails.discountAmount}} {{ invoiceDetails.currency_Code | translate }}
+              </h6>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label for="Lang"> {{ 'Total' | translate }} </label>
+              <h6>{{invoiceDetails.total}} {{ invoiceDetails.currency_Code | translate }}</h6>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="row ">
+      <div>
+        <div class=" tab-menu-heading border-0">
+          <div class="tabs-menu1 ">
+            <!-- Tabs -->
+            <ul ngbNav #nav1="ngbNav" [activeId]="1" class="panel-tabs">
+              <li class="me-2" [ngbNavItem]="1">
+                <a ngbNavLink>{{ 'InvoiceItems' | translate }}</a>
+                <ng-template ngbNavContent>
+                  <p-table #dt3 [value]="invoiceDetails.items" dataKey="id" [rows]="20" [showCurrentPageReport]="true"
+                    [responsive]="true" rowhe [autoLayout]="true" [resizableColumns]="true"
+                    [style]="{'width':'100%','overflow':'auto!important'}" class="ui-rtl" columnResizeMode="expand"
+                    [rows]="items.length" styleClass="p-datatable-gridlines">
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th>
+                          {{ 'Name' | translate }}
+                        </th>
+                        <th>
+                          {{ 'Quantity' | translate }}
+                        </th>
+                        <th>
+                          {{ 'Amount' | translate }}
+                        </th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-item>
+                      <tr>
+
+                        <td>
+                          {{item.name}}
+                        </td>
+                        <td>
+                          {{item.quantity}}
+                        </td>
+                        <td>
+                          {{item.amount}}
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </ng-template>
+              </li>
+              <li class="me-2" [ngbNavItem]="2">
+                <a ngbNavLink>{{'MoreOption' | translate }}</a>
+                <ng-template ngbNavContent class="pt0">
+                  <div class="row ">
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label for="DiscountType"> {{ 'DiscountType' | translate }} </label>
+                        <h6>
+                          {{ invoiceDetails.discountType | translate }}
+                        </h6>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label for="discount_Amount"> {{ 'DiscountAmount' | translate }} </label>
+                        <h6>
+                          {{ invoiceDetails.discountAmount }}
+                        </h6>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label for="remind_After"> {{ 'ReminderAfter' | translate }} </label>
+                        <h6>
+                          {{ invoiceDetails.remindAfter }}
+                        </h6>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label for="attachment"> {{ 'AttachFile' | translate }}</label>
+                        <a *ngIf="invoiceDetails.attachment" class="btn"
+                          (click)="app.downloadFile(invoiceDetails.attachment , 'attachment')">
+                          <span class="iconify" data-icon="mdi:attachment" data-inline="false"></span>
+                          {{ 'Download' | translate }}
+                        </a>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <h6><label for="comment"> {{ 'Notes' | translate }} </label>
+                          {{invoiceDetails.comment}}</h6>
+                      </div>
+                    </div>
+
+                    <label for="terms_Condition"> {{ 'TermsConditions' | translate }} </label>
+                    <div class="input-group">
+                      <span class="input-group-btn" style="margin: 5px;"></span>
+                      {{invoiceDetails.termsCondition}}
+                    </div>
+                  </div>
+                </ng-template>
+              </li>
+
+
+
+            </ul>
+          </div>
+        </div>
+        <div class="panel-body ">
+          <div [ngbNavOutlet]="nav1"></div>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </div>
+</ng-template>

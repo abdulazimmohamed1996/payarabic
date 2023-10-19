@@ -1,0 +1,332 @@
+<app-page-header title="Dashboards" active_item="Sales"></app-page-header>
+
+<!-- ROW OPEN -->
+<div class="row">
+  <div class="col-xl-3 col-md-6">
+    <div class="card sales-1 overflow-hidden">
+      <div class="card-body">
+        <span class="bg-primary-transparent icon-service text-primary float-end"><i class="fe fe-briefcase"></i> </span>
+        <h6 class="mb-3 font-weight-500">Gross Revenue</h6>
+        <h4 class="mb-1"><span class="number-font ">$<span class="counter">6,897</span></span><span class="fs-11 ms-2">
+            VS $5,783</span></h4>
+        <p class="mb-2"><span class="text-success fs-13 me-2">(+43%)</span> <span class="small text-muted">than last
+            week</span></p>
+      </div>
+      <div class="card-over-data ">
+
+        <div class="chartjs-wrapper-demo ">
+
+          <canvas height="90" #myCanvas1></canvas>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-md-6">
+    <div class="card sales-1 overflow-hidden">
+      <div class="card-body">
+        <span class="bg-danger-transparent icon-service text-danger float-end"><i class="fe fe-box"></i> </span>
+        <h6 class="mb-3 font-weight-500">Discounts</h6>
+        <h4 class="mb-1"><span class="number-font">$<span class="counter">398</span></span><span class="fs-11 ms-2"> VS
+            $256</span></h4>
+        <p class="mb-2"><span class="text-success fs-13 me-2">(+56%)</span><span class="small text-muted">than last
+            week</span></p>
+      </div>
+      <div class="card-over-data">
+
+
+        <div class="chartjs-wrapper-demo">
+
+          <canvas height="90" #myCanvas></canvas>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-md-6">
+    <div class="card sales-1 overflow-hidden">
+      <div class="card-body">
+        <span class="bg-secondary-transparent icon-service text-secondary float-end"><i class="fe fe-pie-chart"></i>
+        </span>
+        <h6 class="mb-3 font-weight-500">Net Revenue</h6>
+        <h4 class="mb-1"><span class="number-font">$<span class=" counter">5,998</span></span><span class="fs-11 ms-2">
+            VS $7,783</span></h4>
+        <p class="mb-2"><span class="text-danger fs-13 me-2">(-13%)</span><span class="small text-muted">than last
+            week</span></p>
+      </div>
+      <div class="card-over-data">
+        <div class="chartjs-wrapper-demo ">
+          <canvas height="90" #myCanvas2></canvas>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-md-6">
+    <div class="card sales-1 overflow-hidden">
+      <div class="card-body">
+        <span class="bg-success-transparent icon-service text-success float-end"><i class="fe fe-trending-up"></i>
+        </span>
+        <h6 class="mb-3 font-weight-500">Investments</h6>
+        <h4 class="mb-1"><span class="number-font">$<span class="counter">568</span></span><span class="fs-11 ms-2"> VS
+            $689</span></h4>
+        <p class="mb-2"><span class="text-danger fs-13 me-2">(-12%)</span><span class="small text-muted">than last
+            month</span></p>
+      </div>
+      <div class="card-over-data">
+        <div class="chartjs-wrapper-demo ">
+          <canvas height="90" #myCanvas3></canvas>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ROW END -->
+
+<!-- ROW OPEN -->
+<div class="row">
+  <div class="col-sm-12 col-md-12 col-lg-5 col-xl-4">
+    <div class="card">
+      <div class="card-body d-flex">
+        <div class="card-order">
+          <h6 class="mb-2 font-weight-500">New users</h6>
+          <h2 class="mb-1"><span class="number-font counter">5,897</span></h2>
+          <p class="text-muted fs-12 mb-0">The daily changes the sales report<a href="javascript:void(0)"> View
+              Details..</a></p>
+        </div>
+        <div class="ms-auto my-auto">
+
+
+          <div class="circle-chart text-center " data-value="0.85" data-thickness="5" data-color="#4454c3">
+            <circle-progress [percent]="65" [radius]="25" [space]="-3" [outerStrokeWidth]="3" [innerStrokeWidth]="3"
+              [showInnerStroke]="true" [outerStrokeColor]="'#0052cc'" [innerStrokeColor]="'#e5e4e3'"
+              [showSubtitle]="false" [animation]="true" [animationDuration]="1000" [showImage]="true" [imageHeight]="30"
+              [imageWidth]="30">
+            </circle-progress>
+            <div class="mx-auto chart-circle-value text-center fs-12"> <strong>65%</strong></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body d-flex">
+        <div class="card-order">
+          <h6 class="mb-2 font-weight-500">Total Profit</h6>
+          <h2 class="mb-1"><span class="number-font">$<span class="counter">34,897</span></span></h2>
+          <p class="text-muted fs-12 mb-0">The daily changes the sales report<a href="javascript:void(0)"> View
+              Details..</a></p>
+        </div>
+        <div class="ms-auto my-auto">
+
+          <div class="circle-chart text-center " data-value="0.85" data-thickness="5" data-color="#4454c3">
+            <circle-progress [percent]="50" [radius]="25" [space]="-3" [outerStrokeWidth]="3" [innerStrokeWidth]="3"
+              [showInnerStroke]="true" [outerStrokeColor]="'#0099ff'" [innerStrokeColor]="'#e5e4e3'"
+              [showSubtitle]="false" [animation]="true" [animationDuration]="1000" [showImage]="true" [imageHeight]="30"
+              [imageWidth]="30">
+            </circle-progress>
+            <div class="mx-auto chart-circle-value text-center fs-12"> <strong>50%</strong></div>
+          </div>
+
+          <strong></strong>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body d-flex">
+        <div class="card-order">
+          <h6 class="mb-2 font-weight-500">Total Tax</h6>
+          <h2 class="mb-1"><span class="number-font">$<span class="counter">12,786</span></span></h2>
+          <p class="text-muted fs-12 mb-0">The daily changes the sales report<a href="javascript:void(0)"> View
+              Details..</a></p>
+        </div>
+        <div class="ms-auto my-auto">
+
+          <div class="circle-chart text-center " data-value="0.85" data-thickness="5" data-color="#4454c3">
+            <circle-progress [percent]="85" [radius]="25" [space]="-3" [outerStrokeWidth]="3" [innerStrokeWidth]="3"
+              [showInnerStroke]="true" [outerStrokeColor]="'#e30c0c'" [innerStrokeColor]="'#e5e4e3'"
+              [showSubtitle]="false" [animation]="true" [animationDuration]="1000" [showImage]="true" [imageHeight]="30"
+              [imageWidth]="30">
+            </circle-progress>
+            <div class="mx-auto chart-circle-value text-center fs-12"> <strong>85%</strong></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-12 col-lg-7 col-xl-8">
+    <div class="card" [(ngbCollapse)]="isClosed2">
+      <div class="card-header">
+        <div class="card-title">Sales Statistics</div>
+        <div class="card-options">
+          <a href="javascript:void(0)" class="card-options-collapse" data-bs-toggle="card-collapse"
+            (click)="Collapsetoggle2()" [attr.aria-expanded]="!isCollapsed2"><i
+              class="fe fe-chevron-{{ !isCollapsed2 ? 'up' : 'down'}}"></i></a>
+          <a href="javascript:void(0)" class="card-options-remove" data-bs-toggle="card-remove" (click)="Closetoggle2()"
+            [attr.aria-expanded]="!isClosed2"><i class="fe fe-x"></i></a>
+        </div>
+      </div>
+      <div class="card-body" [(ngbCollapse)]="isCollapsed2">
+        <div class="mb-0">
+          <div id="chart">
+            <apx-chart [series]="chartOptions.series" [chart]="barData.chart" [yaxis]="chartOptions.yaxis"
+              [xaxis]="barData.xaxis" [dataLabels]="chartOptions.dataLabels" [stroke]="barData.stroke"
+              [plotOptions]="chartOptions.plotOptions" [colors]="apexData.colors" [tooltip]="chartOptions.tooltip"
+              [grid]="chartOptions.grid"></apx-chart>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ROW END -->
+
+<!-- ROW OPEN -->
+<div class="row">
+  <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6">
+    <div class="card overflow-hidden" [(ngbCollapse)]="isClosed1">
+      <div class="card-header">
+        <div class="card-title">Customer Statistics</div>
+        <div class="card-options">
+          <a href="javascript:void(0)" class="card-options-collapse" data-bs-toggle="card-collapse"
+            (click)="Collapsetoggle1()" [attr.aria-expanded]="!isCollapsed1"><i
+              class="fe fe-chevron-{{ !isCollapsed1 ? 'up' : 'down'}}"></i></a>
+          <a href="javascript:void(0)" class="card-options-remove" data-bs-toggle="card-remove" (click)="Closetoggle1()"
+            [attr.aria-expanded]="!isClosed1"><i class="fe fe-x"></i></a>
+        </div>
+      </div>
+      <div class="card-body pb-0" [(ngbCollapse)]="isCollapsed1">
+        <div class="row mb-2 dash-font text-center">
+          <div class="col-6  dash1">
+            <h6 class="mb-1 font-weight-500 dash-font1">New Customers</h6>
+            <h3 class="text-primary mb-1 number-font"><span class="counter">4,876</span></h3>
+            <p class="text-success mb-0"><span class="">12%</span><span class="text-muted ms-2">From This week</span>
+            </p>
+          </div>
+          <div class="col-6 ">
+            <h6 class="mb-1 font-weight-500 dash-font1">Existing Customers</h6>
+            <h3 class="text-secondary mb-1 number-font"><span class="counter">24,531</span></h3>
+            <p class="text-danger mb-0"><span class="">34%</span><span class="text-muted ms-2">From This Week</span></p>
+          </div>
+        </div>
+        <div class="chart-wrapper">
+          <apx-chart [series]="apexData.series" [colors]="apexData.colors" [chart]="apexData.chart"
+            [dataLabels]="apexData.dataLabels" [stroke]="apexData.stroke" [xaxis]="apexData.xaxis"
+            [tooltip]="apexData.tooltip" [legend]="apexData.legend"></apx-chart>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+    <div class="card">
+      <div class="card-body text-center">
+        <p class="bg-success-transparent icon-service text-success"><i class="fe fe-pocket"></i></p>
+        <h3 class="number-font mb-1">$<span class="counter">26,176</span></h3>
+        <p class="text-muted">Total Investments</p>
+      </div>
+      <div class="card-footer py-0 d-flex">
+        <div class="text-start border-end col-6 py-3">
+          <p class="text-muted mb-1">Weekly Payments</p>
+          <h3 class="text-dark fs-17 mb-0">$<span class="counter">8,764</span></h3>
+        </div>
+        <div class="text-end col-6 py-3">
+          <p class="text-muted mb-1">Monthly Payments</p>
+          <h3 class="text-dark fs-17 mb-0">$<span class="counter">300</span>k</h3>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body text-center">
+        <p class="bg-warning-transparent icon-service text-warning"><i class="fe fe-bookmark"></i></p>
+        <h3 class="number-font mb-1">$<span class="counter">400</span>k</h3>
+        <p class="text-muted">Total Income</p>
+      </div>
+      <div class="card-footer py-0 d-flex">
+        <div class="text-start border-end col-6 py-3">
+          <p class="text-muted mb-1">Weekly Income</p>
+          <h3 class="text-dark fs-17 mb-0">$<span class="counter">10,987</span></h3>
+        </div>
+        <div class="text-end col-6 py-3">
+          <p class="text-muted mb-1">Monthly Income</p>
+          <h3 class="text-dark fs-17 mb-0">$<span class="counter">53</span>k</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Recent Activity</div>
+      </div>
+      <div class="card-body">
+        <div class="recent-activity">
+          <img class="avatar avatar-md me-3 mb-4 rounded-circle " src="./assets/images/users/female/2.jpg" alt="image">
+          <div class="">
+            <p class="mb-0"><strong>Rose Nash</strong> uploaded new profile picture.</p>
+            <small class="text-muted">Just now</small>
+          </div>
+        </div>
+        <div class="recent-activity">
+          <img class="avatar avatar-md me-3 mb-4 rounded-circle " src="./assets/images/users/male/5.jpg" alt="image">
+          <div class="">
+            <p class="mb-0"><strong>Justin Parr</strong> added a text document.</p>
+            <small class="text-muted">09:20 AM</small>
+          </div>
+        </div>
+        <div class="recent-activity">
+          <img class="avatar avatar-md me-3 mb-4 rounded-circle " src="./assets/images/users/female/1.jpg" alt="image">
+          <div class="">
+            <p class="mb-0"><strong>Vanessa Quinn</strong> saved a web related page.</p>
+            <small class="text-muted">10:47 AM</small>
+          </div>
+        </div>
+        <div class="recent-activity">
+          <img class="avatar avatar-md me-3 mb-4 rounded-circle " src="./assets/images/users/male/3.jpg" alt="image">
+          <div class="">
+            <p class="mb-0"><strong>Mark John</strong> commented on your new post.</p>
+            <small class="text-muted">09:20 AM</small>
+          </div>
+        </div>
+        <div class="recent-activity">
+          <img class="avatar avatar-md me-3 mb-4 rounded-circle " src="./assets/images/users/male/8.jpg" alt="image">
+          <div class="">
+            <p class="mb-0"><strong>Tim Gray</strong> sent an invoice document.</p>
+            <small class="text-muted">12:30 PM</small>
+          </div>
+        </div>
+        <div class="recent-activity">
+          <img class="avatar avatar-md me-3 mb-0 rounded-circle " src="./assets/images/users/female/7.jpg" alt="image">
+          <div class="">
+            <p class="mb-0"><strong>Mike Riya</strong> closed a ticketing process.</p>
+            <small class="text-muted">06:40 PM</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ROW END -->
+
+<!-- ROW OPEN -->
+<div class="row">
+  <div class="col-12">
+    <div class="card ">
+      <div class="card-header">
+        <div class="card-title mb-0">Sales Summary</div>
+      </div>
+      <div class="card-body">
+        <app-table></app-table>
+
+      </div>
+    </div>
+  </div><!-- COL END -->
+</div>
+<!-- ROW END -->

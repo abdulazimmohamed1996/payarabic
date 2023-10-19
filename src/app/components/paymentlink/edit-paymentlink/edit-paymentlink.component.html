@@ -1,0 +1,133 @@
+<app-page-header title="{{ 'HomePage' | translate }}" link="/paymentlink/list" showlist="1"  active_item="{{ 'AddEdit' | translate }} {{ 'PaymentLink' | translate }}"></app-page-header>
+<notifier-container></notifier-container>
+<!-- ROW-1 OPEN -->
+<form novalidate #pageform="ngForm" (ngSubmit)="pageform.form.valid && onSubmit()">
+  <div class="row">
+    <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">{{ 'AddEdit' | translate }} {{ 'PaymentLink' | translate }}</h3>
+        </div>
+        <div class="card-body" style="min-height: 480px;">
+          <div class="panel panel-primary">
+            <div class=" tab-menu-heading border-bottom-0">
+              <div class="tabs-menu1 ">
+                <!-- Tabs -->
+                <div class="row">
+                  <div class="col-lg-4">
+                    <label for="Name_En"> {{ 'Title' | translate }} <span class="text-danger">*</span></label>
+                    <input type="text" name="title" class="form-control " #title="ngModel"
+                    [(ngModel)]="model.title" required placeholder="{{ 'Title' | translate }}"
+                    [ngClass]="{ 'is-invalid': submitted && title.errors }">
+                    <div *ngIf="title?.hasError('required') && submitted " class="invalid-feedback">
+                      {{ 'Title' | translate }} {{ 'Required' | translate }}
+                    </div>
+                    <div *ngIf="title?.hasError('incorrect') && submitted " class="invalid-feedback">
+                      {{(title.errors?.['message']| json)}}
+                    </div>
+                  </div>
+                  <div class="col-lg-2">
+                    <label for="isOpenAmount"> {{ 'PaymentType' | translate }} </label>
+                    <ng-select id="isOpenAmount" name="isOpenAmount" [(ngModel)]="model.isOpenAmount"
+                      #isOpenAmount="ngModel">
+                      <ng-option value="0" selected>{{ 'FixedAmount' | translate }}</ng-option>
+                      <ng-option value="1" selected>{{ 'NotFixedAmount' | translate }}</ng-option>
+                    </ng-select>
+                    <div *ngIf="isOpenAmount?.hasError('required') && submitted " class="invalid-feedback">
+                      {{ 'PaymentType' | translate }} required
+                    </div>
+                    <div *ngIf="isOpenAmount?.hasError('incorrect') && submitted " class="invalid-feedback">
+                      {{(isOpenAmount.errors?.['message']| json)}}
+                    </div>
+                  </div>
+                  <div class="col-lg-2">
+                    <label for="Lang"> {{ 'Language' | translate }} </label>
+                    <ng-select id="lang" name="lang" #lang="ngModel" [(ngModel)]="model.lang">
+                      <ng-option value="ar" selected>{{ 'Arabic' | translate }}</ng-option>
+                      <ng-option value="en">{{ 'English' | translate }}</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-4"></div>
+                  <div class="col-lg-2" *ngIf="model.isOpenAmount == '0'">
+                    <label for="amount"> {{ 'Amount' | translate }} <span class="text-danger">*</span></label>
+
+                    <input type="number" name="amount" parsley-trigger="change" required min="1"
+                      (keypress)="app.onlyDecimalNumberKey($event)" [(ngModel)]="model.amount"
+                      placeholder=" {{ 'Amount' | translate }}" class="form-control" id="amount">
+                  </div>
+
+                  <div class="col-lg-2" *ngIf="model.isOpenAmount=='1'">
+                    <label for="Name_En"> {{ 'MinAmount' | translate }}
+                    </label>
+
+                    <input type="number" name="minAmount" parsley-trigger="change"
+                      (keypress)="app.onlyDecimalNumberKey($event)" [(ngModel)]="model.minAmount"
+                      placeholder=" {{ 'MinAmount' | translate }}" class="form-control" id="minAmount">
+                  </div>
+                  <div class="col-lg-2" *ngIf="model.isOpenAmount=='1'">
+                    <label for="Name_En"> {{ 'MaxAmount' | translate }} </label>
+
+                    <input type="number" name="maxAmount" parsley-trigger="change"
+                      (keypress)="app.onlyDecimalNumberKey($event)" [(ngModel)]="model.maxAmount"
+                      placeholder=" {{ 'MaxAmount' | translate }}" class="form-control" id="maxAmount">
+                  </div>
+                  <div class="col-lg-2">
+                    <label for="disabledSelect"> {{ 'DisplayCurrency' | translate }} </label>
+                    <ng-select id="currency" name="currency" #currency="ngModel" [(ngModel)]="model.currency">
+                      <ng-option value="KWD" selected>{{ 'KWD' | translate }}</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="col-lg-6"></div>
+                  <div class="col-lg-6">
+                    <label for="comment"> {{ 'Notes' | translate }} </label>
+                    <textarea name="comment" parsley-trigger="change" #comment="ngModel" [(ngModel)]="model.comment"
+                      placeholder="{{ 'Notes' | translate }}" class="form-control" id="comment"></textarea>
+                  </div>
+                  <div class="col-lg-6"></div>
+                  <div class="col-lg-6">
+                    <label for="terms_Condition"> {{ 'TermsConditions' | translate }} </label>
+                    <div class="input-group">
+                      <div class="checkbox checkbox-info checkbox-circle">
+                        <input id="checkbox8" type="checkbox" name="termsConditionEnabled"
+                          [(ngModel)]="model.termsConditionEnabled">
+                        <label for="checkbox8">
+
+                        </label>
+                      </div>
+                      <span class="input-group-btn" style="margin: 5px;"></span>
+                      <textarea name="termsCondition" [disabled]="!model.termsConditionEnabled"
+                        #termsCondition="ngModel" [(ngModel)]="model.termsCondition"
+                        placeholder="{{ 'TermsConditions' | translate }}" class="form-control"
+                        id="termsCondition"></textarea>
+                    </div>
+
+                  </div>
+                 
+                  <div class="col-12">
+                    <div class="col-lg-4">
+                      <label for="Active"> {{ 'Active' | translate }} </label>
+                      <div class="form-group form-check form-switch">
+                        <input type="checkbox" class="form-check-input switchery" id="inActive" inActive="ngModel"
+                          [(ngModel)]="!model.inActive" name="inActive">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button (click)="SaveForm(pageform.form)" class="btn btn-success me-1">
+            {{ 'Submit' | translate }}
+          </button>
+          <button type="reset" class="btn btn-secondary waves-effect">
+            {{ 'Cancel' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<!-- ROW-1 CLOSED -->
+<!-- ROW-2 CLOSED -->

@@ -1,0 +1,180 @@
+<app-page-header title="Pages" active_item="Edit Profile"></app-page-header>
+<!-- ROW-1 OPEN -->
+<form novalidate #pageform="ngForm">
+  <div class="row">
+    <div class="col-lg-4 col-xl-4 col-md-12 col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="text-center">
+            <div class="userprofile">
+              <div class="userpic  brround"> <img src="./assets/images/users/male/2.jpg" alt="" class="userpicimg"> </div>
+              <h3 class="username text-dark mb-2">Ahmed Rezk</h3>
+              <div class="socials text-center me-3">
+                <a href="javascript:void(0)" class="btn btn-circle btn-primary me-1 ">
+                  <i class="fa fa-facebook "></i>
+                </a> <a href="javascript:void(0)" class="btn btn-circle btn-danger me-1">
+                  <i class="fa fa-google-plus"></i>
+                </a> <a href="javascript:void(0)" class="btn btn-circle btn-info me-1 ">
+                  <i class="fa fa-twitter"></i>
+                </a> <a href="javascript:void(0)" class="btn btn-circle btn-warning me-1"><i class="fa fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card panel-theme">
+        <div class="card-header">
+          <div class="float-start">
+            <h3 class="card-title">{{ 'ContactDetails' | translate }}</h3>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="card-body no-padding">
+          <ul class="list-group no-margin">
+            <li class="list-group-item">
+              <i class="fa fa-envelope me-4"></i>
+              <input class="form-control" type="email" name="email"
+                     pattern="[^ @]*@[^ @]*" required
+                     placeholder="{{ 'Email' | translate }}"
+                     #email="ngModel"
+                     [(ngModel)]="model.email"
+                     [ngClass]="{ 'is-invalid': submitted && email.errors }">
+            </li>
+            <li class="list-group-item">
+              <i class="fa fa-globe me-4"></i>
+              <input class="form-control" type="text" name="webSite_Url" pattern="[^ @]*@[^ @]*" required
+                     placeholder="{{ 'webSite_Url' | translate }}" #webSite_Url="ngModel"
+                     [(ngModel)]="model.webSite_Url"
+                     [ngClass]="{ 'is-invalid': submitted && webSite_Url.errors }">
+            </li>
+            <li class="list-group-item">
+              <i class="fa fa-phone me-4"></i>
+              <input class="form-control" type="text" name="mobile" pattern="[^ @]*@[^ @]*" required
+                     placeholder="{{ 'Mobile' | translate }}" #mobile="ngModel"
+                     [(ngModel)]="model.mobile"
+                     [ngClass]="{ 'is-invalid': submitted && mobile.errors }">
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8 col-xl-8 col-md-12 col-sm-12">
+      <div class="card">
+
+        <div class="card-header">
+          <h3 class="card-title">Primary Information</h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-6 col-md-12">
+              <div class="form-group">
+                <label for="exampleInputname">{{ 'Name' | translate }}</label>
+                <input type="text" name="name" class="form-control " #name="ngModel"
+                       [(ngModel)]="model.name" required placeholder="{{ 'Name' | translate }}"
+                       [ngClass]="{ 'is-invalid': submitted && name.errors }"
+                       onkeydown="return /[a-z \u0621-\u064A]/i.test(event.key)" />
+                <div *ngIf="name?.hasError('required') && submitted " class="invalid-feedback">
+                  English Name is required
+                </div>
+                <div *ngIf="name?.hasError('incorrect') && submitted " class="invalid-feedback">
+                  {{(name.errors?.['message']| json)}}
+                </div>
+
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="form-group">
+                <label for="exampleInputname1">Last Name</label>
+                <input type="text" class="form-control" id="lastname" placeholder="Enter Last Name">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-12">
+              <div class="form-group">
+                <label for="exampleInputname">{{ 'password' | translate }}</label>
+                <div style="position: relative;">
+                  <input #x type="password" name="password" #password="ngModel" [(ngModel)]="model.password" class="form-control" id="password" placeholder="{{ 'password' | translate }}">
+                  <i #y (click)="togglePassword(x,y)" class="fa fa-eye-slash password-show-i" aria-hidden="true"> </i>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="form-group">
+                <label for="exampleInputname1">{{ 'confirmPassword' | translate }}</label>
+                <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" placeholder="{{ 'confirmPassword' | translate }}">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">{{ 'company_Name' | translate }}</label>
+            <input type="text" class="form-control form-control-sm mt-2" id="company_Name" name="company_Name" #company_Name="ngModel"
+                   [(ngModel)]="model.company_Name" required placeholder="{{ 'company_Name' | translate }}"
+                   [ngClass]="{ 'is-invalid': submitted && company_Name.errors }"
+                   onkeydown="return /[a-z \u0621-\u064A]/i.test(event.key)" />
+            <div *ngIf="company_Name?.hasError('required') && submitted " class="invalid-feedback">
+              Company Name is required
+            </div>
+            <div *ngIf="company_Name?.hasError('incorrect') && submitted " class="invalid-feedback">
+              {{(name.errors?.['message']| json)}}
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">{{ 'Description' | translate }}</label>
+            <textarea class="form-control" rows="6">{{ 'Description' | translate }}.........</textarea>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button (click)="SaveForm(pageform.form)" class="btn btn-success me-1">
+            {{ 'Submit' | translate }}
+          </button>
+          <button type="reset" class="btn btn-secondary waves-effect">
+            {{ 'Cancel' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<!-- ROW-1 CLOSED -->
+<!-- ROW-2 OPEN -->
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header ">
+        <h3 class="card-title "> {{ 'Permissions' | translate }}</h3>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover card-table table-vcenter table-outline text-nowrap">
+          <thead>
+            <tr>
+              <th scope="col"> {{ 'ID' | translate }}</th>
+              <th scope="col"> {{ 'Permissions' | translate }}</th>
+              <th scope="col">{{ 'AccessLevel' | translate }}</th>
+              <th scope="col"> {{ 'Expiration' | translate }}</th>
+              <th scope="col">{{ 'Notes' | translate }}</th>
+              <th scope="col">{{ 'Active' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let products of productData">
+              <td>{{products.id}}</td>
+              <td>{{products.name}}</td>
+              <td>{{products.backend}}</td>
+              <td>{{products.date}}</td>
+              <td>{{products.team}}</td>
+              <td>
+                <div class="material-switch pull-center">
+                  <input id="someSwitchOptionSuccess" checked name="someSwitchOption001" type="checkbox" />
+                  <label for="someSwitchOptionSuccess" class="label-success"></label>
+                </div>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ROW-2 CLOSED -->

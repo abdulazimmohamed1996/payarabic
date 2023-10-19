@@ -1,0 +1,51 @@
+<app-page-header title="Invoice" active_item="Batch" showlist="1" link="/invoice/list"></app-page-header>
+<notifier-container></notifier-container>
+
+
+<form novalidate #pageform="ngForm">
+    <div class="row">
+       
+        <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">{{ 'BatchFile' | translate }} </h3>
+                </div>
+                <div class="card-body pt0">
+                    <div class="panel panel-primary">
+                        <div class="row pt-5">
+                            <div class=" col-lg-4">
+                            <input type="file" class="form-control form-file-input" name="form-file-input"
+                                        accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" name="attachment"
+                                        (change)="onFileChange($event)" id="attachment">
+                            </div>
+                            <div class=" col-lg-8 pt-2" style="text-align: center;">
+                                
+                                <a class="iconsBG" title="Excel" href='/assets/samples/InvoiceSample.xlsx' download="InvoiceSample.xlsx">{{ 'DownloadSampleExcelFile' | translate }} </a>
+
+                            </div>
+                        </div>
+                       
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <div class="row" >
+
+                        <div class="btn-list text-center">
+                            <button (click)="SaveForm(pageform.form)" class="btn btn-primary me-1">
+                                {{ 'Submit' | translate }}
+                            </button>
+                            <button type="reset" class="btn btn-secondary waves-effect">
+                                {{ 'Cancel' | translate }}
+                            </button>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

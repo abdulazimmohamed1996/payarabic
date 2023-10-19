@@ -1,0 +1,101 @@
+<app-page-header title="Currencies" active_item="Currency List" link="/currency/create"></app-page-header>
+<notifier-container></notifier-container>
+<div class="row row-cards">
+  <div class="col-lg-12 col-xl-2">
+    <div class="row ">
+      <div class="col-md-12 col-lg-6 col-xl-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">{{ 'AdvancedSearch' | translate }} </div>
+          </div>
+          <div class="card-body" style=" overflow: auto;  width: 100%;
+                  height: 60vh;">
+            <div class="form-group">
+
+              <input type="text" name="name" #title="ngModel" required [(ngModel)]="CurrencyFilter.name"
+                class="form-control" id="name" placeholder="{{ 'Name' | translate }}">
+            </div>
+            <button (click)="SearchCurrencies()" class="btn btn-primary me-1">
+              {{ 'Search' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-lg-12 col-xl-10">
+    <p-table #dt2 [value]="currencies" dataKey="id" [rows]="15" [showCurrentPageReport]="true" responsiveLayout="scroll"
+      *ngIf="currencies && currencies.length>0" [responsive]="true" [autoLayout]="true" [resizableColumns]="true"
+      [style]="{'width':'100%','overflow':'auto!important'}" class="ui-rtl" columnResizeMode="expand"
+      [rowsPerPageOptions]="[15,30,50]" styleClass="p-datatable-gridlines" [paginator]="true"
+      currentPageReportTemplate="{{ 'Show' | translate }} {first} {{ 'To' | translate }}  {last}  {{ 'FromTotal' | translate }} {totalRecords} ">
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="code">
+            <p-sortIcon field="code"></p-sortIcon> {{ 'Code' | translate }}
+            <p-columnFilter type="text" field="code" display="menu"></p-columnFilter>
+          </th>
+          <th pSortableColumn="nameAr">
+            <p-sortIcon field="nameAr"></p-sortIcon> {{ 'ArabicName' | translate }}
+            <p-columnFilter type="text" field="nameAr" display="menu"></p-columnFilter>
+          </th>
+          <th pSortableColumn="nameEn">
+            <p-sortIcon field="nameEn"></p-sortIcon> {{ 'EnglishName' | translate }}
+            <p-columnFilter type="text" field="nameEn" display="menu"></p-columnFilter>
+          </th>
+          <th pSortableColumn="symboleAr">
+            <p-sortIcon field="nameAr"></p-sortIcon> {{ 'ArabicSymbole' | translate }}
+            <p-columnFilter type="text" field="symboleAr" display="menu"></p-columnFilter>
+          </th>
+          <th pSortableColumn="symboleAr">
+            <p-sortIcon field="symboleAr"></p-sortIcon> {{ 'EnglishSymbole' | translate }}
+            <p-columnFilter type="text" field="symboleAr" display="menu"></p-columnFilter>
+          </th>
+          <th>
+            {{ 'Action' | translate }}
+          </th>
+
+        </tr>
+
+      </ng-template>
+      <ng-template pTemplate="body" let-currency let-i="rowIndex">
+        <tr [attr.id]="currency.id" [ngClass]="{
+    
+    'table-danger': currency.inActive
+  }">
+          <td>
+            {{currency.code}}
+          </td>
+          <td>
+            {{currency.nameAr}}
+          </td>
+          <td>
+             {{currency.nameEn}}
+          </td>
+          <td>
+            {{currency.symboleAr}}
+          </td>
+          <td>
+            {{currency.symboleEn}}
+          </td>
+          <td class="text-center align-middle">
+            <div class="btn-group align-top">
+              <a class="btn btn-sm btn-primary-light" [routerLink]="['/currency/details/',currency.id]">{{
+                'Edit' | translate }}</a>
+              <button class="btn btn-sm btn-primary-light" type="button" (click)="ConfirmDelete(currency.id)"><i
+                  class="fa fa-trash"></i></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="9" style="text-align: center;">{{ 'NoRecords' | translate }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+  </div>
+</div>

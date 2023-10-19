@@ -1,0 +1,65 @@
+<form>
+  <div class="mb-3 row">
+    <label for="table-complete-search" class="col-xs-3 col-sm-auto col-form-label">Full text search:</label>
+    <div class="col-xs-3 col-sm-auto">
+      <input id="table-complete-search" type="text" class="form-control" name="searchTerm" [(ngModel)]="service.searchTerm">
+     </div>
+    <span class="col col-form-label" *ngIf="service.loading$ | async">Loading...</span>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered text-nowrap mb-0">
+      <thead class="border-top">
+      <tr>
+        <th scope="col" sortable="name" (sort)="onSort($event)">COIN TYPE</th>
+        <th scope="col" sortable="marketcap" (sort)="onSort($event)">LAST PRICE	</th>
+        <th scope="col" sortable="price" (sort)="onSort($event)">	MARKET CAP</th>
+        <th scope="col" sortable="marketcap"(sort)="onSort($event)">CHANGE(24H)</th>
+        <th scope="col" sortable="dataAttributes5" (sort)="onSort($event)">	GRAPH</th>
+        <th scope="col" sortable="price" (sort)="onSort($event)"></th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr class="border-bottom" *ngFor="let country of countries$ | async">
+
+        <td><img [src]="country.icon" class="me-2" style="width: 20px"> <ngb-highlight [result]="country.name" [term]="service.searchTerm"></ngb-highlight></td>
+        <td><ngb-highlight [result]="country.lastprice | currency" [term]="service.searchTerm"></ngb-highlight></td>
+        <td><ngb-highlight [result]="country.marketcap | currency" [term]="service.searchTerm"></ngb-highlight></td>
+
+
+        <td><span class="btn {{country.color}} btn-sm py-0 px-1">{{country.change}}</span></td>
+
+        <td>
+
+          <apx-chart
+          [series]="chartOptions2.series"
+          [chart]="chartOptions2.chart"
+[xaxis]="chartOptions2.xaxis"
+[yaxis]="chartOptions2.yaxis"
+[dataLabels]="chartOptions2.dataLabels"
+          [grid]="chartOptions2.grid"
+        ></apx-chart>
+</td>
+
+        <td><a href="javascript:;" class="btn btn-primary btn-sm">Trade</a></td>
+     
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="d-flex justify-content-between p-2">
+    <ngb-pagination
+      [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
+    </ngb-pagination>
+
+    <ng-select class="" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+      <ng-option ng-option-selected value="0">--Select--</ng-option>
+      <ng-option value="2">2 items per page</ng-option>
+      <ng-option value="4">4 items per page</ng-option>
+      <ng-option value="6">6 items per page</ng-option>
+    </ng-select>
+  </div>
+
+</form>
+

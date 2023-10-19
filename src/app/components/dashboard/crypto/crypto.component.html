@@ -1,0 +1,393 @@
+<app-page-header title="Dashboards"  active_item="Crypto"></app-page-header><!-- ROW OPEN -->
+
+						<!-- ROW OPEN -->
+						<div class="row">
+							<div class="col-md-12 col-xl-9">
+								<div class="card ">
+									<div class="row">
+										<div class="col-xl col-lg-6 col-sm-6 px-0">
+											<div class="card-body text-center">
+												<div class="d-flex">
+													<a href="javascript:void(0)">
+														<span class="avatar avatar-md rounded-3 bg-success-transparent text-success me-3">
+															<i class="fa fa-caret-up"></i>
+														</span>
+													</a>
+													<div class="me-2">
+														<a href="javascript:void(0)">
+															<span class="mb-1 fs-13 font-weight-500 text-muted me-3">BTC / USD</span>
+														</a>
+														<p class="fs-20 me-3 mb-0 font-weight-semibold">$100k</p>
+													</div>
+													<div class="my-auto">
+														<i class="fe fe-arrow-up text-success"></i> 0.9%
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-xl col-lg-6 col-sm-6 px-0">
+											<div class="card-body text-center">
+												<div class="d-flex">
+													<a href="javascript:void(0)">
+														<span class="avatar avatar-md rounded-3 bg-danger-transparent text-danger me-3">
+															<i class="fa fa-caret-down"></i>
+														</span>
+													</a>
+													<div class="me-2">
+														<a href="javascript:void(0)">
+															<span class="mb-1 fs-13 font-weight-500 text-muted me-3">ADA / USD</span>
+														</a>
+														<p class="fs-20 me-3 mb-0 font-weight-semibold">$67,432</p>
+													</div>
+													<div class="my-auto">
+														<i class="fe fe-arrow-down text-danger"></i> 1.3%
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-xl col-lg-6 col-sm-6 px-0">
+											<div class="card-body text-center">
+												<div class="d-flex">
+													<a href="javascript:void(0)">
+														<span class="avatar avatar-md rounded-3 bg-success-transparent text-success me-3">
+															<i class="fa fa-caret-up"></i>
+														</span>
+													</a>
+													<div class="me-2">
+														<a href="javascript:void(0)">
+															<span class="mb-1 fs-13 font-weight-500 text-muted me-3">ETH / USD</span>
+														</a>
+														<p class="fs-20 me-3 mb-0 font-weight-semibold">$53,251</p>
+													</div>
+													<div class="my-auto">
+														<i class="fe fe-arrow-up text-success"></i> 0.5%
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-xl col-lg-6 col-sm-6 px-0">
+											<div class="card-body text-center">
+												<div class="d-flex">
+													<a href="javascript:void(0)">
+														<span class="avatar avatar-md rounded-3 bg-danger-transparent text-danger me-3">
+															<i class="fa fa-caret-up"></i>
+														</span>
+													</a>
+													<div class="me-2">
+														<a href="javascript:void(0)">
+															<span class="mb-1 fs-13 font-weight-500 text-muted me-3">XRP / USD</span>
+														</a>
+														<p class="fs-20 me-3 mb-0 font-weight-semibold">$36,760</p>
+													</div>
+													<div class="my-auto">
+														<i class="fe fe-arrow-down text-danger"></i> 1.4%
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-xl col-lg-6 col-sm-6 px-0">
+											<div class="card-body text-center">
+												<div class="d-flex">
+													<a href="javascript:void(0)">
+														<span class="avatar avatar-md rounded-3 bg-success-transparent text-success me-3">
+															<i class="fa fa-caret-up"></i>
+														</span>
+													</a>
+													<div class="me-2">
+														<a href="javascript:void(0)">
+															<span class="mb-1 fs-13 font-weight-500 text-muted me-3">BNB / USD</span>
+														</a>
+														<p class="fs-20 me-3 mb-0 font-weight-semibold">$590k</p>
+													</div>
+													<div class="my-auto">
+														<i class="fe fe-arrow-up text-success"></i> 2.0%
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-xl col-lg-6 col-sm-6 px-0 d-xxl-none">
+											<div class="card-body text-center">
+												<div class="d-flex">
+													<a href="javascript:void(0)">
+														<span class="avatar avatar-md rounded-3 bg-danger-transparent text-danger me-3">
+															<i class="fa fa-caret-up"></i>
+														</span>
+													</a>
+													<div class="me-2">
+														<a href="javascript:void(0)">
+															<span class="mb-1 fs-13 font-weight-500 text-muted me-3">XRP / USD</span>
+														</a>
+														<p class="fs-20 me-3 mb-0 font-weight-semibold">$36,760</p>
+													</div>
+													<div class="my-auto">
+														<i class="fe fe-arrow-down text-danger"></i> 1.4%
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card">
+									<div class="card-header">
+										<h3 class="card-title">Crypto Overview</h3>
+									</div>
+									<div class="card-body overflow-hidden">
+										<div id="crypto" class="w-100"></div>
+                    <apx-chart
+                    [series]="chartOptions.series"
+                    [chart]="chartOptions.chart"
+                    [xaxis]="chartOptions.xaxis"
+                    [yaxis]="chartOptions.yaxis"
+                    [colors]="chartOptions.colors"
+                    [stroke]="chartOptions.stroke"
+                  ></apx-chart>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-12 col-xl-3">
+								<div class="card">
+									<div class="card-header">
+										<h3 class="card-title">Trending</h3>
+									</div>
+									<div class="card-body">
+										<div class="table-responsive">
+											<table class="table table-borderless mb-0">
+												<tbody>
+													<tr>
+														<td class="w-40">
+															<img src="./assets/images/crypto-currencies/bitcoin.svg"  class="w-5" alt="img">
+															<span class="ms-2">BTC</span>
+														</td>
+														<td>$12,789</td>
+														<td>
+															<i class="fa fa-caret-up text-success"></i> 1.7%
+														</td>
+													</tr>
+													<tr>
+														<td class="w-40">
+															<img src="./assets/images/crypto-currencies/litecoin.svg"  class="w-5" alt="img">
+															<span class="ms-2">LTC</span>
+														</td>
+														<td>$12,789</td>
+														<td>
+															<i class="fa fa-caret-down text-danger"></i> 2.7%
+														</td>
+													</tr>
+													<tr>
+														<td class="w-40">
+															<img src="./assets/images/crypto-currencies/monero.svg"  class="w-5" alt="img">
+															<span class="ms-2">XMR</span>
+														</td>
+														<td>$12,789</td>
+														<td>
+															<i class="fa fa-caret-up text-success"></i> 2.6%
+														</td>
+													</tr>
+													<tr>
+														<td class="w-40">
+															<img src="./assets/images/crypto-currencies/ripple.svg"  class="w-5" alt="img">
+															<span class="ms-2">Ripple</span>
+														</td>
+														<td>$12,789</td>
+														<td>
+															<i class="fa fa-caret-down text-danger"></i> 1.9%
+														</td>
+													</tr>
+													<tr>
+														<td class="w-40">
+															<img src="./assets/images/crypto-currencies/dash.svg"  class="w-5" alt="img">
+															<span class="ms-2">Dash</span>
+														</td>
+														<td>$12,789</td>
+														<td>
+															<i class="fa fa-caret-up text-success"></i> 0.1%
+														</td>
+													</tr>
+													<tr>
+														<td class="w-40">
+															<img src="./assets/images/crypto-currencies/eos.svg"  class="w-5" alt="img">
+															<span class="ms-2">EOS</span>
+														</td>
+														<td>$12,789</td>
+														<td>
+															<i class="fa fa-caret-up text-success"></i> 2.4%
+														</td>
+													</tr>
+													<tr>
+														<td class="w-40">
+															<img src="./assets/images/crypto-currencies/ethereum.svg"  class="w-5" alt="img">
+															<span class="ms-2">ETH</span>
+														</td>
+														<td>$12,789</td>
+														<td>
+															<i class="fa fa-caret-down text-danger"></i> 3.2%
+														</td>
+													</tr>
+													<tr>
+														<td class="w-40">
+															<img src="./assets/images/crypto-currencies/euro.svg"  class="w-5" alt="img">
+															<span class="ms-2">Euro</span>
+														</td>
+														<td>$12,789</td>
+														<td>
+															<i class="fa fa-caret-down text-danger"></i> 2.3%
+														</td>
+													</tr>
+													<tr>
+														<td class="w-40">
+															<img src="./assets/images/crypto-currencies/cardano.svg"  class="w-5" alt="img">
+															<span class="ms-2">ADA</span>
+														</td>
+														<td>$12,789</td>
+														<td>
+															<i class="fa fa-caret-up text-success"></i> 1.4%
+														</td>
+													</tr>
+													<tr>
+														<td class="w-40">
+															<img src="./assets/images/crypto-currencies/iota.svg"  class="w-5" alt="img">
+															<span class="ms-2">Iota</span>
+														</td>
+														<td>$12,789</td>
+														<td>
+															<i class="fa fa-caret-up text-success"></i> 0.6%
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--END ROW OPEN -->
+
+						<!-- ROW OPEN -->
+						<div class="row">
+							<div class="col-sm-6 col-md-6 col-xl-4">
+								<div class="card">
+									<div class="card-header">
+										<h3 class="card-title">Buy Crypto</h3>
+									</div>
+									<div class="card-body">
+										<div class="card-title">Buy Crypto Coins</div>
+										<div class="mb-3">
+											<label class="form-label">Enter Your Money</label>
+											<div class="input-group">
+												<input type="text" class="form-control" Value="10,000">
+												<ng-select class="form-control p-0 crypto-select" data-placeholder="Choose one (with optgroup)"label="Currecy">
+
+														<ng-option value="USD">USD</ng-option>
+														<ng-option value="EUR">EUR</ng-option>
+														<ng-option value="INR">INR</ng-option>
+														<ng-option value="GBP">GBP</ng-option>
+														<ng-option value="JPY">JPY</ng-option>
+														<ng-option value="RUB">RUB</ng-option>
+
+												</ng-select>
+											</div>
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Your Crypto Coins Converted to</label>
+											<div class="input-group">
+												<input type="text" class="form-control" Value="0.254">
+												<ng-select class="form-control select2 p-0 crypto-select" data-placeholder="Choose one (with optgroup)">
+													<optgroup label="Coins">
+														<ng-option value="BTC">BTC</ng-option>
+														<ng-option value="ETH">ETH</ng-option>
+														<ng-option value="DAH">DAH</ng-option>
+														<ng-option value="RIP">RIP</ng-option>
+														<ng-option value="ITA">ITA</ng-option>
+														<ng-option value="EOS">EOS</ng-option>
+													</optgroup>
+												</ng-select>
+											</div>
+										</div>
+										<div class="text-center">
+											<a class="btn btn-success btn-w-md" href="javascript:void(0)">Buy Coins</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6 col-md-6 col-xl-4">
+								<div class="card">
+									<div class="card-header">
+										<h3 class="card-title">Sell Crypto</h3>
+									</div>
+									<div class="card-body">
+										<div class="card-title">Sell Crypto Coins</div>
+										<div class="mb-3">
+											<label class="form-label">Enter Crypto Coin</label>
+											<div class="input-group">
+												<input type="text" class="form-control " Value="0.254">
+												<ng-select class="form-control select2 p-0 crypto-select" data-placeholder="Choose one (with optgroup)">
+													<optgroup label="Coins">
+														<ng-option value="BTC">BTC</ng-option>
+														<ng-option value="ETH">ETH</ng-option>
+														<ng-option value="DAH">DAH</ng-option>
+														<ng-option value="RIP">RIP</ng-option>
+														<ng-option value="ITA">ITA</ng-option>
+														<ng-option value="EOS">EOS</ng-option>
+													</optgroup>
+												</ng-select>
+											</div>
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Your Money Converted to</label>
+											<div class="input-group">
+												<input type="text" class="form-control" Value="10,000">
+												<ng-select class="form-control select2 p-0 crypto-select" data-placeholder="Choose one (with optgroup)">
+													<optgroup label="Currecy">
+														<ng-option value="USD">USD</ng-option>
+														<ng-option value="EUR">EUR</ng-option>
+														<ng-option value="INR">INR</ng-option>
+														<ng-option value="GBP">GBP</ng-option>
+														<ng-option value="JPY">JPY</ng-option>
+														<ng-option value="RUB">RUB</ng-option>
+													</optgroup>
+												</ng-select>
+											</div>
+										</div>
+										<div class="text-center">
+											<a class="btn btn-primary btn-w-md" href="javascript:void(0)">Sell Coins</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-12 col-xl-4">
+								<div class="card">
+									<div class="card-header">
+										<h3 class="card-title">Crypto Statistics</h3>
+									</div>
+									<div class="card-body">
+                    <apx-chart
+                    [series]="chartOptions1.series"
+                    [chart]="chartOptions1.chart"
+                    [labels]="chartOptions1.labels"
+                    [fill]="chartOptions1.fill"
+                    [stroke]="chartOptions1.stroke"
+                    [responsive]="chartOptions1.responsive"
+
+                  ></apx-chart>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--END ROW OPEN -->
+
+						<!-- ROW OPEN -->
+						<div class="row">
+							<div class="col-xl-12">
+								<div class="card">
+									<div class="card-header">
+										<h3 class="card-title">Crypto Marketing Values</h3>
+									</div>
+									<div class="card-body">
+<app-searchtable></app-searchtable>
+									
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--END ROW OPEN -->

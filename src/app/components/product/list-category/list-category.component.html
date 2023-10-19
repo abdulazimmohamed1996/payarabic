@@ -1,0 +1,70 @@
+<app-page-header title="{{ 'HomePage' | translate }}" active_item="{{ 'Category' | translate }}" showlist="0"
+  link="/category/create"></app-page-header>
+<notifier-container></notifier-container>
+<div class="row row-cards">
+
+  <div class="col-lg-12 col-xl-12">
+    <p-table #dt2 [value]="categories" dataKey="id" [rows]="15" [showCurrentPageReport]="true" responsiveLayout="scroll"
+      *ngIf="categories && categories.length>0" [responsive]="true" [autoLayout]="true" [resizableColumns]="true"
+      [style]="{'width':'100%','overflow':'auto!important'}" class="ui-rtl" columnResizeMode="expand"
+      [rowsPerPageOptions]="[15,30,50]" styleClass="p-datatable-gridlines" [paginator]="true"
+      currentPageReportTemplate="{{ 'Show' | translate }} {first} {{ 'To' | translate }}  {last}  {{ 'FromTotal' | translate }} {totalRecords} ">
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="id" *ngIf="this.requestedCategoryType == 'Vendor' ">
+            <p-sortIcon field="id"></p-sortIcon> {{ 'ID' | translate }}
+            <p-columnFilter type="text" field="id" display="menu"></p-columnFilter>
+          </th>
+          <th pSortableColumn="nameAr">
+            <p-sortIcon field="nameAr"></p-sortIcon> {{ 'ArabicName' | translate }}
+            <p-columnFilter type="text" field="nameAr" display="menu"></p-columnFilter>
+          </th>
+          <th pSortableColumn="nameEn">
+            <p-sortIcon field="nameEn"></p-sortIcon> {{ 'EnglishName' | translate }}
+            <p-columnFilter type="text" field="nameEn" display="menu"></p-columnFilter>
+          </th>
+          <th pSortableColumn="sort">
+            <p-sortIcon field="sort"></p-sortIcon> {{ 'Sort' | translate }}
+            <p-columnFilter type="text" field="sort" display="menu"></p-columnFilter>
+          </th>
+          <th>
+            {{ 'Action' | translate }}
+          </th>
+
+        </tr>
+
+      </ng-template>
+      <ng-template pTemplate="body" let-category let-i="rowIndex">
+        <tr [attr.id]="category.id" [ngClass]="{
+    
+    'table-danger': category.inActive
+  }">
+          <td>
+            {{category.nameAr}}
+          </td>
+          <td>
+            {{category.nameEn}}
+          </td>
+          <td>
+            {{category.sort}}
+          </td>
+          <td class="text-center align-middle">
+            <div class="btn-group align-top">
+              <a class="btn btn-sm btn-primary-light" [routerLink]="['/category/details/',category.id]">{{
+                'Edit' | translate }}</a>
+              <button class="btn btn-sm btn-primary-light" type="button" (click)="ConfirmDelete(category.id)"><i
+                  class="fa fa-trash"></i></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="9" style="text-align: center;">{{ 'NoRecords' | translate }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+  </div>
+</div>

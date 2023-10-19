@@ -1,0 +1,24 @@
+/* ----------------------------------------------------------------
+	Custom CSS
+
+	Add all your Custom Styled CSS here for New Styles or
+	Overwriting Default Theme Styles for Better Hanlding Updates
+-----------------------------------------------------------------*/
+
+
+
+.showimage
+{
+	display: block !important;
+}
+.mega
+{
+	margin-left: 50px !important;
+}
+.dropdown-item-hand
+{
+	cursor: pointer;
+}
+.form-inline.form-control:hover{
+	display: block;
+}

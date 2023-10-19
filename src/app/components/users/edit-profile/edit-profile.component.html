@@ -1,0 +1,506 @@
+<app-page-header title="{{ 'HomePage' | translate }}" link="/{{currentUserType.toLowerCase()}}/list" showlist="{{!isProfile}}"
+  active_item="{{pageTitle}}"></app-page-header>
+<notifier-container></notifier-container>
+<!-- ROW-1 OPEN -->
+<form novalidate #pageform="ngForm" (ngSubmit)="pageform.form.valid && onSubmit()">
+  <div class="row">
+    <div class="col-lg-4 col-xl-4 col-md-12 col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="text-center">
+            <div class="userprofile">
+              <div class="userpic  brround">
+                <img src="./assets/images/users/male/2.jpg" alt="" class="userpicimg">
+              </div>
+              <h3 class="username text-dark mb-2">{{model.name}}</h3>
+              <div class="socials text-center me-3">
+                <a href="javascript:void(0)" class="btn btn-circle btn-primary me-1 ">
+                  <i class="fa fa-facebook "></i>
+                </a> <a href="javascript:void(0)" class="btn btn-circle me-1">
+                  <i class="fa fa-google-plus"></i>
+                </a> <a href="javascript:void(0)" class="btn btn-circle btn-info me-1 ">
+                  <i class="fa fa-twitter"></i>
+                </a> <a href="javascript:void(0)" class="btn btn-circle btn-warning me-1"><i
+                    class="fa fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card panel-theme">
+        <div class="card-header">
+          <div class="float-start">
+            <h3 class="card-title">{{ 'ContactDetails' | translate }}</h3>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="card-body no-padding">
+          <ul class="list-group no-margin">
+            <li class="list-group-item">
+              <i class="fa fa-envelope me-4"></i>
+              <input class="form-control" type="email" name="email" pattern="[^ @]*@[^ @]*" required
+                placeholder="{{ 'Email' | translate }}" #email="ngModel" [(ngModel)]="model.email"
+                [ngClass]="{ 'is-invalid': submitted && email.errors }">
+            </li>
+            <li class="list-group-item">
+              <i class="fa fa-globe me-4"></i>
+              <input class="form-control" type="text" name="webSiteUrl" required
+                placeholder="{{ 'webSite_Url' | translate }}" #webSiteUrl="ngModel" [(ngModel)]="model.webSiteUrl"
+                [ngClass]="{ 'is-invalid': submitted && webSiteUrl.errors }">
+            </li>
+            <li class="list-group-item">
+              <i class="fa fa-phone me-4"></i>
+              <ngx-intl-tel-input [onlyCountries]="SharedModule.preferredCountries" [enableAutoCountrySelect]="true"
+                [enablePlaceholder]="false" [searchCountryFlag]="true" [searchCountryField]="[
+                    SharedModule.SearchCountryField.Iso2,
+                    SharedModule.SearchCountryField.Name
+                  ]" [selectFirstCountry]="false" [selectedCountryISO]="SharedModule.CountryISO.Kuwait"
+                [maxLength]="15" [minlength]="8" [phoneValidation]="true" [separateDialCode]="true"
+                [numberFormat]="SharedModule.PhoneNumberFormat.National" name="mobile" [(ngModel)]="model.mobile"
+                id="mobile" name="mobile" required="">
+              </ngx-intl-tel-input>
+              <div *ngIf="submitted">
+                <div class="invalid-feedback" style="display: block;" *ngIf="!pageform.form.value.mobile">{{ 'Mobile' |
+                  translate }} {{ 'Required' | translate }}</div>
+                <div class="invalid-feedback" style="display: block;"
+                  *ngIf="pageform.form.value.mobile && pageform.form.controls['mobile'].errors">{{ 'MobileInvalid' |
+                  translate }}
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8 col-xl-8 col-md-12 col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">{{ 'Details' | translate }}</h3>
+        </div>
+        <div class="card-body" style="min-height: 480px;">
+          <div class="panel panel-primary">
+            <div class=" tab-menu-heading border-bottom-0">
+              <div class="tabs-menu1 ">
+                <!-- Tabs -->
+                <ul ngbNav #nav1="ngbNav" [activeId]="1" class="panel-tabs">
+                  <li class="me-2" [ngbNavItem]="1">
+                    <a ngbNavLink *ngIf="showVendorTabs">{{ 'ContactDetails' | translate }}</a>
+                    <ng-template ngbNavContent>
+                      <div class="row">&nbsp;</div>
+                      <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                          <div class="form-group">
+                            <label for="exampleInputname">{{ 'Name' | translate }}</label>
+                            <input type="text" name="name" class="form-control " #name="ngModel"
+                              [(ngModel)]="model.name" required placeholder="{{ 'Name' | translate }}"
+                              [ngClass]="{ 'is-invalid': submitted && name.errors }"/>
+                            <div *ngIf="name?.hasError('required') && submitted " class="invalid-feedback">
+                              {{ 'Name' | translate }} {{ 'Required' | translate }}
+                            </div>
+                            <div *ngIf="name?.hasError('incorrect') && submitted " class="invalid-feedback">
+                              {{(name.errors?.['message']| json)}}
+                            </div>
+
+                          </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                          <div class="form-group">
+                            <label for="companyName">{{ 'company_Name' | translate }}</label>
+                            <input type="text" class="form-control " id="companyName" name="companyName"
+                              #companyName="ngModel" [(ngModel)]="model.companyName" required
+                              placeholder="{{ 'company_Name' | translate }}"
+                              [ngClass]="{ 'is-invalid': submitted && companyName.errors }" />
+                            <div *ngIf="companyName?.hasError('required') && submitted " class="invalid-feedback">
+                              {{ 'company_Name' | translate }} {{ 'Required' | translate }}
+                            </div>
+                            <div *ngIf="companyName?.hasError('incorrect') && submitted " class="invalid-feedback">
+                              {{(name.errors?.['message']| json)}}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row" *ngIf="showPasswprd">
+                        <div class="col-lg-6 col-md-12">
+                          <div class="form-group">
+                            <label for="exampleInputname">{{ 'password' | translate }}</label>
+                            <div style="position: relative;">
+                              <input type="password" name="password" #password="ngModel" [(ngModel)]="model.password"
+                                class="form-control" id="password" placeholder="{{ 'password' | translate }}">
+                              <!-- <i #y (click)="togglePassword(x,y)" class="fa fa-eye-slash password-show-i"
+                                aria-hidden="true"> </i> -->
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                          <div class="form-group">
+                            <label for="exampleInputname1">{{ 'confirmPassword' | translate }}</label>
+                            <input type="password" name="confirmPassword" class="form-control" id="confirmPassword"
+                              placeholder="{{ 'confirmPassword' | translate }}">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row" *ngIf="!isProfile">
+                        <div class="col-lg-6 col-md-12">
+                          <div class="form-group">
+                            <div class="form-label"></div>
+                            <label class="custom-switch">
+                              <input type="checkbox" id="reviewed" name="reviewed" #reviewed="ngModel"
+                                [(ngModel)]="model.reviewed" class="custom-switch-input">
+                              <span class="custom-switch-indicator"></span>
+                              <span class="custom-switch-description">{{ 'Reviewed' | translate }} </span>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                          <div class="form-group">
+                            <div class="form-label"></div>
+                            <label class="custom-switch">
+                              <input type="checkbox" id="inActive" name="inActive" #inActive="ngModel"
+                                [(ngModel)]="!model.inActive" class="custom-switch-input">
+                              <span class="custom-switch-indicator"></span>
+                              <span class="custom-switch-description">{{ 'Active' | translate }} </span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </li>
+                  <li class="me-2" [ngbNavItem]="2" *ngIf="showVendorTabs">
+                    <a ngbNavLink>{{ 'BankDetails' | translate }}</a>
+                    <ng-template ngbNavContent>
+                      <div class="row">&nbsp;</div>
+                      <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                          <div class="form-group">
+                            <label for="exampleInputname">{{ 'bank_Name' | translate }}</label>
+                            <ng-select required #bankId="ngModel" name="bankId" [(ngModel)]="model.bankId"
+                              [ngClass]="{ 'is-invalid': submitted && bankId.errors }">
+                              <ng-option *ngFor="let Bank of Banks" itemid="Bank.id">
+                                {{Bank.name_En}}
+                              </ng-option>
+                            </ng-select>
+                            <div *ngIf="bankId?.hasError('required') && submitted " class="invalid-feedback">
+                              {{ 'bank_Name' | translate }} {{ 'Required' | translate }}
+                            </div>
+                            <div *ngIf="bankId?.hasError('incorrect') && submitted " class="invalid-feedback">
+                              {{(bankId.errors?.['message']| json)}}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                          <div class="form-group">
+                            <label for="exampleInputname1">{{ 'account_Holder_Name' | translate }}</label>
+                            <input type="text" class="form-control " id="accountHolderName" name="accountHolderName"
+                              #accountHolderName="ngModel" [(ngModel)]="model.accountHolderName" required
+                              placeholder="{{ 'account_Holder_Name' | translate }}"
+                              [ngClass]="{ 'is-invalid': submitted && accountHolderName.errors }" />
+                            <div *ngIf="accountHolderName?.hasError('required') && submitted " class="invalid-feedback">
+                              {{ 'account_Holder_Name' | translate }} {{ 'Required' | translate }}
+                            </div>
+                            <div *ngIf="accountHolderName?.hasError('incorrect') && submitted "
+                              class="invalid-feedback">
+                              {{(accountHolderName.errors?.['message']| json)}}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                          <div class="form-group">
+                            <label for="exampleInputname1">{{ 'account_Number' | translate }}</label>
+                            <input type="text" class="form-control " id="accountNumber" name="accountNumber"
+                              #accountNumber="ngModel" [(ngModel)]="model.accountNumber" required
+                              placeholder="{{ 'account_Number' | translate }}"
+                              [ngClass]="{ 'is-invalid': submitted && accountNumber.errors }" />
+                            <div *ngIf="accountNumber?.hasError('required') && submitted " class="invalid-feedback">
+                              {{ 'account_Number' | translate }} {{ 'Required' | translate }}
+                            </div>
+                            <div *ngIf="accountNumber?.hasError('incorrect') && submitted " class="invalid-feedback">
+                              {{(accountNumber.errors?.['message']| json)}}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                          <div class="form-group">
+                            <label for="exampleInputname1">{{ 'iban' | translate }}</label>
+                            <input type="text" class="form-control " id="iban" name="iban" #iban="ngModel"
+                              [(ngModel)]="model.iban" required placeholder="{{ 'iban' | translate }}"
+                              [ngClass]="{ 'is-invalid': submitted && iban.errors }" />
+                            <div *ngIf="iban?.hasError('required') && submitted " class="invalid-feedback">
+                              {{ 'iban' | translate }} {{ 'Required' | translate }}
+                            </div>
+                            <div *ngIf="iban?.hasError('incorrect') && submitted " class="invalid-feedback">
+                              {{(iban.errors?.['message']| json)}}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">{{ 'terms_Condition' | translate }}</label>
+                        <textarea class="form-control" id="termsCondition" name="termsCondition"
+                          #termsCondition="ngModel" [(ngModel)]="model.termsCondition"
+                          rows="4">{{ 'terms_Condition' | translate }}.........</textarea>
+                      </div>
+                    </ng-template>
+                  </li>
+                  <li class="me-2" [ngbNavItem]="3" *ngIf="showVendorTabs">
+                    <a ngbNavLink>{{ 'PaymentMethods' | translate }}</a>
+                    <ng-template ngbNavContent>
+                      <div class="table-responsive">
+                        <table class="table table-hover card-table table-vcenter table-outline text-nowrap">
+                          <thead>
+                            <tr>
+                              <th scope="col">{{ 'Type' | translate }}</th>
+                              <th scope="col">{{ 'Name' | translate }}</th>
+                              <th scope="col">{{ 'fees_Type' | translate }}</th>
+                              <th scope="col">{{ 'feesFixed_Amount' | translate }}</th>
+                              <th scope="col">{{ 'feesPercent_Amount' | translate }}</th>
+                              <th scope="col">{{ 'Active' | translate }}</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let paymentMethod of model.paymentMethods">
+                              <td>{{paymentMethod.code}}</td>
+                              <td>{{paymentMethod.nameEn}}</td>
+                              <td>
+                                <ng-select name="fees_Type_{{paymentMethod.id}}" id="fees_Type_{{paymentMethod.id}}"
+                                  [(ngModel)]="paymentMethod.feesType">
+                                  <ng-option selected="selected" value="Amount">{{ 'FixedRate' | translate
+                                    }}</ng-option>
+                                  <ng-option value="Percent">{{ 'Rate%' | translate }}</ng-option>
+                                  <ng-option value="AmountAndPercent">{{ 'FixedAndPercent' | translate }}</ng-option>
+                                </ng-select>
+                              </td>
+                              <td>
+                                <input type="number" name="feesFixed_Amount_{{paymentMethod.id}}" min="0"
+                                  style="width: 100px;" min="0" [(ngModel)]="paymentMethod.feesFixedAmount"
+                                  class="form-control mobile_input" id="feesFixed_Amount_{{paymentMethod.id}}"
+                                  step=".001">
+                              </td>
+                              <td><input type="number" name="feesPercent_Amount_{{paymentMethod.id}}" max="100"
+                                  style="width: 100px;" min="0" [(ngModel)]="paymentMethod.feesPercentAmount"
+                                  class="form-control mobile_input" id="feesPercent_Amount_{{paymentMethod.id}}"
+                                  step=".01"></td>
+                              <td>
+                                <div class="material-switch pull-center">
+                                  <input id="inActive_{{paymentMethod.id}}" [checked]="!paymentMethod.inActive"
+                                    name="inActive_{{paymentMethod.id}}" type="checkbox" />
+                                  <label for="inActive_{{paymentMethod.id}}" class="label-success"></label>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </ng-template>
+                  </li>
+                  <li class="me-2" [ngbNavItem]="4" *ngIf="showVendorTabs">
+                    <a ngbNavLink>{{ 'SocialMedia' | translate }}</a>
+                    <ng-template ngbNavContent>
+                      <div class="row">&nbsp;</div>
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label for="facebook_link"><i class="fa fa-facebook"></i> {{ 'Facebook' | translate }}
+                            </label>
+                            <input type="url" name="social[facebook_link]" class="form-control"
+                              [(ngModel)]="social.facebook_link" id="facebook_link" value="{{social.facebook_link}}"
+                              autocomplete="off"
+                              pattern="[Hh][Tt][Tt][Pp][Ss]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?">
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label for="instagram_link"><i class="fa fa-instagram"></i> {{ 'Instagram' | translate
+                              }}</label>
+                            <input type="url" name="social[instagram_link]" class="form-control"
+                              [(ngModel)]="social.instagram_link" id="instagram_link" value="{{social.instagram_link}}"
+                              autocomplete="off"
+                              pattern="[Hh][Tt][Tt][Pp][Ss]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?">
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label for="snapchat_link"><i class="fa fa-snapchat"></i> {{ 'Snapchat' | translate }}
+                            </label>
+                            <input type="url" name="snapchat_link" class="form-control"
+                              [(ngModel)]="social.snapchat_link" id="snapchat_link" value="{{social.snapchat_link}}"
+                              autocomplete="off"
+                              pattern="[Hh][Tt][Tt][Pp][Ss]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?">
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label for="twitter_link"><i class="fa fa-twitter"></i> {{ 'Twitter' | translate }}</label>
+                            <input type="url" name="twitter_link" class="form-control" [(ngModel)]="social.twitter_link"
+                              id="twitter_link" value="{{social.twitter_link}}" autocomplete="off"
+                              pattern="[Hh][Tt][Tt][Pp][Ss]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?">
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label for="youtube_link"><i class="fa fa-youtube"></i> {{ 'YouTube' | translate }}</label>
+                            <input type="url" name="youtube_link" class="form-control" [(ngModel)]="social.youtube_link"
+                              id="youtube_link" value="{{social.youtube_link}}" autocomplete="off"
+                              pattern="[Hh][Tt][Tt][Pp][Ss]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?">
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label for="linkedin_link"><i class="fa fa-linkedin"></i> {{ 'LinkedIn' | translate
+                              }}</label>
+                            <input type="url" name="linkedin_link" class="form-control"
+                              [(ngModel)]="social.linkedin_link" id="linkedin_link" value="{{social.linkedin_link}}"
+                              autocomplete="off"
+                              pattern="[Hh][Tt][Tt][Pp][Ss]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?">
+                          </div>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </li>
+                  <li class="me-2" [ngbNavItem]="5" *ngIf="showVendorTabs">
+                    <a ngbNavLink>{{ 'VendorDocuments' | translate }}</a>
+                    <ng-template ngbNavContent>
+                      <div class="row">&nbsp;</div>
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label for="logo"> {{ 'Logo' | translate }} </label>
+                            <input type="file" accept="image/jpg,image/jpeg,image/png" name="logo"
+                              (change)="fileChangeEvent($event,'logo')" class="form-control" id="logo">
+                            <a  class="btn link-info" *ngIf="filterArray(model.attachments,'logo')" target="_blank"
+                              [routerLink]="filterArrayLink(model.attachments,'logo')">
+                              <i class="fe fe-link me-2"></i>
+                              {{ 'Download' | translate }}
+                            </a>
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label for="commercialLicense"> {{ 'commercial_License' | translate }} </label>
+                            <input type="file" accept="image/jpg,image/jpeg,image/png,application/pdf"
+                              name="commercialLicense" (change)="fileChangeEvent($event,'commercialLicense')"
+                              class="form-control" id="commercialLicense">
+                            <a  class="btn link-info" *ngIf="filterArray(model.attachments,'commercialLicense')" target="_blank"
+                              [routerLink]="filterArrayLink(model.attachments,'commercialLicense')">
+                              <i class="fe fe-link me-2"></i>
+                              {{ 'Download' | translate }}
+                            </a>
+
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label for="signatureAuthorization"> {{ 'SignatureAuthorization' | translate }} </label>
+                            <input type="file" accept="image/jpg,image/jpeg,image/png,application/pdf"
+                              name="signatureAuthorization" (change)="fileChangeEvent($event,'signatureAuthorization')"
+                              class="form-control" id="signatureAuthorization">
+                            <a  class="btn link-info" *ngIf="filterArray(model.attachments,'signatureAuthorization')" 
+                              target="_blank"
+                              [routerLink]="filterArrayLink(model.attachments,'signatureAuthorization')">
+                              <i class="fe fe-link me-2"></i>
+                              {{ 'Download' | translate }}
+                            </a>
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label for="commercialRegister"> {{ 'CommercialRegister' | translate }} </label>
+                            <input type="file" accept="image/jpg,image/jpeg,image/png,application/pdf"
+                              name="commercialRegister" (change)="fileChangeEvent($event,'commercialRegister')"
+                              class="form-control" id="commercialRegister">
+                            <a  class="btn link-info" *ngIf="filterArray(model.attachments,'commercialRegister')"  target="_blank"
+                              [routerLink]="filterArrayLink(model.attachments,'commercialRegister')">
+                              <i class="fe fe-link me-2"></i>
+                              {{ 'Download' | translate }}
+                            </a>
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label for="civilIdOwner"> {{ 'civil_Id_Owner' | translate }} </label>
+                            <input type="file" accept="image/jpg,image/jpeg,image/png,application/pdf"
+                              name="civilIdOwner" (change)="fileChangeEvent($event,'civilIdOwner')" class="form-control"
+                              id="civilIdOwner">
+                            <a  class="btn link-info" *ngIf="filterArray(model.attachments,'civilIdOwner')"  target="_blank"
+                              [routerLink]="filterArrayLink(model.attachments,'civilIdOwner')">
+                              <i class="fe fe-link me-2"></i>
+                              {{ 'Download' | translate }}
+                            </a>
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label for="bankAccountLetter"> {{ 'BankAccountLetter' | translate }} </label>
+                            <input type="file" accept="image/jpg,image/jpeg,image/png,application/pdf"
+                              name="bankAccountLetter" (change)="fileChangeEvent($event,'bankAccountLetter')"
+                              class="form-control" id="bankAccountLetter">
+                            <a  class="btn link-info" *ngIf="filterArray(model.attachments,'bankAccountLetter')"  target="_blank"
+                              [routerLink]="filterArrayLink(model.attachments,'bankAccountLetter')">
+                              <i class="fe fe-link me-2"></i>
+                              {{ 'Download' | translate }}
+                            </a>
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label for="kyC_doc"> {{ 'kyC_doc' | translate }} </label>
+                            <input type="file" accept="image/jpg,image/jpeg,image/png,application/pdf" name="kyC_doc"
+                              (change)="fileChangeEvent($event,'kyC_doc')" class="form-control form-control-sm"
+                              id="kyC_doc">
+                            <p *ngIf="model.kyC_doc == ''">
+                              <small>
+                                <a [hidden]="model.accountType == 'HomeBusiness'"
+                                  href="https://sadadpay.net/assets/docs/kyc_non_individual.docx">{{
+                                  'KYC_doc_download_link' | translate }} </a>
+                                <a [hidden]="model.accountType == 'Business'"
+                                  href="https://sadadpay.net/assets/docs/kyc_individual.docx">{{ 'KYC_doc_download_link'
+                                  | translate }}</a>
+                              </small>
+                            </p>
+                            <a *ngIf="model.kyC_doc"  (click)="downloadFile(model.kyC_doc , 'kyC_doc')">
+                              <i class="fe fe-link me-2"></i>
+                              {{ 'Download' | translate }}
+                            </a>
+
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label for="other"> {{ 'other' | translate }} </label>
+                            <input type="file" accept="image/jpg,image/jpeg,image/png,application/pdf" name="other"
+                              (change)="fileChangeEvent($event,'other')" class="form-control" id="other">
+                            <a *ngIf="model.other"  (click)="downloadFile(model.other , 'other')">
+                              <i class="fe fe-link me-2"></i>
+                              {{ 'Download' | translate }}
+                            </a>
+
+                          </div>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="panel-body tabs-menu-body">
+              <div [ngbNavOutlet]="nav1"></div>
+            </div>
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <button (click)="SaveForm(pageform.form)" class="btn btn-success me-1">
+            {{ 'Submit' | translate }}
+          </button>
+          <button type="reset" class="btn btn-secondary waves-effect">
+            {{ 'Cancel' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<!-- ROW-1 CLOSED -->
+<!-- ROW-2 CLOSED -->

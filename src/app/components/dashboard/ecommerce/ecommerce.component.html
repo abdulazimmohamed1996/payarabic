@@ -1,0 +1,353 @@
+<app-page-header title="Dashboards"  active_item="Ecommerce"></app-page-header>
+						<!-- ROW OPEN -->
+						<div class="row">
+							<div class="col-lg-6 col-md-12 col-sm-12 col-xl-6">
+								<div class="row">
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xl-6">
+										<div class="card">
+											<div class="card-body p-6">
+												<span class="bg-primary-transparent icon-service text-primary float-end"><i class="fe fe-box"></i> </span>
+												<h6 class="mb-2">Total Revenue</h6>
+												<h2 class="mb-1  number-font">$<span class="counter">3,516</span></h2>
+												<p class="text-muted mb-2">Sed ut perspiciatis unde omnis accusantium</p>
+												<a href="javascript:void(0)" class="text-primary">View Details</a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xl-6">
+										<div class="card">
+											<div class="card-body p-6">
+												<span class="bg-danger-transparent icon-service text-danger float-end"><i class="fe fe-shopping-bag"></i> </span>
+												<h6 class="mb-2">Total Orders</h6>
+												<h2 class="mb-1 number-font"><span class="counter">5,692k</span></h2>
+												<p class="text-muted mb-2">Sed ut perspiciatis unde omnis accusantium</p>
+												<a href="javascript:void(0)" class="text-primary">View Details</a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xl-6">
+										<div class="card">
+											<div class="card-body p-6">
+												<span class="bg-success-transparent icon-service text-success float-end"><i class="fe fe-dollar-sign"></i> </span>
+												<h6 class="mb-2">Total Profit</h6>
+												<h2 class="mb-1  number-font">$<span class="counter">4,267</span></h2>
+												<p class="text-muted mb-2">Sed ut perspiciatis unde omnis accusantium</p>
+												<a href="javascript:void(0)" class="text-primary">View Details</a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xl-6">
+										<div class="card">
+											<div class="card-body p-6">
+												<span class="bg-warning-transparent icon-service text-warning float-end"><i class="fe fe-activity"></i> </span>
+												<h6 class="mb-2">Total Sales</h6>
+												<h2 class="mb-1  number-font"><span class="counter">57</span>%</h2>
+												<p class="text-muted mb-2">Sed ut perspiciatis unde omnis accusantium</p>
+												<a href="javascript:void(0)" class="text-primary">View Details</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-12 col-sm-12 col-xl-6">
+								<div class="card">
+									<div class="card-header">
+										<h3 class="card-title">Yearly Revenue</h3>
+									</div>
+									<div class="card-body ">
+										<div class="">
+                      <apx-chart  [series]="RandomData.series"  [colors]="RandomData.colors" [chart]="RandomData.chart" [annotations]="RandomData.annotations" [dataLabels]="RandomData.dataLabels" [markers]="RandomData.markers" [xaxis]="RandomData.xaxis"
+                      [tooltip]="RandomData.tooltip" [fill]="RandomData.fill">
+                      </apx-chart>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- ROW END -->
+
+						<!-- ROW OPEN -->
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card ">
+									<div class="row">
+										<div class="col-xl-3 col-lg-6 col-sm-6 px-0">
+											<div class="card-body text-center">
+												<h6 class="mb-0">Total Imperssions</h6>
+												<h2 class="mb-1 mt-2 number-font  counter">28.893</h2>
+												<p class="mb-2 text-muted"><span class="mb-0 text-danger fs-13 ms-1"><i class="fe fe-arrow-down"></i> 1.68%</span> for Last month</p>
+												<div class="progress h-1">
+													<div class="progress-bar bg-primary progress-bar-striped progress-bar-animated w-50 " role="progressbar"></div>
+												</div>
+											</div>
+										</div>
+										<div class="col-xl-3 col-lg-6 col-sm-6 px-0">
+											<div class="card-body text-center">
+												<h6 class="mb-0">Total Clicks</h6>
+												<h2 class="mb-1 mt-2 number-font  counter">98.364</h2>
+												<p class="mb-2 text-muted"><span class="mb-0 text-success fs-13 ms-1"><i class="fe fe-arrow-up"></i> 0.27%</span> for Last month</p>
+												<div class="progress h-1">
+													<div class="progress-bar bg-secondary progress-bar-striped progress-bar-animated w-60 " role="progressbar"></div>
+												</div>
+											</div>
+										</div>
+										<div class="col-xl-3 col-lg-6 col-sm-6 px-0">
+											<div class="card-body text-center">
+												<h6 class="mb-0">Total Acquisitions</h6>
+												<h2 class="mb-1 mt-2 number-font  counter">678</h2>
+												<p class="mb-2 text-muted"><span class="mb-0 text-danger fs-13 ms-1"><i class="fe fe-arrow-down"></i> 0.87%</span> for Last month</p>
+												<div class="progress h-1">
+													<div class="progress-bar bg-success progress-bar-striped progress-bar-animated w-30 " role="progressbar"></div>
+												</div>
+											</div>
+										</div>
+										<div class="col-xl-3 col-lg-6 col-sm-6 px-0">
+											<div class="card-body text-center">
+												<h6 class="mb-0">Cost Acquisitions</h6>
+												<h2 class="mb-1 mt-2 ">$<span class="number-font counter">789</span></h2>
+												<p class="mb-2 text-muted"><span class="mb-0 text-success fs-13 ms-1"><i class="fe fe-arrow-up"></i> 22%</span> for Last month</p>
+												<div class="progress h-1">
+													<div class="progress-bar bg-danger progress-bar-striped progress-bar-animated w-70 " role="progressbar"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--END ROW OPEN -->
+
+						<!-- ROW OPEN -->
+						<div class="row ">
+							<div class="col-lg-8 col-md-12 col-sm-12 col-xl-8">
+								<div class="card ">
+									<div class="card-header">
+										<h3 class="card-title">Sales Overview</h3>
+									</div>
+									<div class="card-body overflow-hidden h-365">
+
+										<div id="stacked-bar" class="w-100"></div>
+                    <canvas   baseChart [data]="barChart2Data" [options]="barChart2Options"
+                    [legend]="barChart2Legend" [type]="barChart2Type"[height]="barChart2Height">
+                </canvas>
+									</div>
+								</div>
+							</div><!-- COL END -->
+              <div class="col-lg-4 col-md-12 col-sm-12 col-xl-4">
+								<div class="card overflow-hidden">
+									<div class="card-header">
+										<h3 class="card-title">Countrywise Sales</h3>
+									</div>
+									<div class="card-body overflow-hidden ">
+                    <apx-chart [series]="donutData.pieseries" [colors]="donutData.colors" [chart]="donutData.chart"
+                        [responsive]="donutData.responsive" [legend]="donutData.legend"></apx-chart>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- ROW CLOSED -->
+
+						<!-- ROW OPEN -->
+						<div class="row">
+							<div class="col-xl-4">
+								<div class="card">
+									<div class="card-header">
+										<h3 class="card-title">Transaction History</h3>
+									</div>
+									<div class="card-body">
+                                        <ul>
+                                            <li>
+                                                <div class="mb-5 mt-2">
+                                                    <div class="d-flex">
+                                                        <a routerLink="/pages/profile">
+															<span class="avatar avatar-md rounded-3 bg-light text-primary me-3">
+																<i class="fe fe-credit-card"></i>
+															</span>
+														</a>
+                                                        <div class="w-100">
+                                                          <a routerLink="/pages/profile">
+                                                                <span class="mb-1 fs-13 fw-600 text-default me-3">ATM Withdrawl</span>
+                                                                <span class="badge bg-primary-transparent text-primary">Processing</span>
+                                                            </a>
+                                                            <p class="fs-12 text-muted me-3">Just now</p>
+                                                        </div>
+                                                        <div class="ms-auto my-auto">
+                                                            <h6 class="mb-3 text-success">
+                                                                $2,45,000
+                                                            </h6>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="mb-5">
+                                                    <div class="d-flex">
+                                                      <a routerLink="/pages/profile">
+															<span class="avatar avatar-md rounded-3 bg-light text-warning me-3">
+																<i class="fe fe-smartphone"></i>
+															</span>
+														</a>
+                                                        <div class="w-100">
+                                                          <a routerLink="/pages/profile">
+                                                                <span class="mb-1 fs-13 fw-600 text-default me-3">Movies Subscription</span>
+                                                            </a>
+                                                            <p class="fs-12 text-muted me-3">Yesterday</p>
+                                                        </div>
+                                                        <div class="ms-auto my-auto">
+                                                            <h6 class="mb-3 text-danger">
+                                                                -$100.00
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="mb-5">
+                                                    <div class="d-flex">
+                                                      <a routerLink="/pages/profile">
+															<span class="avatar avatar-md rounded-3 bg-light text-danger me-3">
+																<i class="fe fe-arrow-down"></i>
+															</span>
+														</a>
+                                                        <div class="w-100">
+                                                          <a routerLink="/pages/profile">
+                                                                <span class="mb-1 fs-13 fw-600 text-default me-3">Recieved from John</span>
+                                                                <span class="badge bg-danger-transparent text-danger">Pending</span>
+                                                            </a>
+                                                            <p class="fs-12 text-muted me-3">17-04-2022</p>
+                                                        </div>
+                                                        <div class="ms-auto my-auto">
+                                                            <h6 class="mb-3 text-success">
+                                                                $1,50,000
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+											<li>
+                                                <div class="mb-5">
+                                                    <div class="d-flex">
+                                                      <a routerLink="/pages/profile">
+															<span class="avatar avatar-md rounded-3 bg-light text-muted me-3">
+																<i class="fe fe-more-horizontal"></i>
+															</span>
+														</a>
+                                                        <div class="w-100">
+                                                          <a routerLink="/pages/profile">
+                                                                <span class="mb-1 fs-13 fw-600 text-default me-3">Home Expenses</span>
+                                                                <span class="badge bg-primary-transparent text-primary">Processing</span>
+                                                            </a>
+                                                            <p class="fs-12 text-muted me-3">14-04-2022</p>
+                                                        </div>
+                                                        <div class="ms-auto my-auto">
+                                                            <h6 class="mb-3 text-danger">
+                                                                -$299.98
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="mb-5">
+                                                    <div class="d-flex">
+                                                      <a routerLink="/pages/profile">
+															<span class="avatar avatar-md rounded-3 bg-light text-success me-3">
+																<i class="fe fe-arrow-up"></i>
+															</span>
+														</a>
+                                                        <div class="w-100">
+                                                          <a routerLink="/pages/profile">
+                                                                <span class="mb-1 fs-13 fw-600 text-default me-3">Paid to Harvey Mattos</span>
+                                                            </a>
+                                                            <p class="fs-12 text-muted me-3">21-04-2022</p>
+                                                        </div>
+                                                        <div class="ms-auto my-auto">
+                                                            <h6 class="mb-3 text-danger">
+                                                                -$500.00
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="mb-3">
+                                                    <div class="d-flex">
+                                                      <a routerLink="/pages/profile">
+															<span class="avatar avatar-md rounded-3 bg-light text-danger me-3">
+																<i class="fe fe-repeat"></i>
+															</span>
+														</a>
+                                                        <div class="w-100">
+                                                          <a routerLink="/pages/profile">
+                                                                <span class="mb-1 fs-13 fw-600 text-default me-3">Transfer to XYZ Card</span>
+                                                            </a>
+                                                            <p class="fs-12 text-muted me-3">30-04-2022</p>
+                                                        </div>
+                                                        <div class="ms-auto my-auto">
+                                                            <h6 class="mb-3 text-success">
+                                                                $15,000
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+								</div>
+							</div>
+              <div class="col-xl-8">
+								<div class="card">
+									<div class="card-header">
+										<h3 class="card-title">Product Summary</h3>
+									</div>
+									<div class="card-body ">
+										<div class="table-responsive ">
+                                            <table class="table table-bordered text-nowrap mb-0 product-summary ">
+                                                <thead class="">
+                                                    <tr>
+                                                        <th class="w-35">Product</th>
+                                                        <th class="w-20">Progress</th>
+                                                        <th class="">Product Cost</th>
+                                                        <th class="">Product Status</th>
+                                                        <th class="">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                  <tr *ngFor="let items of ItemData">
+                                                    <!-- <td class="">{{items.id}}</td> -->
+                                                      <td>
+                            <img src={{items.image}} alt="img">
+                            <span class="product-name">{{items.name}}</span>
+                          </td>
+                                                      <td>
+                                                          <div class="progress progress-xs mt-3">
+                                                              <div class="progress-bar bg-{{items.progresscolor}}  w-{{items.width}}"></div>
+                                                          </div>
+                                                      </td>
+                                                      <td>{{items.date}}</td>
+                                                      <td>
+                                                          <div class="mt-sm-1 d-block">
+                                                              <span
+                                                                  class="badge bg-{{items.badge}} text-{{items.text}} p-2 px-3">{{items.status}}</span>
+                                                          </div>
+                                                      </td>
+                                                      <td>
+                            <a class="btn text-primary btn-sm" placement="top" ngbTooltip="Edit" data-bs-original-title="Edit">
+                              <span class="fe fe-edit-2 fs-14"></span>
+                            </a>
+                            <button class="btn text-danger btn-sm" type="button" placement="top" ngbTooltip="Delete" (click)="click(items.id)" ><span class="fe fe-trash fs-14"></span></button>
+                            
+                                                      </td>
+                                                      </tr>
+                                                      </tbody>
+                                                      </table>
+                                                      </div>
+                                                      </div>
+                                                      </div>
+                                                      </div>
+                                                      </div>
+
+

@@ -1,0 +1,92 @@
+<app-page-header title="{{ 'HomePage' | translate }}" link="/category/list" showlist="1"  active_item="{{ 'AddEdit' | translate }} {{ 'Category' | translate }}"></app-page-header>
+<notifier-container></notifier-container>
+<!-- ROW-1 OPEN -->
+<form novalidate #pageform="ngForm" (ngSubmit)="pageform.form.valid && onSubmit()">
+  <div class="row">
+    <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">{{ 'Details' | translate }}</h3>
+        </div>
+        <div class="card-body" style="min-height: 480px;">
+          <div class="panel panel-primary">
+            <div class=" tab-menu-heading border-bottom-0">
+              <div class="tabs-menu1 ">
+                <!-- Tabs -->
+
+                <div class="row">
+                  <div class="col-lg-4">
+                    <label for="nameAr"> {{ 'ArabicName' | translate }} <span class="text-danger">*</span></label>
+                    <input type="text" name="nameAr" class="form-control " #nameAr="ngModel"
+                      [(ngModel)]="model.nameAr" required placeholder="{{ 'ArabicName' | translate }}"
+                      [ngClass]="{ 'is-invalid': submitted && nameAr.errors }"
+                      onkeydown="return /[a-z \u0621-\u064A]/i.test(event.key)" />
+                    <div *ngIf="nameAr?.hasError('required') && submitted " class="invalid-feedback">
+                      {{ 'ArabicName' | translate }} {{ 'Required' | translate }}
+                    </div>
+                    <div *ngIf="nameAr?.hasError('incorrect') && submitted " class="invalid-feedback">
+                      {{(nameAr.errors?.['message']| json)}}
+                    </div>
+                  </div>
+                  <div class="col-lg-8"></div>
+                  <div class="col-lg-4">
+                    <label for="nameEn"> {{ 'EnglishName' | translate }} <span class="text-danger">*</span></label>
+                    <input type="text" name="nameEn" class="form-control " #nameEn="ngModel"
+                      [(ngModel)]="model.nameEn" required placeholder="{{ 'EnglishName' | translate }}"
+                      [ngClass]="{ 'is-invalid': submitted && nameEn.errors }"
+                      onkeydown="return /[a-z \u0621-\u064A]/i.test(event.key)" />
+                    <div *ngIf="nameEn?.hasError('required') && submitted " class="invalid-feedback">
+                      {{ 'EnglishName' | translate }} {{ 'Required' | translate }}
+                    </div>
+                    <div *ngIf="nameEn?.hasError('incorrect') && submitted " class="invalid-feedback">
+                      {{(nameAr.errors?.['message']| json)}}
+                    </div>
+                  </div>
+                  <div class="col-lg-8"></div>
+                  <div class="col-lg-4">
+                    <label for="sort"> {{ 'Sort' | translate }} <span class="text-danger">*</span></label>
+                    <input type="number" name="sort" class="form-control " #sort="ngModel"
+                      [(ngModel)]="model.sort" (keypress)="app.onlyDecimalNumberKey($event)" [min]="0"  required placeholder="{{ 'Sort' | translate }}"
+                      [ngClass]="{ 'is-invalid': submitted && sort.errors }"/>
+                    <div *ngIf="sort?.hasError('required') && submitted " class="invalid-feedback">
+                      {{ 'Sort' | translate }} {{ 'Required' | translate }}
+                    </div>
+                    <div *ngIf="sort?.hasError('incorrect') && submitted " class="invalid-feedback">
+                      {{(sort.errors?.['message']| json)}} 
+                    </div>
+                  </div>
+                  <!-- <div class="col-lg-4">&nbsp;&nbsp;&nbsp;
+                    <label for="Active"> {{ 'Active' | translate }} </label>
+                    <div class="form-group form-check form-switch">
+                      &nbsp;&nbsp;&nbsp; <input type="checkbox" class="form-check-input switchery" id="Active"
+                        inActive="ngModel" [(ngModel)]="active" name="Active">
+                    </div>
+                  </div> -->
+                </div>
+                <br>
+                <div class="row">
+
+                  <div class="col-lg-4">
+                    <button (click)="SaveForm(pageform.form)" class="btn btn-success me-1">
+                      {{ 'Submit' | translate }}
+                    </button>
+                    <button type="reset" class="btn btn-secondary waves-effect">
+                      {{ 'Cancel' | translate }}
+                    </button>
+                  </div>
+                  <div class="col-lg-4"></div>
+                  <div class="col-lg-4"> </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<!-- ROW-1 CLOSED -->
+<!-- ROW-2 CLOSED -->

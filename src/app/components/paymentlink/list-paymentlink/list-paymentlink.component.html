@@ -1,0 +1,107 @@
+<app-page-header title="{{ 'HomePage' | translate }}" active_item="{{ 'PaymentLink' | translate }}" showlist="0"
+  link="/paymentlink/create"></app-page-header>
+<notifier-container></notifier-container>
+<div class="row row-cards">
+  <div class="col-lg-12 col-xl-2">
+    <div class="row ">
+      <div class="col-md-12 col-lg-6 col-xl-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">{{ 'AdvancedSearch' | translate }} </div>
+          </div>
+          <div class="card-body" style=" overflow: auto;  width: 100%;
+                  height: 60vh;">
+            <div class="form-group">
+              <input type="text" name="title" #title="ngModel" required [(ngModel)]="PaymentLinkFilter.title"
+                class="form-control" id="title" placeholder="{{ 'Title' | translate }}">
+            </div>
+            <button (click)="SearchPaymentLinks()" class="btn btn-primary me-1">
+              {{ 'Search' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-lg-12 col-xl-10">
+    <p-table #dt2 [value]="paymentlinks" dataKey="id" [rows]="15" [showCurrentPageReport]="true"
+      responsiveLayout="scroll" *ngIf="paymentlinks && paymentlinks.length>0" [responsive]="true" [autoLayout]="true"
+      [resizableColumns]="true" [style]="{'width':'100%','overflow':'auto!important'}" class="ui-rtl"
+      columnResizeMode="expand" [rowsPerPageOptions]="[15,30,50]" styleClass="p-datatable-gridlines" [paginator]="true"
+      currentPageReportTemplate="{{ 'Show' | translate }} {first} {{ 'To' | translate }}  {last}  {{ 'FromTotal' | translate }} {totalRecords} ">
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="title">
+            <p-sortIcon field="title"></p-sortIcon> {{ 'Title' | translate }}
+            <p-columnFilter type="text" field="title" display="menu"></p-columnFilter>
+          </th>
+          <th pSortableColumn="amount">
+            <p-sortIcon field="amount"></p-sortIcon> {{ 'Amount' | translate }}
+            <p-columnFilter type="text" field="amount" display="menu"></p-columnFilter>
+          </th>
+
+          <th pSortableColumn="isOpenAmount">
+            <p-sortIcon field="isOpenAmount"></p-sortIcon> {{ 'IsOpenAmount' | translate }}
+            <p-columnFilter type="text" field="isOpenAmount" display="menu"></p-columnFilter>
+          </th>
+          <th pSortableColumn="url">
+            <p-sortIcon field="url"></p-sortIcon> {{ 'URL' | translate }}
+            <p-columnFilter type="text" field="url" display="menu"></p-columnFilter>
+          </th>
+
+          <th pSortableColumn="inActive">
+            <p-sortIcon field="inActive"></p-sortIcon> {{ 'Active' | translate }}
+            <p-columnFilter type="text" field="inActive" display="menu"></p-columnFilter>
+          </th>
+          <th>
+            {{ 'Action' | translate }}
+          </th>
+
+        </tr>
+
+      </ng-template>
+      <ng-template pTemplate="body" let-item let-i="rowIndex">
+        <tr [attr.id]="item.id" [ngClass]="{'table-danger': item.inActive}">
+          <td>
+            {{item.title}}
+          </td>
+          <td>
+            {{item.isOpenAmount?(item.minAmount+" - "+item.maxAmount):item.amount}} {{"KWD"|translate}}
+          </td>
+          <td style="align-items: center">
+            <div class="form-group form-check form-switch">
+              <input type="checkbox" class="form-check-input switchery" id="isOpenAmount" inActive="ngModel"
+                [(ngModel)]="!item.isOpenAmount" name="isOpenAmount" disabled>
+            </div>
+          </td>
+          <td>
+            <a href="{{baseURL}}/CustomerPayment/{{item.key}}"
+              target="_blank">{{baseURL}}/CustomerPayment/{{item.key}}</a>
+          </td>
+          <td>
+            <div class="form-group form-check form-switch">
+              <input type="checkbox" class="form-check-input switchery" id="Active" inActive="ngModel"
+                [(ngModel)]="!item.inActive" name="Active" disabled>
+            </div>
+          </td>
+          <td class="text-center align-middle">
+            <div class="btn-group align-top">
+              <a class="btn btn-sm btn-primary-light" [routerLink]="['/paymentlink/details/',item.id]">{{
+                'Edit' | translate }}</a>
+              <button class="btn btn-sm btn-primary-light" type="button" (click)="ConfirmDelete(item.id)"><i
+                  class="fa fa-trash"></i></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="9" style="text-align: center;">{{ 'NoRecords' | translate }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+  </div>
+</div>
